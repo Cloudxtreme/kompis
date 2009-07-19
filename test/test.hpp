@@ -176,4 +176,24 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       pp.visit(l);
       TS_ASSERT_EQUALS(out.str(), "(< 1 2)");
     }
+
+    void test_identifier1()
+    {
+      Identifier id("foo");
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(id);
+      TS_ASSERT_EQUALS(out.str(), "$foo");
+    }
+
+    void test_plus_identifier()
+    {
+      Identifier id1("foo");
+      Identifier id2("bar");
+      Plus p1(id1, id2);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(p1);
+      TS_ASSERT_EQUALS(out.str(), "(+ $foo $bar)");
+    }
 };

@@ -7,6 +7,7 @@ namespace kompis
   {
     class And;
     class FalseLiteral;
+    class Identifier;
     class IntegerLiteral;
     class LessThan;
     class Minus;
@@ -21,6 +22,7 @@ namespace kompis
         virtual ~Visitor() {}
         virtual void visit(And &) = 0;
         virtual void visit(FalseLiteral &) = 0;
+        virtual void visit(Identifier &) = 0;
         virtual void visit(IntegerLiteral &) = 0;
         virtual void visit(LessThan &) = 0;
         virtual void visit(Minus &) = 0;

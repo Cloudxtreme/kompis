@@ -4,6 +4,7 @@
 #include "ast/and.hpp"
 #include "ast/expression.hpp"
 #include "ast/false_literal.hpp"
+#include "ast/identifier.hpp"
 #include "ast/integer_literal.hpp"
 #include "ast/less_than.hpp"
 #include "ast/minus.hpp"

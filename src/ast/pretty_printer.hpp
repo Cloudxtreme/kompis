@@ -10,6 +10,7 @@ namespace kompis
   {
     class And;
     class FalseLiteral;
+    class Identifier;
     class IntegerLiteral;
     class LessThan;
     class Minus;
@@ -25,6 +26,7 @@ namespace kompis
 
         void visit(And &);
         void visit(FalseLiteral &);
+        void visit(Identifier &);
         void visit(IntegerLiteral &);
         void visit(LessThan &);
         void visit(Minus &);
