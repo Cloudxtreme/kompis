@@ -8,20 +8,28 @@ namespace kompis
 {
   namespace ast
   {
+    class And;
+    class FalseLiteral;
     class IntegerLiteral;
+    class LessThan;
     class Minus;
     class Plus;
     class Times;
+    class TrueLiteral;
 
     class PrettyPrinter : public Visitor
     {
       public:
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
+        void visit(And &);
+        void visit(FalseLiteral &);
         void visit(IntegerLiteral &);
+        void visit(LessThan &);
         void visit(Minus &);
         void visit(Plus &);
         void visit(Times &);
+        void visit(TrueLiteral &);
 
       private:
         std::ostream &_out;

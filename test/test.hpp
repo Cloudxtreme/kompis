@@ -126,4 +126,33 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       pp.visit(t2);
       TS_ASSERT_EQUALS(out.str(), "(* (* 1 2) 3)");
     }
+
+    void test_true_literal()
+    {
+      TrueLiteral t;
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(t);
+      TS_ASSERT_EQUALS(out.str(), "true");
+    }
+
+    void test_false_literal()
+    {
+      FalseLiteral f;
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(f);
+      TS_ASSERT_EQUALS(out.str(), "false");
+    }
+
+    void test_and1()
+    {
+      TrueLiteral t;
+      FalseLiteral f;
+      And a1(t, f);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(a1);
+      TS_ASSERT_EQUALS(out.str(), "(&& true false)");
+    }
 };

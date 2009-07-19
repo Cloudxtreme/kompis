@@ -5,9 +5,32 @@ namespace kompis
 {
   namespace ast
   {
+    void PrettyPrinter::visit(And &a)
+    {
+      _out << "(&& ";
+      a._left.accept(*this);
+      _out << " ";
+      a._right.accept(*this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(FalseLiteral &f)
+    {
+      _out << "false";
+    }
+
     void PrettyPrinter::visit(IntegerLiteral &i)
     {
       _out << i._value;
+    }
+
+    void PrettyPrinter::visit(LessThan &l)
+    {
+      _out << "(< ";
+      l._left.accept(*this);
+      _out << " ";
+      l._right.accept(*this);
+      _out << ")";
     }
 
     void PrettyPrinter::visit(Minus &m)
@@ -35,6 +58,11 @@ namespace kompis
       _out << " ";
       t._right.accept(*this);
       _out << ")";
+    }
+
+    void PrettyPrinter::visit(TrueLiteral &t)
+    {
+      _out << "true";
     }
   }
 }
