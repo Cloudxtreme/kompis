@@ -153,7 +153,17 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       std::ostringstream out;
       PrettyPrinter pp(out);
       pp.visit(a);
-      TS_ASSERT_EQUALS(out.str(), "(&& true false)");
+      TS_ASSERT_EQUALS(out.str(), "(and true false)");
+    }
+
+    void test_not1()
+    {
+      TrueLiteral t;
+      Not n(t);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(n);
+      TS_ASSERT_EQUALS(out.str(), "(not true)");
     }
 
     void test_less_than1()
