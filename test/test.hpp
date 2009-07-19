@@ -218,4 +218,31 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       pp.visit(pr);
       TS_ASSERT_EQUALS(out.str(), "(print (+ 1 2))");
     }
+
+    test_if_statement()
+    {
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      LessThan l(i1, i2);
+      Print pr1(i1);
+      Print pr2(i2);
+      If if1(l, pr1, pr2);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(if1);
+      TS_ASSERT_EQUALS(out.str(), "(if (< 1 2) (print 1) (print 2))");
+    }
+
+    test_while_statement()
+    {
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      LessThan l(i1, i2);
+      Print pr(i1);
+      While wh(l, pr);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(wh);
+      TS_ASSERT_EQUALS(out.str(), "(while (< 1 2) (print 1))");
+    }
 };
