@@ -9,10 +9,10 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
   public:
     void test_integer_literal()
     {
-      IntegerLiteral i1(1);
+      IntegerLiteral i(1);
       std::ostringstream out;
       PrettyPrinter pp(out);
-      pp.visit(i1);
+      pp.visit(i);
       TS_ASSERT_EQUALS(out.str(), "1");
     }
 
@@ -195,5 +195,27 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       PrettyPrinter pp(out);
       pp.visit(p1);
       TS_ASSERT_EQUALS(out.str(), "(+ foo bar)");
+    }
+
+    void test_print_integer_literal()
+    {
+      IntegerLiteral i(1);
+      Print pr(i);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(pr);
+      TS_ASSERT_EQUALS(out.str(), "(print 1)");
+    }
+
+    void test_print_plus()
+    {
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      Plus pl(i1, i2);
+      Print pr(pl);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(pr);
+      TS_ASSERT_EQUALS(out.str(), "(print (+ 1 2))");
     }
 };

@@ -16,6 +16,7 @@ namespace kompis
     class Minus;
     class Not;
     class Plus;
+    class Print;
     class Times;
     class TrueLiteral;
 
@@ -32,6 +33,7 @@ namespace kompis
         void visit(Minus &);
         void visit(Not &);
         void visit(Plus &);
+        void visit(Print &);
         void visit(Times &);
         void visit(TrueLiteral &);
 

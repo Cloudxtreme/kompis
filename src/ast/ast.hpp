@@ -12,6 +12,8 @@
 #include "ast/not.hpp"
 #include "ast/plus.hpp"
 #include "ast/pretty_printer.hpp"
+#include "ast/print.hpp"
+#include "ast/statement.hpp"
 #include "ast/times.hpp"
 #include "ast/true_literal.hpp"
 #include "ast/visitor.hpp"
