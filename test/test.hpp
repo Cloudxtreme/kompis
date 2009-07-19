@@ -7,6 +7,15 @@ using namespace ast;
 class PrettyPrinterTestSuite : public CxxTest::TestSuite
 {
   public:
+    void test_integer_literal()
+    {
+      IntegerLiteral i1(1);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(&i1);
+      TS_ASSERT_EQUALS(out.str(), "1");
+    }
+
     void test_plus1()
     {
       IntegerLiteral i1(1);
