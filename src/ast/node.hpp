@@ -1,12 +1,12 @@
 #ifndef KOMPIS_AST_NODE_HPP
 #define KOMPIS_AST_NODE_HPP
 
-#include "ast/visitor.hpp"
-
 namespace kompis
 {
   namespace ast
   {
+    class Visitor;
+
     class Node
     {
       public:

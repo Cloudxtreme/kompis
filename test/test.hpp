@@ -1,5 +1,5 @@
 #include <cxxtest/TestSuite.h>
-#include "ast/pretty_printer.hpp"
+#include "ast/ast.hpp"
 
 using namespace kompis;
 using namespace ast;

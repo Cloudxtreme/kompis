@@ -1,15 +1,11 @@
 #ifndef KOMPIS_AST_AST_HPP
 #define KOMPIS_AST_AST_HPP
 
-namespace kompis
-{
-  namespace ast
-  {
-    class Node;
-    class Expression;
-    class IntegerLiteral;
-    class Plus;
-  }
-}
+#include "ast/expression.hpp"
+#include "ast/integer_literal.hpp"
+#include "ast/node.hpp"
+#include "ast/plus.hpp"
+#include "ast/pretty_printer.hpp"
+#include "ast/visitor.hpp"
 
 #endif

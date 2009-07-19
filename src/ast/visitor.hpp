@@ -1,12 +1,13 @@
 #ifndef KOMPIS_AST_VISITOR_HPP
 #define KOMPIS_AST_VISITOR_HPP
 
-#include "ast/ast.hpp"
-
 namespace kompis
 {
   namespace ast
   {
+    class IntegerLiteral;
+    class Plus;
+
     class Visitor
     {
       public:
