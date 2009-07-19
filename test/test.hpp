@@ -219,7 +219,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "(print (+ 1 2))");
     }
 
-    test_if_statement()
+    void test_if_statement()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -233,7 +233,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "(if (< 1 2) (print 1) (print 2))");
     }
 
-    test_while_statement()
+    void test_while_statement()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -244,5 +244,16 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       PrettyPrinter pp(out);
       pp.visit(wh);
       TS_ASSERT_EQUALS(out.str(), "(while (< 1 2) (print 1))");
+    }
+
+    void test_assign_statement()
+    {
+      Identifier id("foo");
+      IntegerLiteral i(1);
+      Assign a(id, i);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(a);
+      TS_ASSERT_EQUALS(out.str(), "(= foo 1)");
     }
 };
