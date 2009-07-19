@@ -145,7 +145,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "false");
     }
 
-    void test_and1()
+    void test_and()
     {
       TrueLiteral t;
       FalseLiteral f;
@@ -156,7 +156,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "(and true false)");
     }
 
-    void test_not1()
+    void test_not()
     {
       TrueLiteral t;
       Not n(t);
@@ -166,7 +166,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "(not true)");
     }
 
-    void test_less_than1()
+    void test_less_than()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -177,7 +177,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(out.str(), "(< 1 2)");
     }
 
-    void test_identifier1()
+    void test_identifier()
     {
       Identifier id("foo");
       std::ostringstream out;
