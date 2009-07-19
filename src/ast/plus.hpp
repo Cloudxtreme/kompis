@@ -12,12 +12,12 @@ namespace kompis
     class Plus : public Expression
     {
       public:
-        Plus(Expression *left, Expression *right) : _left(left), _right(right) {}
+        Plus(Expression &left, Expression &right) : _left(left), _right(right) {}
 
-        void accept(Visitor *visitor);
+        void accept(Visitor &visitor);
 
       //private:
-        Expression *_left, *_right;
+        Expression &_left, &_right;
     };
   }
 }

@@ -16,8 +16,8 @@ namespace kompis
       public:
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
-        void visit(IntegerLiteral *i);
-        void visit(Plus *p);
+        void visit(IntegerLiteral &i);
+        void visit(Plus &p);
 
       private:
         std::ostream &_out;

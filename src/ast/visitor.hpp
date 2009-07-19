@@ -12,8 +12,8 @@ namespace kompis
     {
       public:
         virtual ~Visitor() {}
-        virtual void visit(IntegerLiteral *) = 0;
-        virtual void visit(Plus *) = 0;
+        virtual void visit(IntegerLiteral &) = 0;
+        virtual void visit(Plus &) = 0;
     };
   }
 }
