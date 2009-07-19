@@ -21,7 +21,7 @@ namespace kompis
 
     void PrettyPrinter::visit(Identifier &id)
     {
-      _out << "$" << id._name;
+      _out << id._name;
     }
 
     void PrettyPrinter::visit(IntegerLiteral &i)

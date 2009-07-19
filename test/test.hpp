@@ -183,7 +183,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       std::ostringstream out;
       PrettyPrinter pp(out);
       pp.visit(id);
-      TS_ASSERT_EQUALS(out.str(), "$foo");
+      TS_ASSERT_EQUALS(out.str(), "foo");
     }
 
     void test_plus_identifier()
@@ -194,6 +194,6 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       std::ostringstream out;
       PrettyPrinter pp(out);
       pp.visit(p1);
-      TS_ASSERT_EQUALS(out.str(), "(+ $foo $bar)");
+      TS_ASSERT_EQUALS(out.str(), "(+ foo bar)");
     }
 };
