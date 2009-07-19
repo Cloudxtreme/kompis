@@ -9,15 +9,19 @@ namespace kompis
   namespace ast
   {
     class IntegerLiteral;
+    class Minus;
     class Plus;
+    class Times;
 
     class PrettyPrinter : public Visitor
     {
       public:
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
-        void visit(IntegerLiteral &i);
-        void visit(Plus &p);
+        void visit(IntegerLiteral &);
+        void visit(Minus &);
+        void visit(Plus &);
+        void visit(Times &);
 
       private:
         std::ostream &_out;
