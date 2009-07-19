@@ -8,6 +8,7 @@
 #include "ast/less_than.hpp"
 #include "ast/minus.hpp"
 #include "ast/node.hpp"
+#include "ast/not.hpp"
 #include "ast/plus.hpp"
 #include "ast/pretty_printer.hpp"
 #include "ast/times.hpp"

@@ -7,7 +7,7 @@ namespace kompis
   {
     void PrettyPrinter::visit(And &a)
     {
-      _out << "(&& ";
+      _out << "(and ";
       a._left.accept(*this);
       _out << " ";
       a._right.accept(*this);
@@ -39,6 +39,13 @@ namespace kompis
       m._left.accept(*this);
       _out << " ";
       m._right.accept(*this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(Not &n)
+    {
+      _out << "(not ";
+      n._expr.accept(*this);
       _out << ")";
     }
 
