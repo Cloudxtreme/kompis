@@ -149,10 +149,21 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       TrueLiteral t;
       FalseLiteral f;
-      And a1(t, f);
+      And a(t, f);
       std::ostringstream out;
       PrettyPrinter pp(out);
-      pp.visit(a1);
+      pp.visit(a);
       TS_ASSERT_EQUALS(out.str(), "(&& true false)");
+    }
+
+    void test_less_than1()
+    {
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      LessThan l(i1, i2);
+      std::ostringstream out;
+      PrettyPrinter pp(out);
+      pp.visit(l);
+      TS_ASSERT_EQUALS(out.str(), "(< 1 2)");
     }
 };
