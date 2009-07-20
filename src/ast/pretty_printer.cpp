@@ -33,6 +33,20 @@ namespace kompis
       _out << "Boolean";
     }
 
+    void PrettyPrinter::visit(CallExpression &c)
+    {
+      _out << "(call ";
+      c._self.accept(*this);
+      _out << " ";
+      c._id.accept(*this);
+      for(std::list<Expression *>::iterator it = c._args.begin(); it != c._args.end(); ++it)
+      {
+        _out << " ";
+        (*it)->accept(*this);
+      }
+      _out << ")";
+    }
+
     void PrettyPrinter::visit(Identifier &id)
     {
       _out << id._name;

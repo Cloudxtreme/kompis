@@ -12,6 +12,7 @@ namespace kompis
     class AssignmentStatement;
     class BooleanLiteral;
     class BooleanType;
+    class CallExpression;
     class Identifier;
     class IdentifierExpression;
     class IdentifierType;
@@ -39,6 +40,7 @@ namespace kompis
         void visit(AssignmentStatement &);
         void visit(BooleanLiteral &);
         void visit(BooleanType &);
+        void visit(CallExpression &);
         void visit(Identifier &);
         void visit(IdentifierExpression &);
         void visit(IdentifierType &);

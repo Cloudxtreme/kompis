@@ -298,4 +298,40 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(n);
       TS_ASSERT_EQUALS(_out.str(), "(new foo)");
     }
+
+    void test_call_expression0()
+    {
+      ThisExpression t;
+      Identifier id("do_foo");
+      std::list<Expression *> args;
+      CallExpression c(t, id, args);
+      _pp.visit(c);
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo)");
+    }
+
+    void test_call_expression1()
+    {
+      ThisExpression t;
+      Identifier id("do_foo");
+      IntegerLiteral i(1);
+      std::list<Expression *> args;
+      args.push_back(&i);
+      CallExpression c(t, id, args);
+      _pp.visit(c);
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo 1)");
+    }
+
+    void test_call_expression2()
+    {
+      ThisExpression t;
+      Identifier id("do_foo");
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      std::list<Expression *> args;
+      args.push_back(&i1);
+      args.push_back(&i2);
+      CallExpression c(t, id, args);
+      _pp.visit(c);
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo 1 2)");
+    }
 };

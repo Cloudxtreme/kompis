@@ -5,6 +5,7 @@
 #include "ast/assignment_statement.hpp"
 #include "ast/boolean_literal.hpp"
 #include "ast/boolean_type.hpp"
+#include "ast/call_expression.hpp"
 #include "ast/expression.hpp"
 #include "ast/identifier.hpp"
 #include "ast/identifier_expression.hpp"
