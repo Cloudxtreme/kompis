@@ -206,34 +206,34 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "(print (+ 1 2))");
     }
 
-    void test_if_statement()
+    void test_if_then_else_statement()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       LessThan l(i1, i2);
       Print pr1(i1);
       Print pr2(i2);
-      If if1(l, pr1, pr2);
+      IfThenElseStatement if1(l, pr1, pr2);
       _pp.visit(if1);
       TS_ASSERT_EQUALS(_out.str(), "(if (< 1 2) (print 1) (print 2))");
     }
 
-    void test_while_statement()
+    void test_while_do_statement()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       LessThan l(i1, i2);
       Print pr(i1);
-      While wh(l, pr);
+      WhileDoStatement wh(l, pr);
       _pp.visit(wh);
       TS_ASSERT_EQUALS(_out.str(), "(while (< 1 2) (print 1))");
     }
 
-    void test_assign_statement()
+    void test_assignment_statement()
     {
       Identifier id("foo");
       IntegerLiteral i(1);
-      Assign a(id, i);
+      AssignmentStatement a(id, i);
       _pp.visit(a);
       TS_ASSERT_EQUALS(_out.str(), "(= foo 1)");
     }

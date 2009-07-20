@@ -14,6 +14,15 @@ namespace kompis
       _out << ")";
     }
 
+    void PrettyPrinter::visit(AssignmentStatement &a)
+    {
+      _out << "(= ";
+      a._id.accept(*this);
+      _out << " ";
+      a._expr.accept(*this);
+      _out << ")";
+    }
+
     void PrettyPrinter::visit(FalseLiteral &f)
     {
       _out << "false";
@@ -22,6 +31,17 @@ namespace kompis
     void PrettyPrinter::visit(Identifier &id)
     {
       _out << id._name;
+    }
+
+    void PrettyPrinter::visit(IfThenElseStatement &i)
+    {
+      _out << "(if ";
+      i._pred.accept(*this);
+      _out << " ";
+      i._s1.accept(*this);
+      _out << " ";
+      i._s2.accept(*this);
+      _out << ")";
     }
 
     void PrettyPrinter::visit(IntegerLiteral &i)
@@ -82,6 +102,15 @@ namespace kompis
     void PrettyPrinter::visit(TrueLiteral &t)
     {
       _out << "true";
+    }
+
+    void PrettyPrinter::visit(WhileDoStatement &w)
+    {
+      _out << "(while ";
+      w._pred.accept(*this);
+      _out << " ";
+      w._s.accept(*this);
+      _out << ")";
     }
   }
 }

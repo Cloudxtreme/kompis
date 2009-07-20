@@ -9,8 +9,10 @@ namespace kompis
   namespace ast
   {
     class And;
+    class AssignmentStatement;
     class FalseLiteral;
     class Identifier;
+    class IfThenElseStatement;
     class IntegerLiteral;
     class LessThan;
     class Minus;
@@ -19,6 +21,7 @@ namespace kompis
     class Print;
     class Times;
     class TrueLiteral;
+    class WhileDoStatement;
 
     class PrettyPrinter : public Visitor
     {
@@ -26,8 +29,10 @@ namespace kompis
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
         void visit(And &);
+        void visit(AssignmentStatement &);
         void visit(FalseLiteral &);
         void visit(Identifier &);
+        void visit(IfThenElseStatement &);
         void visit(IntegerLiteral &);
         void visit(LessThan &);
         void visit(Minus &);
@@ -36,6 +41,7 @@ namespace kompis
         void visit(Print &);
         void visit(Times &);
         void visit(TrueLiteral &);
+        void visit(WhileDoStatement &);
 
       private:
         std::ostream &_out;
