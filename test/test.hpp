@@ -359,7 +359,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral il(1);
       MethodDeclaration m(it, id, ps, vs, ss, il);
       _pp.visit(m);
-      TS_ASSERT_EQUALS(_out.str(), "(method do_foo (list) (list) (list) 1)");
+      TS_ASSERT_EQUALS(_out.str(), "(method Integer do_foo (list) (list) (list) 1)");
     }
 
     void test_class_declaration()

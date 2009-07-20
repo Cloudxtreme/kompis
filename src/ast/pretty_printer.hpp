@@ -10,9 +10,11 @@ namespace kompis
   {
     class And;
     class AssignmentStatement;
+    class BlockStatement;
     class BooleanLiteral;
     class BooleanType;
     class CallExpression;
+    class ClassDeclaration;
     class Identifier;
     class IdentifierExpression;
     class IdentifierType;
@@ -20,12 +22,15 @@ namespace kompis
     class IntegerLiteral;
     class IntegerType;
     class LessThan;
+    class MainClassDeclaration;
+    class MethodDeclaration;
     class Minus;
     class NewObjectExpression;
     class Not;
-    class ParameterDeclaration;
     class Plus;
+    class ParameterDeclaration;
     class Print;
+    class ProgramDeclaration;
     class ThisExpression;
     class Times;
     class VariableDeclaration;
@@ -38,9 +43,11 @@ namespace kompis
 
         void visit(And &);
         void visit(AssignmentStatement &);
+        void visit(BlockStatement &);
         void visit(BooleanLiteral &);
         void visit(BooleanType &);
         void visit(CallExpression &);
+        void visit(ClassDeclaration &);
         void visit(Identifier &);
         void visit(IdentifierExpression &);
         void visit(IdentifierType &);
@@ -48,12 +55,15 @@ namespace kompis
         void visit(IntegerLiteral &);
         void visit(IntegerType &);
         void visit(LessThan &);
+        void visit(MainClassDeclaration &);
+        void visit(MethodDeclaration &);
         void visit(Minus &);
         void visit(NewObjectExpression &);
         void visit(Not &);
         void visit(ParameterDeclaration &);
         void visit(Plus &);
         void visit(Print &);
+        void visit(ProgramDeclaration &);
         void visit(ThisExpression &);
         void visit(Times &);
         void visit(VariableDeclaration &);
