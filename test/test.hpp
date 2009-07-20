@@ -6,14 +6,37 @@ using namespace ast;
 
 class PrettyPrinterTestSuite : public CxxTest::TestSuite
 {
+  private:
+    PrettyPrinter _pp;
+    std::ostringstream _out;
+
   public:
+    PrettyPrinterTestSuite() : _pp(_out), _out() {}
+
+    static PrettyPrinterTestSuite *createSuite()
+    {
+      return new PrettyPrinterTestSuite();
+    }
+
+    static void destroySuite(PrettyPrinterTestSuite *suite)
+    {
+      delete suite;
+    }
+
+    void setUp()
+    {
+      _out.str("");
+    }
+
+    void tearDown()
+    {
+    }
+
     void test_integer_literal()
     {
       IntegerLiteral i(1);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(i);
-      TS_ASSERT_EQUALS(out.str(), "1");
+      _pp.visit(i);
+      TS_ASSERT_EQUALS(_out.str(), "1");
     }
 
     void test_plus1()
@@ -21,10 +44,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       Plus p1(i1, i2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(p1);
-      TS_ASSERT_EQUALS(out.str(), "(+ 1 2)");
+      _pp.visit(p1);
+      TS_ASSERT_EQUALS(_out.str(), "(+ 1 2)");
     }
 
     void test_plus2()
@@ -34,10 +55,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Plus p1(i2, i3);
       Plus p2(i1, p1);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(p2);
-      TS_ASSERT_EQUALS(out.str(), "(+ 1 (+ 2 3))");
+      _pp.visit(p2);
+      TS_ASSERT_EQUALS(_out.str(), "(+ 1 (+ 2 3))");
     }
 
     void test_plus3()
@@ -47,10 +66,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Plus p1(i1, i2);
       Plus p2(p1, i3);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(p2);
-      TS_ASSERT_EQUALS(out.str(), "(+ (+ 1 2) 3)");
+      _pp.visit(p2);
+      TS_ASSERT_EQUALS(_out.str(), "(+ (+ 1 2) 3)");
     }
 
     void test_minus1()
@@ -58,10 +75,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       Minus m1(i1, i2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(m1);
-      TS_ASSERT_EQUALS(out.str(), "(- 1 2)");
+      _pp.visit(m1);
+      TS_ASSERT_EQUALS(_out.str(), "(- 1 2)");
     }
 
     void test_minus2()
@@ -71,10 +86,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Minus m1(i2, i3);
       Minus m2(i1, m1);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(m2);
-      TS_ASSERT_EQUALS(out.str(), "(- 1 (- 2 3))");
+      _pp.visit(m2);
+      TS_ASSERT_EQUALS(_out.str(), "(- 1 (- 2 3))");
     }
 
     void test_minus3()
@@ -84,10 +97,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Minus m1(i1, i2);
       Minus m2(m1, i3);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(m2);
-      TS_ASSERT_EQUALS(out.str(), "(- (- 1 2) 3)");
+      _pp.visit(m2);
+      TS_ASSERT_EQUALS(_out.str(), "(- (- 1 2) 3)");
     }
 
     void test_times1()
@@ -95,10 +106,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       Times t1(i1, i2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(t1);
-      TS_ASSERT_EQUALS(out.str(), "(* 1 2)");
+      _pp.visit(t1);
+      TS_ASSERT_EQUALS(_out.str(), "(* 1 2)");
     }
 
     void test_times2()
@@ -108,10 +117,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Times t1(i2, i3);
       Times t2(i1, t1);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(t2);
-      TS_ASSERT_EQUALS(out.str(), "(* 1 (* 2 3))");
+      _pp.visit(t2);
+      TS_ASSERT_EQUALS(_out.str(), "(* 1 (* 2 3))");
     }
 
     void test_times3()
@@ -121,28 +128,22 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i3(3);
       Times t1(i1, i2);
       Times t2(t1, i3);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(t2);
-      TS_ASSERT_EQUALS(out.str(), "(* (* 1 2) 3)");
+      _pp.visit(t2);
+      TS_ASSERT_EQUALS(_out.str(), "(* (* 1 2) 3)");
     }
 
     void test_true_literal()
     {
       TrueLiteral t;
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(t);
-      TS_ASSERT_EQUALS(out.str(), "true");
+      _pp.visit(t);
+      TS_ASSERT_EQUALS(_out.str(), "true");
     }
 
     void test_false_literal()
     {
       FalseLiteral f;
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(f);
-      TS_ASSERT_EQUALS(out.str(), "false");
+      _pp.visit(f);
+      TS_ASSERT_EQUALS(_out.str(), "false");
     }
 
     void test_and()
@@ -150,20 +151,16 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TrueLiteral t;
       FalseLiteral f;
       And a(t, f);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(a);
-      TS_ASSERT_EQUALS(out.str(), "(and true false)");
+      _pp.visit(a);
+      TS_ASSERT_EQUALS(_out.str(), "(and true false)");
     }
 
     void test_not()
     {
       TrueLiteral t;
       Not n(t);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(n);
-      TS_ASSERT_EQUALS(out.str(), "(not true)");
+      _pp.visit(n);
+      TS_ASSERT_EQUALS(_out.str(), "(not true)");
     }
 
     void test_less_than()
@@ -171,19 +168,15 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       LessThan l(i1, i2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(l);
-      TS_ASSERT_EQUALS(out.str(), "(< 1 2)");
+      _pp.visit(l);
+      TS_ASSERT_EQUALS(_out.str(), "(< 1 2)");
     }
 
     void test_identifier()
     {
       Identifier id("foo");
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(id);
-      TS_ASSERT_EQUALS(out.str(), "foo");
+      _pp.visit(id);
+      TS_ASSERT_EQUALS(_out.str(), "foo");
     }
 
     void test_plus_identifier()
@@ -191,20 +184,16 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       Identifier id1("foo");
       Identifier id2("bar");
       Plus p1(id1, id2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(p1);
-      TS_ASSERT_EQUALS(out.str(), "(+ foo bar)");
+      _pp.visit(p1);
+      TS_ASSERT_EQUALS(_out.str(), "(+ foo bar)");
     }
 
     void test_print_integer_literal()
     {
       IntegerLiteral i(1);
       Print pr(i);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(pr);
-      TS_ASSERT_EQUALS(out.str(), "(print 1)");
+      _pp.visit(pr);
+      TS_ASSERT_EQUALS(_out.str(), "(print 1)");
     }
 
     void test_print_plus()
@@ -213,10 +202,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       Plus pl(i1, i2);
       Print pr(pl);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(pr);
-      TS_ASSERT_EQUALS(out.str(), "(print (+ 1 2))");
+      _pp.visit(pr);
+      TS_ASSERT_EQUALS(_out.str(), "(print (+ 1 2))");
     }
 
     void test_if_statement()
@@ -227,10 +214,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       Print pr1(i1);
       Print pr2(i2);
       If if1(l, pr1, pr2);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(if1);
-      TS_ASSERT_EQUALS(out.str(), "(if (< 1 2) (print 1) (print 2))");
+      _pp.visit(if1);
+      TS_ASSERT_EQUALS(_out.str(), "(if (< 1 2) (print 1) (print 2))");
     }
 
     void test_while_statement()
@@ -240,10 +225,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       LessThan l(i1, i2);
       Print pr(i1);
       While wh(l, pr);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(wh);
-      TS_ASSERT_EQUALS(out.str(), "(while (< 1 2) (print 1))");
+      _pp.visit(wh);
+      TS_ASSERT_EQUALS(_out.str(), "(while (< 1 2) (print 1))");
     }
 
     void test_assign_statement()
@@ -251,9 +234,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       Identifier id("foo");
       IntegerLiteral i(1);
       Assign a(id, i);
-      std::ostringstream out;
-      PrettyPrinter pp(out);
-      pp.visit(a);
-      TS_ASSERT_EQUALS(out.str(), "(= foo 1)");
+      _pp.visit(a);
+      TS_ASSERT_EQUALS(_out.str(), "(= foo 1)");
     }
 };
