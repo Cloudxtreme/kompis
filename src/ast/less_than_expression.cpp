@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    void IntegerLiteral::accept(Visitor &visitor)
+    void LessThanExpression::accept(Visitor &visitor)
     {
       visitor.visit(*this);
     }

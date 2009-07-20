@@ -19,13 +19,13 @@ namespace kompis
     class MethodDeclaration : public Node
     {
       public:
-        MethodDeclaration(Type &return_type, Identifier &id, std::list<ParameterDeclaration *> params, std::list<VariableDeclaration *> vars, std::list<Statement *> statements, Expression &return_expr) : _return_type(return_type), _id(id), _params(params), _vars(vars), _statements(statements), _return_expr(return_expr) {}
+        MethodDeclaration(Type &return_type, Identifier &name, std::list<ParameterDeclaration *> params, std::list<VariableDeclaration *> vars, std::list<Statement *> statements, Expression &return_expr) : _return_type(return_type), _name(name), _params(params), _vars(vars), _statements(statements), _return_expr(return_expr) {}
 
         void accept(Visitor &);
 
       //private:
         Type &_return_type;
-        Identifier &_id;
+        Identifier &_name;
         std::list<ParameterDeclaration *> _params;
         std::list<VariableDeclaration *> _vars;
         std::list<Statement *> _statements;

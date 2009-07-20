@@ -14,13 +14,13 @@ namespace kompis
     class VariableDeclaration : public Node
     {
       public:
-        VariableDeclaration(Type &type, Identifier &id) : _type(type), _id(id) {}
+        VariableDeclaration(Type &type, Identifier &name) : _type(type), _name(name) {}
 
         void accept(Visitor &visitor);
 
       //private:
         Type &_type;
-        Identifier &_id;
+        Identifier &_name;
     };
   }
 }

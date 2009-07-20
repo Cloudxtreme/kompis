@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_WHILE_DO_HPP
-#define KOMPIS_AST_WHILE_DO_HPP
+#ifndef KOMPIS_AST_WHILE_DO_STATEMENT_HPP
+#define KOMPIS_AST_WHILE_DO_STATEMENT_HPP
 
 #include "ast/statement.hpp"
 

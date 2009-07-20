@@ -1,5 +1,4 @@
-#include "ast/while_do_statement.hpp"
-#include "ast/visitor.hpp"
+#include "ast/ast.hpp"
 
 namespace kompis
 {

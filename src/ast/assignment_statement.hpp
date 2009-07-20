@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_ASSIGN
-#define KOMPIS_AST_ASSIGN
+#ifndef KOMPIS_AST_ASSIGNMENT_STATEMENT_HPP
+#define KOMPIS_AST_ASSIGNMENT_STATEMENT_HPP
 
 #include "ast/statement.hpp"
 

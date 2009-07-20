@@ -13,12 +13,12 @@ namespace kompis
     class NewObjectExpression : public Expression
     {
       public:
-        NewObjectExpression(Identifier &id) : _id(id) {}
+        NewObjectExpression(Identifier &class_name) : _class_name(class_name) {}
 
         void accept(Visitor &visitor);
 
       //private:
-        Identifier &_id;
+        Identifier &_class_name;
     };
   }
 }

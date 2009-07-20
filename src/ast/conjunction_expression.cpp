@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    void IntegerLiteral::accept(Visitor &visitor)
+    void ConjunctionExpression::accept(Visitor &visitor)
     {
       visitor.visit(*this);
     }

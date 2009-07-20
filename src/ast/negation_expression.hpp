@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_NOT_HPP
-#define KOMPIS_AST_NOT_HPP
+#ifndef KOMPIS_AST_NEGATION_EXPRESSION_HPP
+#define KOMPIS_AST_NEGATION_EXPRESSION_HPP
 
 #include "ast/expression.hpp"
 
@@ -9,10 +9,10 @@ namespace kompis
   {
     class Visitor;
 
-    class Not : public Expression
+    class NegationExpression : public Expression
     {
       public:
-        Not(Expression &expr) : _expr(expr) {}
+        NegationExpression(Expression &expr) : _expr(expr) {}
 
         void accept(Visitor &visitor);
 

@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_PRINT_HPP
-#define KOMPIS_AST_PRINT_HPP
+#ifndef KOMPIS_AST_PRINT_STATEMENT_HPP
+#define KOMPIS_AST_PRINT_STATEMENT_HPP
 
 #include "ast/statement.hpp"
 
@@ -10,10 +10,10 @@ namespace kompis
     class Expression;
     class Visitor;
 
-    class Print : public Statement
+    class PrintStatement : public Statement
     {
       public:
-        Print(Expression &expr) : _expr(expr) {}
+        PrintStatement(Expression &expr) : _expr(expr) {}
 
         void accept(Visitor &visitor);
 

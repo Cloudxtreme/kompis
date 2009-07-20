@@ -15,12 +15,12 @@ namespace kompis
     class MainClassDeclaration : public Node
     {
       public:
-        MainClassDeclaration(Identifier &id, Statement &statement) : _id(id), _statement(statement) {}
+        MainClassDeclaration(Identifier &name, Statement &statement) : _name(name), _statement(statement) {}
 
         void accept(Visitor &);
 
       //private:
-        Identifier &_id;
+        Identifier &_name;
         Statement &_statement;
     };
   }

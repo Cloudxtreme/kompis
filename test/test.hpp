@@ -1,5 +1,6 @@
 #include <cxxtest/TestSuite.h>
 #include "ast/ast.hpp"
+#include "ast/pretty_printer.hpp"
 
 using namespace kompis;
 using namespace ast;
@@ -39,96 +40,96 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "1");
     }
 
-    void test_plus1()
+    void test_addition_expression1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Plus p(i1, i2);
-      _pp.visit(p);
+      AdditionExpression a(i1, i2);
+      _pp.visit(a);
       TS_ASSERT_EQUALS(_out.str(), "(+ 1 2)");
     }
 
-    void test_plus2()
+    void test_addition_expression2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Plus p1(i2, i3);
-      Plus p2(i1, p1);
-      _pp.visit(p2);
+      AdditionExpression a1(i2, i3);
+      AdditionExpression a2(i1, a1);
+      _pp.visit(a2);
       TS_ASSERT_EQUALS(_out.str(), "(+ 1 (+ 2 3))");
     }
 
-    void test_plus3()
+    void test_addition_expression3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Plus p1(i1, i2);
-      Plus p2(p1, i3);
-      _pp.visit(p2);
+      AdditionExpression a1(i1, i2);
+      AdditionExpression a2(a1, i3);
+      _pp.visit(a2);
       TS_ASSERT_EQUALS(_out.str(), "(+ (+ 1 2) 3)");
     }
 
-    void test_minus1()
+    void test_subtraction_expression1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Minus m(i1, i2);
-      _pp.visit(m);
+      SubtractionExpression s(i1, i2);
+      _pp.visit(s);
       TS_ASSERT_EQUALS(_out.str(), "(- 1 2)");
     }
 
-    void test_minus2()
+    void test_subtraction_expression2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Minus m1(i2, i3);
-      Minus m2(i1, m1);
-      _pp.visit(m2);
+      SubtractionExpression s1(i2, i3);
+      SubtractionExpression s2(i1, s1);
+      _pp.visit(s2);
       TS_ASSERT_EQUALS(_out.str(), "(- 1 (- 2 3))");
     }
 
-    void test_minus3()
+    void test_subtraction_expression3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Minus m1(i1, i2);
-      Minus m2(m1, i3);
-      _pp.visit(m2);
+      SubtractionExpression s1(i1, i2);
+      SubtractionExpression s2(s1, i3);
+      _pp.visit(s2);
       TS_ASSERT_EQUALS(_out.str(), "(- (- 1 2) 3)");
     }
 
-    void test_times1()
+    void test_multiplication_expression1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Times t(i1, i2);
-      _pp.visit(t);
+      MultiplicationExpression m(i1, i2);
+      _pp.visit(m);
       TS_ASSERT_EQUALS(_out.str(), "(* 1 2)");
     }
 
-    void test_times2()
+    void test_multiplication_expression2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Times t1(i2, i3);
-      Times t2(i1, t1);
-      _pp.visit(t2);
+      MultiplicationExpression m1(i2, i3);
+      MultiplicationExpression m2(i1, m1);
+      _pp.visit(m2);
       TS_ASSERT_EQUALS(_out.str(), "(* 1 (* 2 3))");
     }
 
-    void test_times3()
+    void test_multiplication_expression3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       IntegerLiteral i3(3);
-      Times t1(i1, i2);
-      Times t2(t1, i3);
-      _pp.visit(t2);
+      MultiplicationExpression m1(i1, i2);
+      MultiplicationExpression m2(m1, i3);
+      _pp.visit(m2);
       TS_ASSERT_EQUALS(_out.str(), "(* (* 1 2) 3)");
     }
 
@@ -146,75 +147,56 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "false");
     }
 
-    void test_and()
+    void test_conjunction_expression()
     {
       BooleanLiteral b1(true);
       BooleanLiteral b2(false);
-      And a(b1, b2);
-      _pp.visit(a);
+      ConjunctionExpression c(b1, b2);
+      _pp.visit(c);
       TS_ASSERT_EQUALS(_out.str(), "(and true false)");
     }
 
-    void test_not()
+    void test_negation_expression()
     {
       BooleanLiteral b(true);
-      Not n(b);
+      NegationExpression n(b);
       _pp.visit(n);
       TS_ASSERT_EQUALS(_out.str(), "(not true)");
     }
 
-    void test_less_than()
+    void test_less_than_expression()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      LessThan l(i1, i2);
+      LessThanExpression l(i1, i2);
       _pp.visit(l);
       TS_ASSERT_EQUALS(_out.str(), "(< 1 2)");
     }
 
     void test_identifier()
     {
-      Identifier id("foo");
-      _pp.visit(id);
+      Identifier i("foo");
+      _pp.visit(i);
       TS_ASSERT_EQUALS(_out.str(), "foo");
     }
 
-    void test_plus_identifier_expression()
-    {
-      IdentifierExpression id1("foo");
-      IdentifierExpression id2("bar");
-      Plus p(id1, id2);
-      _pp.visit(p);
-      TS_ASSERT_EQUALS(_out.str(), "(+ foo bar)");
-    }
-
-    void test_print_integer_literal()
+    void test_print_statement()
     {
       IntegerLiteral i(1);
-      Print p(i);
+      PrintStatement p(i);
       _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(print 1)");
-    }
-
-    void test_print_plus()
-    {
-      IntegerLiteral i1(1);
-      IntegerLiteral i2(2);
-      Plus pl(i1, i2);
-      Print pr(pl);
-      _pp.visit(pr);
-      TS_ASSERT_EQUALS(_out.str(), "(print (+ 1 2))");
     }
 
     void test_if_then_else_statement()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      LessThan l(i1, i2);
-      Print p1(i1);
-      Print p2(i2);
-      IfThenElseStatement i(l, p1, p2);
-      _pp.visit(i);
+      LessThanExpression l(i1, i2);
+      PrintStatement p1(i1);
+      PrintStatement p2(i2);
+      IfThenElseStatement if1(l, p1, p2);
+      _pp.visit(if1);
       TS_ASSERT_EQUALS(_out.str(), "(if (< 1 2) (print 1) (print 2))");
     }
 
@@ -222,8 +204,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      LessThan l(i1, i2);
-      Print p(i1);
+      LessThanExpression l(i1, i2);
+      PrintStatement p(i1);
       WhileDoStatement w(l, p);
       _pp.visit(w);
       TS_ASSERT_EQUALS(_out.str(), "(while (< 1 2) (print 1))");
@@ -232,8 +214,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     void test_assignment_statement()
     {
       Identifier id("foo");
-      IntegerLiteral i(1);
-      AssignmentStatement a(id, i);
+      IntegerLiteral il(1);
+      AssignmentStatement a(id, il);
       _pp.visit(a);
       TS_ASSERT_EQUALS(_out.str(), "(= foo 1)");
     }
@@ -254,25 +236,25 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
 
     void test_identifier_type()
     {
-      IdentifierType id("FooClass");
-      _pp.visit(id);
+      IdentifierType i("FooClass");
+      _pp.visit(i);
       TS_ASSERT_EQUALS(_out.str(), "FooClass");
     }
 
     void test_variable_declaration()
     {
-      IntegerType i;
+      IntegerType it;
       Identifier id("foo");
-      VariableDeclaration v(i, id);
+      VariableDeclaration v(it, id);
       _pp.visit(v);
       TS_ASSERT_EQUALS(_out.str(), "(variable Integer foo)");
     }
 
     void test_parameter_declaration()
     {
-      IntegerType i;
+      IntegerType it;
       Identifier id("foo");
-      ParameterDeclaration p(i, id);
+      ParameterDeclaration p(it, id);
       _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(parameter Integer foo)");
     }
@@ -286,51 +268,51 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
 
     void test_identifier_expression()
     {
-      IdentifierExpression id("foo");
-      _pp.visit(id);
+      IdentifierExpression i("foo");
+      _pp.visit(i);
       TS_ASSERT_EQUALS(_out.str(), "foo");
     }
 
     void test_new_object_expression()
     {
-      Identifier id("foo");
-      NewObjectExpression n(id);
+      Identifier i("foo");
+      NewObjectExpression n(i);
       _pp.visit(n);
       TS_ASSERT_EQUALS(_out.str(), "(new foo)");
     }
 
-    void test_call_expression0()
+    void test_call_expression_without_arguments()
     {
       ThisExpression t;
-      Identifier id("do_foo");
-      std::list<Expression *> args;
-      CallExpression c(t, id, args);
+      Identifier i("do_foo");
+      std::list<Expression *> es;
+      CallExpression c(t, i, es);
       _pp.visit(c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list))");
     }
 
-    void test_call_expression1()
+    void test_call_expression_with_one_argument()
     {
       ThisExpression t;
       Identifier id("do_foo");
-      IntegerLiteral i(1);
-      std::list<Expression *> args;
-      args.push_back(&i);
-      CallExpression c(t, id, args);
+      IntegerLiteral il(1);
+      std::list<Expression *> es;
+      es.push_back(&il);
+      CallExpression c(t, id, es);
       _pp.visit(c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1))");
     }
 
-    void test_call_expression2()
+    void test_call_expression_with_two_arguments()
     {
       ThisExpression t;
       Identifier id("do_foo");
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      std::list<Expression *> args;
-      args.push_back(&i1);
-      args.push_back(&i2);
-      CallExpression c(t, id, args);
+      std::list<Expression *> es;
+      es.push_back(&i1);
+      es.push_back(&i2);
+      CallExpression c(t, id, es);
       _pp.visit(c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1 2))");
     }
@@ -339,8 +321,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Print p1(i1);
-      Print p2(i2);
+      PrintStatement p1(i1);
+      PrintStatement p2(i2);
       std::list<Statement *> ss;
       ss.push_back(&p1);
       ss.push_back(&p2);
@@ -364,10 +346,10 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
 
     void test_class_declaration()
     {
-      Identifier id("FooClass");
+      Identifier i("FooClass");
       std::list<VariableDeclaration *> vs;
       std::list<MethodDeclaration *> ms;
-      ClassDeclaration c(id, vs, ms);
+      ClassDeclaration c(i, vs, ms);
       _pp.visit(c);
       TS_ASSERT_EQUALS(_out.str(), "(class FooClass (list) (list))");
     }
@@ -375,8 +357,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     void test_main_class_declaration()
     {
       Identifier id("MainClass");
-      IntegerLiteral i(1);
-      Print p(i);
+      IntegerLiteral il(1);
+      PrintStatement p(il);
       MainClassDeclaration m(id, p);
       _pp.visit(m);
       TS_ASSERT_EQUALS(_out.str(), "(main MainClass (print 1))");
@@ -384,10 +366,10 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
 
     void test_program_declaration()
     {
-      Identifier id1("MainClass");
-      IntegerLiteral i(1);
-      Print p(i);
-      MainClassDeclaration m(id1, p);
+      Identifier id("MainClass");
+      IntegerLiteral il(1);
+      PrintStatement ps(il);
+      MainClassDeclaration m(id, ps);
       std::list<ClassDeclaration *> cs;
       ProgramDeclaration pd(m, cs);
       _pp.visit(pd);

@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_IF_THEN_ELSE_HPP
-#define KOMPIS_AST_IF_THEN_ELSE_HPP
+#ifndef KOMPIS_AST_IF_THEN_ELSE_STATEMENT_HPP
+#define KOMPIS_AST_IF_THEN_ELSE_STATEMENT_HPP
 
 #include "ast/statement.hpp"
 
@@ -13,13 +13,13 @@ namespace kompis
     class IfThenElseStatement : public Statement
     {
       public:
-        IfThenElseStatement(Expression &pred, Statement &s1, Statement &s2) : _pred(pred), _s1(s1), _s2(s2) {}
+        IfThenElseStatement(Expression &pred, Statement &then_statement, Statement &else_statement) : _pred(pred), _then_statement(then_statement), _else_statement(else_statement) {}
 
         void accept(Visitor &visitor);
 
       //private:
         Expression &_pred;
-        Statement &_s1, &_s2;
+        Statement &_then_statement, &_else_statement;
     };
   }
 }

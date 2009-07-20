@@ -8,31 +8,31 @@ namespace kompis
 {
   namespace ast
   {
-    class And;
+    class AdditionExpression;
     class AssignmentStatement;
     class BlockStatement;
     class BooleanLiteral;
     class BooleanType;
     class CallExpression;
     class ClassDeclaration;
+    class ConjunctionExpression;
     class Identifier;
     class IdentifierExpression;
     class IdentifierType;
     class IfThenElseStatement;
     class IntegerLiteral;
     class IntegerType;
-    class LessThan;
+    class LessThanExpression;
     class MainClassDeclaration;
     class MethodDeclaration;
-    class Minus;
+    class MultiplicationExpression;
+    class NegationExpression;
     class NewObjectExpression;
-    class Not;
-    class Plus;
     class ParameterDeclaration;
-    class Print;
+    class PrintStatement;
     class ProgramDeclaration;
+    class SubtractionExpression;
     class ThisExpression;
-    class Times;
     class VariableDeclaration;
     class WhileDoStatement;
 
@@ -41,31 +41,31 @@ namespace kompis
       public:
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
-        void visit(And &);
+        void visit(AdditionExpression &);
         void visit(AssignmentStatement &);
         void visit(BlockStatement &);
         void visit(BooleanLiteral &);
         void visit(BooleanType &);
         void visit(CallExpression &);
         void visit(ClassDeclaration &);
+        void visit(ConjunctionExpression &);
         void visit(Identifier &);
         void visit(IdentifierExpression &);
         void visit(IdentifierType &);
         void visit(IfThenElseStatement &);
         void visit(IntegerLiteral &);
         void visit(IntegerType &);
-        void visit(LessThan &);
+        void visit(LessThanExpression &);
         void visit(MainClassDeclaration &);
         void visit(MethodDeclaration &);
-        void visit(Minus &);
+        void visit(MultiplicationExpression &);
+        void visit(NegationExpression &);
         void visit(NewObjectExpression &);
-        void visit(Not &);
         void visit(ParameterDeclaration &);
-        void visit(Plus &);
-        void visit(Print &);
+        void visit(PrintStatement &);
         void visit(ProgramDeclaration &);
+        void visit(SubtractionExpression &);
         void visit(ThisExpression &);
-        void visit(Times &);
         void visit(VariableDeclaration &);
         void visit(WhileDoStatement &);
 
