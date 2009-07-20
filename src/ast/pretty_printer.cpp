@@ -38,6 +38,11 @@ namespace kompis
       _out << id._name;
     }
 
+    void PrettyPrinter::visit(IdentifierExpression &id)
+    {
+      _out << id._name;
+    }
+
     void PrettyPrinter::visit(IdentifierType &id)
     {
       _out << id._name;

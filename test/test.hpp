@@ -179,10 +179,10 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "foo");
     }
 
-    void test_plus_identifier()
+    void test_plus_identifier_expression()
     {
-      Identifier id1("foo");
-      Identifier id2("bar");
+      IdentifierExpression id1("foo");
+      IdentifierExpression id2("bar");
       Plus p(id1, id2);
       _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(+ foo bar)");
@@ -282,5 +282,12 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       ThisExpression t;
       _pp.visit(t);
       TS_ASSERT_EQUALS(_out.str(), "this");
+    }
+
+    void test_identifier_expression()
+    {
+      IdentifierExpression id("foo");
+      _pp.visit(id);
+      TS_ASSERT_EQUALS(_out.str(), "foo");
     }
 };

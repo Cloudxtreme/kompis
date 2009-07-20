@@ -7,6 +7,7 @@
 #include "ast/boolean_type.hpp"
 #include "ast/expression.hpp"
 #include "ast/identifier.hpp"
+#include "ast/identifier_expression.hpp"
 #include "ast/identifier_type.hpp"
 #include "ast/if_then_else_statement.hpp"
 #include "ast/integer_literal.hpp"

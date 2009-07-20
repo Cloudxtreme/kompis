@@ -2,7 +2,7 @@
 #define KOMPIS_AST_IDENTIFIER_HPP
 
 #include <string>
-#include "ast/expression.hpp"
+#include "ast/node.hpp"
 
 namespace kompis
 {
@@ -10,7 +10,7 @@ namespace kompis
   {
     class Visitor;
 
-    class Identifier : public Expression
+    class Identifier : public Node
     {
       public:
         Identifier(char *name) : _name(name) {}

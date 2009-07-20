@@ -13,6 +13,7 @@ namespace kompis
     class BooleanLiteral;
     class BooleanType;
     class Identifier;
+    class IdentifierExpression;
     class IdentifierType;
     class IfThenElseStatement;
     class IntegerLiteral;
@@ -38,6 +39,7 @@ namespace kompis
         void visit(BooleanLiteral &);
         void visit(BooleanType &);
         void visit(Identifier &);
+        void visit(IdentifierExpression &);
         void visit(IdentifierType &);
         void visit(IfThenElseStatement &);
         void visit(IntegerLiteral &);
