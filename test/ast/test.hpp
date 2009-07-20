@@ -5,21 +5,21 @@
 using namespace kompis;
 using namespace ast;
 
-class PrettyPrinterTestSuite : public CxxTest::TestSuite
+class ASTTestSuite : public CxxTest::TestSuite
 {
   private:
     PrettyPrinter _pp;
     std::ostringstream _out;
 
   public:
-    PrettyPrinterTestSuite() : _pp(_out), _out() {}
+    ASTTestSuite() : _pp(_out), _out() {}
 
-    static PrettyPrinterTestSuite *createSuite()
+    static ASTTestSuite *createSuite()
     {
-      return new PrettyPrinterTestSuite();
+      return new ASTTestSuite();
     }
 
-    static void destroySuite(PrettyPrinterTestSuite *suite)
+    static void destroySuite(ASTTestSuite *suite)
     {
       delete suite;
     }
