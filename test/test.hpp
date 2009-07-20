@@ -306,7 +306,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       std::list<Expression *> args;
       CallExpression c(t, id, args);
       _pp.visit(c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo)");
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list))");
     }
 
     void test_call_expression1()
@@ -318,7 +318,7 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       args.push_back(&i);
       CallExpression c(t, id, args);
       _pp.visit(c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo 1)");
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1))");
     }
 
     void test_call_expression2()
@@ -332,6 +332,65 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       args.push_back(&i2);
       CallExpression c(t, id, args);
       _pp.visit(c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo 1 2)");
+      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1 2))");
+    }
+
+    void test_block_statement()
+    {
+      IntegerLiteral i1(1);
+      IntegerLiteral i2(2);
+      Print p1(i1);
+      Print p2(i2);
+      std::list<Statement *> ss;
+      ss.push_back(&p1);
+      ss.push_back(&p2);
+      BlockStatement b(ss);
+      _pp.visit(b);
+      TS_ASSERT_EQUALS(_out.str(), "(block (list (print 1) (print 2)))");
+    }
+
+    void test_method_declaration()
+    {
+      IntegerType it;
+      Identifier id("do_foo");
+      std::list<ParameterDeclaration *> ps;
+      std::list<VariableDeclaration *> vs;
+      std::list<Statement *> ss;
+      IntegerLiteral il(1);
+      MethodDeclaration m(it, id, ps, vs, ss, il);
+      _pp.visit(m);
+      TS_ASSERT_EQUALS(_out.str(), "(method do_foo (list) (list) (list) 1)");
+    }
+
+    void test_class_declaration()
+    {
+      Identifier id("FooClass");
+      std::list<VariableDeclaration *> vs;
+      std::list<MethodDeclaration *> ms;
+      ClassDeclaration c(id, vs, ms);
+      _pp.visit(c);
+      TS_ASSERT_EQUALS(_out.str(), "(class FooClass (list) (list))");
+    }
+
+    void test_main_class_declaration()
+    {
+      Identifier id("MainClass");
+      IntegerLiteral i(1);
+      Print p(i);
+      MainClassDeclaration m(id, p);
+      _pp.visit(m);
+      TS_ASSERT_EQUALS(_out.str(), "(main MainClass (print 1))");
+    }
+
+    void test_program_declaration()
+    {
+      Identifier id1("MainClass");
+      IntegerLiteral i(1);
+      Print p(i);
+      MainClassDeclaration m(id1, p);
+      std::list<ClassDeclaration *> cs;
+      ProgramDeclaration pd(m, cs);
+      _pp.visit(pd);
+      TS_ASSERT_EQUALS(_out.str(), "(program (main MainClass (print 1)) (list))");
     }
 };
