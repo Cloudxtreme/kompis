@@ -20,6 +20,7 @@ namespace kompis
     class IntegerType;
     class LessThan;
     class Minus;
+    class NewObjectExpression;
     class Not;
     class ParameterDeclaration;
     class Plus;
@@ -46,6 +47,7 @@ namespace kompis
         void visit(IntegerType &);
         void visit(LessThan &);
         void visit(Minus &);
+        void visit(NewObjectExpression &);
         void visit(Not &);
         void visit(ParameterDeclaration &);
         void visit(Plus &);

@@ -14,6 +14,7 @@
 #include "ast/integer_type.hpp"
 #include "ast/less_than.hpp"
 #include "ast/minus.hpp"
+#include "ast/new_object_expression.hpp"
 #include "ast/node.hpp"
 #include "ast/not.hpp"
 #include "ast/parameter_declaration.hpp"

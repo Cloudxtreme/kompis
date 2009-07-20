@@ -290,4 +290,12 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(id);
       TS_ASSERT_EQUALS(_out.str(), "foo");
     }
+
+    void test_new_object_expression()
+    {
+      Identifier id("foo");
+      NewObjectExpression n(id);
+      _pp.visit(n);
+      TS_ASSERT_EQUALS(_out.str(), "(new foo)");
+    }
 };

@@ -17,6 +17,7 @@ namespace kompis
     class IntegerType;
     class LessThan;
     class Minus;
+    class NewObjectExpression;
     class Not;
     class Plus;
     class ParameterDeclaration;
@@ -42,6 +43,7 @@ namespace kompis
         virtual void visit(IntegerType &) = 0;
         virtual void visit(LessThan &) = 0;
         virtual void visit(Minus &) = 0;
+        virtual void visit(NewObjectExpression &) = 0;
         virtual void visit(Not &) = 0;
         virtual void visit(Plus &) = 0;
         virtual void visit(ParameterDeclaration &) = 0;

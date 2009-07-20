@@ -87,6 +87,13 @@ namespace kompis
       _out << ")";
     }
 
+    void PrettyPrinter::visit(NewObjectExpression &n)
+    {
+      _out << "(new ";
+      n._id.accept(*this);
+      _out << ")";
+    }
+
     void PrettyPrinter::visit(Not &n)
     {
       _out << "(not ";
