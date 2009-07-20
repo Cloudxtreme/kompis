@@ -28,7 +28,17 @@ namespace kompis
       _out << (b._value ? "true" : "false");
     }
 
+    void PrettyPrinter::visit(BooleanType &b)
+    {
+      _out << "Boolean";
+    }
+
     void PrettyPrinter::visit(Identifier &id)
+    {
+      _out << id._name;
+    }
+
+    void PrettyPrinter::visit(IdentifierType &id)
     {
       _out << id._name;
     }
@@ -47,6 +57,11 @@ namespace kompis
     void PrettyPrinter::visit(IntegerLiteral &i)
     {
       _out << i._value;
+    }
+
+    void PrettyPrinter::visit(IntegerType &i)
+    {
+      _out << "Integer";
     }
 
     void PrettyPrinter::visit(LessThan &l)

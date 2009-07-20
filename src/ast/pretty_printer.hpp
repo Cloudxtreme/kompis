@@ -11,16 +11,18 @@ namespace kompis
     class And;
     class AssignmentStatement;
     class BooleanLiteral;
+    class BooleanType;
     class Identifier;
+    class IdentifierType;
     class IfThenElseStatement;
     class IntegerLiteral;
+    class IntegerType;
     class LessThan;
     class Minus;
     class Not;
     class Plus;
     class Print;
     class Times;
-    class TrueLiteral;
     class WhileDoStatement;
 
     class PrettyPrinter : public Visitor
@@ -31,9 +33,12 @@ namespace kompis
         void visit(And &);
         void visit(AssignmentStatement &);
         void visit(BooleanLiteral &);
+        void visit(BooleanType &);
         void visit(Identifier &);
+        void visit(IdentifierType &);
         void visit(IfThenElseStatement &);
         void visit(IntegerLiteral &);
+        void visit(IntegerType &);
         void visit(LessThan &);
         void visit(Minus &);
         void visit(Not &);

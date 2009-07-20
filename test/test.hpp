@@ -237,4 +237,25 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(a);
       TS_ASSERT_EQUALS(_out.str(), "(= foo 1)");
     }
+
+    void test_boolean_type()
+    {
+      BooleanType b;
+      _pp.visit(b);
+      TS_ASSERT_EQUALS(_out.str(), "Boolean");
+    }
+
+    void test_integer_type()
+    {
+      IntegerType i;
+      _pp.visit(i);
+      TS_ASSERT_EQUALS(_out.str(), "Integer");
+    }
+
+    void test_identifier_type()
+    {
+      IdentifierType id("FooClass");
+      _pp.visit(id);
+      TS_ASSERT_EQUALS(_out.str(), "FooClass");
+    }
 };
