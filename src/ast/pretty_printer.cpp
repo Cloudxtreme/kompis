@@ -114,6 +114,11 @@ namespace kompis
       _out << ")";
     }
 
+    void PrettyPrinter::visit(ThisExpression &t)
+    {
+      _out << "this";
+    }
+
     void PrettyPrinter::visit(Times &t)
     {
       _out << "(* ";

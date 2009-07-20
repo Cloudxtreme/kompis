@@ -276,4 +276,11 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(parameter Integer foo)");
     }
+
+    void test_this_expression()
+    {
+      ThisExpression t;
+      _pp.visit(t);
+      TS_ASSERT_EQUALS(_out.str(), "this");
+    }
 };

@@ -20,6 +20,7 @@
 #include "ast/pretty_printer.hpp"
 #include "ast/print.hpp"
 #include "ast/statement.hpp"
+#include "ast/this_expression.hpp"
 #include "ast/times.hpp"
 #include "ast/type.hpp"
 #include "ast/variable_declaration.hpp"

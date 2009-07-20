@@ -23,6 +23,7 @@ namespace kompis
     class ParameterDeclaration;
     class Plus;
     class Print;
+    class ThisExpression;
     class Times;
     class VariableDeclaration;
     class WhileDoStatement;
@@ -47,6 +48,7 @@ namespace kompis
         void visit(ParameterDeclaration &);
         void visit(Plus &);
         void visit(Print &);
+        void visit(ThisExpression &);
         void visit(Times &);
         void visit(VariableDeclaration &);
         void visit(WhileDoStatement &);
