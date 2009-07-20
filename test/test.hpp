@@ -43,8 +43,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Plus p1(i1, i2);
-      _pp.visit(p1);
+      Plus p(i1, i2);
+      _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(+ 1 2)");
     }
 
@@ -74,8 +74,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Minus m1(i1, i2);
-      _pp.visit(m1);
+      Minus m(i1, i2);
+      _pp.visit(m);
       TS_ASSERT_EQUALS(_out.str(), "(- 1 2)");
     }
 
@@ -105,8 +105,8 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      Times t1(i1, i2);
-      _pp.visit(t1);
+      Times t(i1, i2);
+      _pp.visit(t);
       TS_ASSERT_EQUALS(_out.str(), "(* 1 2)");
     }
 
@@ -183,16 +183,16 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       Identifier id1("foo");
       Identifier id2("bar");
-      Plus p1(id1, id2);
-      _pp.visit(p1);
+      Plus p(id1, id2);
+      _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(+ foo bar)");
     }
 
     void test_print_integer_literal()
     {
       IntegerLiteral i(1);
-      Print pr(i);
-      _pp.visit(pr);
+      Print p(i);
+      _pp.visit(p);
       TS_ASSERT_EQUALS(_out.str(), "(print 1)");
     }
 
@@ -211,10 +211,10 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       LessThan l(i1, i2);
-      Print pr1(i1);
-      Print pr2(i2);
-      IfThenElseStatement if1(l, pr1, pr2);
-      _pp.visit(if1);
+      Print p1(i1);
+      Print p2(i2);
+      IfThenElseStatement i(l, p1, p2);
+      _pp.visit(i);
       TS_ASSERT_EQUALS(_out.str(), "(if (< 1 2) (print 1) (print 2))");
     }
 
@@ -223,9 +223,9 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
       LessThan l(i1, i2);
-      Print pr(i1);
-      WhileDoStatement wh(l, pr);
-      _pp.visit(wh);
+      Print p(i1);
+      WhileDoStatement w(l, p);
+      _pp.visit(w);
       TS_ASSERT_EQUALS(_out.str(), "(while (< 1 2) (print 1))");
     }
 
