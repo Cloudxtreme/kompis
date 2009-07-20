@@ -10,7 +10,7 @@ namespace kompis
   {
     class And;
     class AssignmentStatement;
-    class FalseLiteral;
+    class BooleanLiteral;
     class Identifier;
     class IfThenElseStatement;
     class IntegerLiteral;
@@ -30,7 +30,7 @@ namespace kompis
 
         void visit(And &);
         void visit(AssignmentStatement &);
-        void visit(FalseLiteral &);
+        void visit(BooleanLiteral &);
         void visit(Identifier &);
         void visit(IfThenElseStatement &);
         void visit(IntegerLiteral &);
@@ -40,7 +40,6 @@ namespace kompis
         void visit(Plus &);
         void visit(Print &);
         void visit(Times &);
-        void visit(TrueLiteral &);
         void visit(WhileDoStatement &);
 
       private:

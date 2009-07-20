@@ -134,31 +134,31 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
 
     void test_true_literal()
     {
-      TrueLiteral t;
-      _pp.visit(t);
+      BooleanLiteral b(true);
+      _pp.visit(b);
       TS_ASSERT_EQUALS(_out.str(), "true");
     }
 
     void test_false_literal()
     {
-      FalseLiteral f;
-      _pp.visit(f);
+      BooleanLiteral b(false);
+      _pp.visit(b);
       TS_ASSERT_EQUALS(_out.str(), "false");
     }
 
     void test_and()
     {
-      TrueLiteral t;
-      FalseLiteral f;
-      And a(t, f);
+      BooleanLiteral b1(true);
+      BooleanLiteral b2(false);
+      And a(b1, b2);
       _pp.visit(a);
       TS_ASSERT_EQUALS(_out.str(), "(and true false)");
     }
 
     void test_not()
     {
-      TrueLiteral t;
-      Not n(t);
+      BooleanLiteral b(true);
+      Not n(b);
       _pp.visit(n);
       TS_ASSERT_EQUALS(_out.str(), "(not true)");
     }

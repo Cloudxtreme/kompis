@@ -3,8 +3,8 @@
 
 #include "ast/and.hpp"
 #include "ast/assignment_statement.hpp"
+#include "ast/boolean_literal.hpp"
 #include "ast/expression.hpp"
-#include "ast/false_literal.hpp"
 #include "ast/identifier.hpp"
 #include "ast/if_then_else_statement.hpp"
 #include "ast/integer_literal.hpp"
@@ -17,7 +17,6 @@
 #include "ast/print.hpp"
 #include "ast/statement.hpp"
 #include "ast/times.hpp"
-#include "ast/true_literal.hpp"
 #include "ast/visitor.hpp"
 #include "ast/while_do_statement.hpp"
 

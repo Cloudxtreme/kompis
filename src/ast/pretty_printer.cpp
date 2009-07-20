@@ -23,9 +23,9 @@ namespace kompis
       _out << ")";
     }
 
-    void PrettyPrinter::visit(FalseLiteral &f)
+    void PrettyPrinter::visit(BooleanLiteral &b)
     {
-      _out << "false";
+      _out << (b._value ? "true" : "false");
     }
 
     void PrettyPrinter::visit(Identifier &id)
@@ -97,11 +97,6 @@ namespace kompis
       _out << " ";
       t._right.accept(*this);
       _out << ")";
-    }
-
-    void PrettyPrinter::visit(TrueLiteral &t)
-    {
-      _out << "true";
     }
 
     void PrettyPrinter::visit(WhileDoStatement &w)

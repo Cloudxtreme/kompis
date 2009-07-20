@@ -1,10 +1,10 @@
-#include "ast/true_literal.hpp"
+#include "ast/boolean_literal.hpp"
 
 namespace kompis
 {
   namespace ast
   {
-    void TrueLiteral::accept(Visitor &visitor)
+    void BooleanLiteral::accept(Visitor &visitor)
     {
       visitor.visit(*this);
     }
