@@ -9,6 +9,11 @@ namespace kompis
   {
     class MoveStatement : public Statement
     {
+      public:
+        MoveStatement(Expression &f, Expression &t) : _from(f), _to(t) {}
+
+      private:
+        Expression &_from, &_to;
     };
   }
 }

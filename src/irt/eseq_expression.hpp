@@ -7,8 +7,16 @@ namespace kompis
 {
   namespace irt
   {
+    class Statement;
+
     class EseqExpression : public Expression
     {
+      public:
+        EseqExpression(Statement &s, Expression &e) : _statement(s), _expr(e) {}
+
+      private:
+        Statement &_statement;
+        Expression &_expr;
     };
   }
 }
