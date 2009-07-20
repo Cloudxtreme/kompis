@@ -1,4 +1,5 @@
 #include "ast/boolean_literal.hpp"
+#include "ast/visitor.hpp"
 
 namespace kompis
 {

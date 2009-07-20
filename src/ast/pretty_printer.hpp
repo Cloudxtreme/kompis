@@ -20,9 +20,11 @@ namespace kompis
     class LessThan;
     class Minus;
     class Not;
+    class ParameterDeclaration;
     class Plus;
     class Print;
     class Times;
+    class VariableDeclaration;
     class WhileDoStatement;
 
     class PrettyPrinter : public Visitor
@@ -42,9 +44,11 @@ namespace kompis
         void visit(LessThan &);
         void visit(Minus &);
         void visit(Not &);
+        void visit(ParameterDeclaration &);
         void visit(Plus &);
         void visit(Print &);
         void visit(Times &);
+        void visit(VariableDeclaration &);
         void visit(WhileDoStatement &);
 
       private:

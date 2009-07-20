@@ -258,4 +258,22 @@ class PrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(id);
       TS_ASSERT_EQUALS(_out.str(), "FooClass");
     }
+
+    void test_variable_declaration()
+    {
+      IntegerType i;
+      Identifier id("foo");
+      VariableDeclaration v(i, id);
+      _pp.visit(v);
+      TS_ASSERT_EQUALS(_out.str(), "(variable Integer foo)");
+    }
+
+    void test_parameter_declaration()
+    {
+      IntegerType i;
+      Identifier id("foo");
+      ParameterDeclaration p(i, id);
+      _pp.visit(p);
+      TS_ASSERT_EQUALS(_out.str(), "(parameter Integer foo)");
+    }
 };

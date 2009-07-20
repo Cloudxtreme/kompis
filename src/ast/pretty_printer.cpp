@@ -98,6 +98,15 @@ namespace kompis
       _out << ")";
     }
 
+    void PrettyPrinter::visit(ParameterDeclaration &p)
+    {
+      _out << "(parameter ";
+      p._type.accept(*this);
+      _out << " ";
+      p._id.accept(*this);
+      _out << ")";
+    }
+
     void PrettyPrinter::visit(Print &p)
     {
       _out << "(print ";
@@ -111,6 +120,15 @@ namespace kompis
       t._left.accept(*this);
       _out << " ";
       t._right.accept(*this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(VariableDeclaration &p)
+    {
+      _out << "(variable ";
+      p._type.accept(*this);
+      _out << " ";
+      p._id.accept(*this);
       _out << ")";
     }
 

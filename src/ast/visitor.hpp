@@ -18,8 +18,10 @@ namespace kompis
     class Minus;
     class Not;
     class Plus;
+    class ParameterDeclaration;
     class Print;
     class Times;
+    class VariableDeclaration;
     class WhileDoStatement;
 
     class Visitor
@@ -39,8 +41,10 @@ namespace kompis
         virtual void visit(Minus &) = 0;
         virtual void visit(Not &) = 0;
         virtual void visit(Plus &) = 0;
+        virtual void visit(ParameterDeclaration &) = 0;
         virtual void visit(Print &) = 0;
         virtual void visit(Times &) = 0;
+        virtual void visit(VariableDeclaration &) = 0;
         virtual void visit(WhileDoStatement &) = 0;
     };
   }

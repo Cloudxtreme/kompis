@@ -1,4 +1,5 @@
 #include "ast/integer_type.hpp"
+#include "ast/visitor.hpp"
 
 namespace kompis
 {

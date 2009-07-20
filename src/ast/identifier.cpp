@@ -1,4 +1,5 @@
 #include "ast/identifier.hpp"
+#include "ast/visitor.hpp"
 
 namespace kompis
 {

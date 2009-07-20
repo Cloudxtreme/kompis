@@ -1,4 +1,5 @@
 #include "ast/less_than.hpp"
+#include "ast/visitor.hpp"
 
 namespace kompis
 {
