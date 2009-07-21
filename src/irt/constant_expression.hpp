@@ -10,7 +10,7 @@ namespace kompis
     class ConstantExpression : public Expression
     {
       public:
-        ConstantExpression(int _value) : _value(value) {}
+        ConstantExpression(int value) : _value(value) {}
 
       private:
         int _value;

@@ -7,13 +7,15 @@ namespace kompis
 {
   namespace irt
   {
+    class Expression;
+
     class MoveStatement : public Statement
     {
       public:
-        MoveStatement(Expression &f, Expression &t) : _from(f), _to(t) {}
+        MoveStatement(Expression &dst, Expression &src) : _dst(dst), _src(src) {}
 
       private:
-        Expression &_from, &_to;
+        Expression &_dst, &_src;
     };
   }
 }

@@ -16,6 +16,6 @@
 #include "irt/node.hpp"
 #include "irt/seq_statement.hpp"
 #include "irt/statement.hpp"
-#include "irt/temp_expression.hpp"
+#include "irt/temporary_expression.hpp"
 
 #endif
