@@ -1,10 +1,9 @@
 %{
 #include <stdio.h>
+#include "ast/ast.hpp"
 
 void yyerror(const char *str);
 int yywrap();
-
-int yydebug = 1;
 %}
 
 %token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE
@@ -21,101 +20,146 @@ int yydebug = 1;
 
 program
   : main_class class_declarations
+    { $$ = new ProgramDeclaration($1, $2); }
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
+    { $$ = new MainClassDeclaration($2, $15); } // ?
   ;
 
 class_declarations
   :
+    { $$ = NULL; }
   | class_declarations class_declaration
+    { $$ = NULL; }
   ;
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
+    { $$ = new ClassDeclaration($2, $4, $5); } // ?
   ;
 
 variable_declarations
   :
+    { $$ = NULL; }
   | variable_declarations variable_declaration
+    { $$ = NULL; }
   ;
 
 variable_declaration
   : type IDENTIFIER ';'
+    { $$ = new VariableDeclaration($1, $2); } // ?
   ;
 
 method_declarations
   :
+    { $$ = NULL; }
   | method_declarations method_declaration
+    { $$ = NULL; }
   ;
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
+    { $$ = new MethodDeclaration($2, $3, $5, $8, $9, $11); }
   ;
 
 parameter_list
   :
+    { $$ = NULL; }
   | type IDENTIFIER parameter_rests
+    { $$ = NULL; }
   ;
 
 parameter_rests
   :
+    { $$ = NULL; }
   | parameter_rests parameter_rest
+    { $$ = NULL; }
   ;
 
 parameter_rest
   : ',' type IDENTIFIER
+    { $$ = NULL; }
   ;
 
 type
   : BOOLEAN
+    { return new BooleanType(); }
   | INT
+    { return new IntegerType(); }
   | IDENTIFIER
+    { return new IdentifierType($1); } // ?
   ;
 
 statements
   :
+    { $$ = NULL; }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
+    { $$ = NULL; }
   ;
 
 statement
   : '{' statements '}'
+    { $$ = $2; }
   | IF '(' expression ')' statement ELSE statement
+    { $$ = new IfThenElseStatement($3, $5, $7); }
   | WHILE '(' expression ')' statement
+    { $$ = new WhileDoStatement($3, $5); }
   | PRINT '(' expression ')' ';'
+    { $$ = new PrintStatement($3); }
   | IDENTIFIER '=' expression ';'
+    { $$ = new AssignmentStatement($1, $3); } // ?
   ;
 
 expression_list
   :
+    { $$ = NULL; }
   | expression expression_rests
+    { $$ = NULL; }
   ;
 
 expression_rests
   :
+    { $$ = NULL; }
   | expression_rest expression_rests
+    { $$ = NULL; }
   ;
 
 expression_rest
   : ',' type IDENTIFIER
+    { $$ = NULL; }
   ;
 
 expression
   : expression '+' expression
+    { $$ = new AdditionExpression($1, $2); }
   | expression '-' expression
+    { $$ = new SubtractionExpression($1, $2); }
   | expression '*' expression
+    { $$ = new MultiplicationExpression($1, $2); }
   | expression '<' expression
+    { $$ = new LessThanExpression($1, $2); }
   | expression AND expression
+    { $$ = new ConjunctionExpression($1, $2); }
   | expression '.' IDENTIFIER '(' expression_list ')'
+    { $$ = new CallExpression($1, $2, $3); }
   | INTEGER_LITERAL
+    { $$ = new IntegerLiteral(yylval); }
   | TRUE
+    { $$ = new BooleanLiteral(true); }
   | FALSE
+    { $$ = new BooleanLiteral(false); }
   | IDENTIFIER
+    { $$ = new IdentifierExpression($1); } // ?
   | THIS
+    { $$ = new ThisExpression(); }
   | NEW IDENTIFIER '(' ')'
+    { $$ = new NewObjectExpression($2); } // ?
   | '!' expression
+    { $$ = new NegationExpression($2); }
   | '(' expression ')'
+    { $$ = $2; }
   ;
 
 %%

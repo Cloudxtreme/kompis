@@ -1,6 +1,6 @@
 %{
 #include <stdlib.h>
-#include "y.tab.h"
+#include "parser.tab.hpp"
 
 int line_num = 1;
 %}
