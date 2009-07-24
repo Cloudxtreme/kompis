@@ -14,7 +14,7 @@ namespace kompis
       public:
         BooleanLiteral(bool value) : _value(value) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
         bool _value;

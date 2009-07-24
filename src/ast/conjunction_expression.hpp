@@ -12,12 +12,12 @@ namespace kompis
     class ConjunctionExpression : public Expression
     {
       public:
-        ConjunctionExpression(Expression &left, Expression &right) : _left(left), _right(right) {}
+        ConjunctionExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
-        Expression &_left, &_right;
+        Expression *_left, *_right;
     };
   }
 }

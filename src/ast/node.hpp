@@ -11,7 +11,7 @@ namespace kompis
     {
       public:
         virtual ~Node() {}
-        virtual void accept(Visitor &) = 0;
+        virtual void accept(Visitor *) = 0;
     };
   }
 }

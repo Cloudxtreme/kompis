@@ -14,13 +14,13 @@ namespace kompis
     class ParameterDeclaration : public Node
     {
       public:
-        ParameterDeclaration(Type &type, Identifier &name) : _type(type), _name(name) {}
+        ParameterDeclaration(Type *type, Identifier *name) : _type(type), _name(name) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
-        Type &_type;
-        Identifier &_name;
+        Type *_type;
+        Identifier *_name;
     };
   }
 }

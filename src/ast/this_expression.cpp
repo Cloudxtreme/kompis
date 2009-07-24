@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void ThisExpression::accept(Visitor &visitor)
+    void ThisExpression::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }

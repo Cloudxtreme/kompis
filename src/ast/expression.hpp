@@ -13,7 +13,7 @@ namespace kompis
     {
       public:
         virtual ~Expression() {}
-        virtual void accept(Visitor &) = 0;
+        virtual void accept(Visitor *) = 0;
     };
   }
 }

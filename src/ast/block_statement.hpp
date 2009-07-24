@@ -15,7 +15,7 @@ namespace kompis
       public:
         BlockStatement(std::list<Statement *> statements) : _statements(statements) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
         std::list<Statement *> _statements;

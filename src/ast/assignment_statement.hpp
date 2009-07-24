@@ -14,13 +14,13 @@ namespace kompis
     class AssignmentStatement : public Statement
     {
       public:
-        AssignmentStatement(Identifier &id, Expression &expr) : _id(id), _expr(expr) {}
+        AssignmentStatement(Identifier *id, Expression *expr) : _id(id), _expr(expr) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
-        Identifier &_id;
-        Expression &_expr;
+        Identifier *_id;
+        Expression *_expr;
     };
   }
 }

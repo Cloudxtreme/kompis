@@ -12,7 +12,7 @@ namespace kompis
     {
       public:
         virtual ~Type() {}
-        virtual void accept(Visitor &) = 0;
+        virtual void accept(Visitor *) = 0;
     };
   }
 }

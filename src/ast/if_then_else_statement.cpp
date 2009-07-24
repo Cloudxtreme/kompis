@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void IfThenElseStatement::accept(Visitor &visitor)
+    void IfThenElseStatement::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }

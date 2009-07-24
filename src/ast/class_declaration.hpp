@@ -16,12 +16,12 @@ namespace kompis
     class ClassDeclaration : public Node
     {
       public:
-        ClassDeclaration(Identifier &name, std::list<VariableDeclaration *> vars, std::list<MethodDeclaration *> methods) : _name(name), _vars(vars), _methods(methods) {}
+        ClassDeclaration(Identifier *name, std::list<VariableDeclaration *> vars, std::list<MethodDeclaration *> methods) : _name(name), _vars(vars), _methods(methods) {}
 
-        void accept(Visitor &);
+        void accept(Visitor *);
 
       //private:
-        Identifier &_name;
+        Identifier *_name;
         std::list<VariableDeclaration *> _vars;
         std::list<MethodDeclaration *> _methods;
     };

@@ -13,7 +13,7 @@ namespace kompis
     class ThisExpression : public Expression
     {
       public:
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
     };
   }
 }

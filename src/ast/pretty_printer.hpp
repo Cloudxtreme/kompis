@@ -41,33 +41,33 @@ namespace kompis
       public:
         PrettyPrinter(std::ostream &out) : _out(out) {}
 
-        void visit(AdditionExpression &);
-        void visit(AssignmentStatement &);
-        void visit(BlockStatement &);
-        void visit(BooleanLiteral &);
-        void visit(BooleanType &);
-        void visit(CallExpression &);
-        void visit(ClassDeclaration &);
-        void visit(ConjunctionExpression &);
-        void visit(Identifier &);
-        void visit(IdentifierExpression &);
-        void visit(IdentifierType &);
-        void visit(IfThenElseStatement &);
-        void visit(IntegerLiteral &);
-        void visit(IntegerType &);
-        void visit(LessThanExpression &);
-        void visit(MainClassDeclaration &);
-        void visit(MethodDeclaration &);
-        void visit(MultiplicationExpression &);
-        void visit(NegationExpression &);
-        void visit(NewObjectExpression &);
-        void visit(ParameterDeclaration &);
-        void visit(PrintStatement &);
-        void visit(ProgramDeclaration &);
-        void visit(SubtractionExpression &);
-        void visit(ThisExpression &);
-        void visit(VariableDeclaration &);
-        void visit(WhileDoStatement &);
+        void visit(AdditionExpression *);
+        void visit(AssignmentStatement *);
+        void visit(BlockStatement *);
+        void visit(BooleanLiteral *);
+        void visit(BooleanType *);
+        void visit(CallExpression *);
+        void visit(ClassDeclaration *);
+        void visit(ConjunctionExpression *);
+        void visit(Identifier *);
+        void visit(IdentifierExpression *);
+        void visit(IdentifierType *);
+        void visit(IfThenElseStatement *);
+        void visit(IntegerLiteral *);
+        void visit(IntegerType *);
+        void visit(LessThanExpression *);
+        void visit(MainClassDeclaration *);
+        void visit(MethodDeclaration *);
+        void visit(MultiplicationExpression *);
+        void visit(NegationExpression *);
+        void visit(NewObjectExpression *);
+        void visit(ParameterDeclaration *);
+        void visit(PrintStatement *);
+        void visit(ProgramDeclaration *);
+        void visit(SubtractionExpression *);
+        void visit(ThisExpression *);
+        void visit(VariableDeclaration *);
+        void visit(WhileDoStatement *);
 
       private:
         std::ostream &_out;

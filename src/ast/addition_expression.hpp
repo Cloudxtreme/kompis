@@ -12,12 +12,12 @@ namespace kompis
     class AdditionExpression : public Expression
     {
       public:
-        AdditionExpression(Expression &left, Expression &right) : _left(left), _right(right) {}
+        AdditionExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
-        Expression &_left, &_right;
+        Expression *_left, *_right;
     };
   }
 }

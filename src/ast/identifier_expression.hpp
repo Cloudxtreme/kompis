@@ -15,7 +15,7 @@ namespace kompis
       public:
         IdentifierExpression(char *name) : _name(name) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
         std::string _name;

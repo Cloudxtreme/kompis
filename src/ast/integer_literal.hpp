@@ -14,7 +14,7 @@ namespace kompis
       public:
         IntegerLiteral(int value) : _value(value) {}
 
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
 
       //private:
         int _value;

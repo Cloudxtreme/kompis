@@ -13,7 +13,7 @@ namespace kompis
     class BooleanType : public Type
     {
       public:
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
     };
   }
 }

@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void BlockStatement::accept(Visitor &visitor)
+    void BlockStatement::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }

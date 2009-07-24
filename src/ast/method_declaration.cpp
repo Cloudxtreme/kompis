@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void MethodDeclaration::accept(Visitor &visitor)
+    void MethodDeclaration::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }

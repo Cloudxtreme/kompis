@@ -13,7 +13,7 @@ namespace kompis
     class IntegerType : public Type
     {
       public:
-        void accept(Visitor &visitor);
+        void accept(Visitor *visitor);
     };
   }
 }

@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void IdentifierType::accept(Visitor &visitor)
+    void IdentifierType::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }

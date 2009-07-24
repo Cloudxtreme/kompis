@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void BooleanLiteral::accept(Visitor &visitor)
+    void BooleanLiteral::accept(Visitor *visitor)
     {
-      visitor.visit(*this);
+      visitor->visit(this);
     }
   }
 }
