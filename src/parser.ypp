@@ -29,13 +29,15 @@ int yylex();
   Node *node;
   std::list<ClassDeclaration *> *class_declarations;
   std::list<MethodDeclaration *> *method_declarations;
+  std::list<ParameterDeclaration *> *parameter_declarations;
   std::list<VariableDeclaration *> *variable_declarations;
 }
 
-%type <node> program main_class class_declaration variable_declaration method_declaration parameter_list parameter_rests parameter_rest type statements statement expression_list expression_rests expression_rest expression
+%type <node> program main_class class_declaration variable_declaration method_declaration parameter_rest type statements statement expression_list expression_rests expression_rest expression
 %type <class_declarations> class_declarations
-%type <method_declarations> method_declarations
 %type <variable_declarations> variable_declarations
+%type <parameter_declarations> parameter_list parameter_rests
+%type <method_declarations> method_declarations
 
 %%
 
@@ -91,21 +93,26 @@ method_declaration
 
 parameter_list
   :
-    { $$ = NULL; }
+    // This clause ONLY gets executed for an empty parameter list.
+    { $$ = new std::list<ParameterDeclaration *>(); }
   | type IDENTIFIER parameter_rests
-    { $$ = NULL; }
+    // This clause gets executed once, last, for a non-empty parameter list._rests
+    { $$->push_front(NULL); }
   ;
 
 parameter_rests
   :
-    { $$ = NULL; }
+    // This clause gets executed once, first, for a non-empty parameter list.
+    { $$ = new std::list<ParameterDeclaration *>(); }
   | parameter_rests parameter_rest
-    { $$ = NULL; }
+    // This clause gets executed once for each element of a non-empty parameter list, after the parameter_rest clause.
+    { $$->push_back((ParameterDeclaration *)$2); }
   ;
 
 parameter_rest
   : ',' type IDENTIFIER
-    { $$ = NULL; }
+    // This clause gets executed once for each element of a non-empty parameter list, before the second parameter_rests clause.
+    { $$ = new ParameterDeclaration((Type *)$2, NULL); }
   ;
 
 type
