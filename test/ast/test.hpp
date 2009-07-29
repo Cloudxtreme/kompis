@@ -356,23 +356,21 @@ class ASTTestSuite : public CxxTest::TestSuite
 
     void test_main_class_declaration()
     {
-      Identifier id("MainClass");
       IntegerLiteral il(1);
       PrintStatement p(&il);
-      MainClassDeclaration m(&id, &p);
+      MainClassDeclaration m(&p);
       _pp.visit(&m);
-      TS_ASSERT_EQUALS(_out.str(), "(main MainClass (print 1))");
+      TS_ASSERT_EQUALS(_out.str(), "(main (print 1))");
     }
 
     void test_program_declaration()
     {
-      Identifier id("MainClass");
       IntegerLiteral il(1);
       PrintStatement ps(&il);
-      MainClassDeclaration m(&id, &ps);
+      MainClassDeclaration m(&ps);
       ClassDeclarationList cs;
       ProgramDeclaration pd(&m, &cs);
       _pp.visit(&pd);
-      TS_ASSERT_EQUALS(_out.str(), "(program (main MainClass (print 1)) (list))");
+      TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list))");
     }
 };

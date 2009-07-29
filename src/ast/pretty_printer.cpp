@@ -141,8 +141,6 @@ namespace kompis
     void PrettyPrinter::visit(MainClassDeclaration *x)
     {
       _out << "(main ";
-      x->_name->accept(this);
-      _out << " ";
       x->_statement->accept(this);
       _out << ")";
     }

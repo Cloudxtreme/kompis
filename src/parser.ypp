@@ -65,7 +65,7 @@ program
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration(new Identifier($2), (Statement *)$15); }
+    { $$ = new MainClassDeclaration((Statement *)$15); }
   ;
 
 // Of the following two cases, the empty case will be executed first (and only
