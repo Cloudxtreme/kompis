@@ -1,7 +1,6 @@
 #ifndef KOMPIS_AST_PROGRAM_DECLARATION_HPP
 #define KOMPIS_AST_PROGRAM_DECLARATION_HPP
 
-#include <list>
 #include "ast/node.hpp"
 
 namespace kompis
@@ -15,13 +14,16 @@ namespace kompis
     class ProgramDeclaration : public Node
     {
       public:
-        ProgramDeclaration(MainClassDeclaration *main, std::list<ClassDeclaration *> *classes) : _main(main), _classes(classes) {}
+        ProgramDeclaration(MainClassDeclaration *main,
+                           ClassDeclarationList *classes)
+          : _main(main),
+            _classes(classes) {}
 
         void accept(Visitor *);
 
       //private:
         MainClassDeclaration *_main;
-        std::list<ClassDeclaration *> *_classes;
+        ClassDeclarationList *_classes;
     };
   }
 }

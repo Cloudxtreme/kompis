@@ -27,10 +27,9 @@ int yylex();
 %union
 {
   Node *node;
-  std::list<ClassDeclaration *> *class_declarations;
-  std::list<MethodDeclaration *> *method_declarations;
-  std::list<ParameterDeclaration *> *parameter_declarations;
-  std::list<VariableDeclaration *> *variable_declarations;
+  ClassDeclarationList *class_declarations;
+  MethodDeclarationList *method_declarations;
+  VariableDeclarationList *variable_declarations;
 }
 
 %type <node> program main_class class_declaration variable_declaration method_declaration parameter_rest type statements statement expression_list expression_rests expression_rest expression

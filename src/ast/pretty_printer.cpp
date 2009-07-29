@@ -25,13 +25,9 @@ namespace kompis
 
     void PrettyPrinter::visit(BlockStatement *x)
     {
-      _out << "(block (list";
-      for(std::list<Statement *>::iterator it = x->_statements->begin(); it != x->_statements->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << "))";
+      _out << "(block ";
+      x->_statements->accept(this);
+      _out << ")";
     }
 
     void PrettyPrinter::visit(BooleanLiteral *x)
@@ -50,32 +46,31 @@ namespace kompis
       x->_self->accept(this);
       _out << " ";
       x->_method_name->accept(this);
-      _out << " (list";
-      for(std::list<Expression *>::iterator it = x->_args->begin(); it != x->_args->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << "))";
+      _out << " ";
+      x->_args->accept(this);
+      _out << ")";
     }
 
     void PrettyPrinter::visit(ClassDeclaration *x)
     {
       _out << "(class ";
       x->_name->accept(this);
-      _out << " (list";
-      for(std::list<VariableDeclaration *>::iterator it = x->_vars->begin(); it != x->_vars->end(); ++it)
+      _out << " ";
+      x->_vars->accept(this);
+      _out << " ";
+      x->_methods->accept(this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(ClassDeclarationList *x)
+    {
+      _out << "(list";
+      for(std::list<ClassDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
       {
         _out << " ";
         (*it)->accept(this);
       }
-      _out << ") (list";
-      for(std::list<MethodDeclaration *>::iterator it = x->_methods->begin(); it != x->_methods->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << "))";
+      _out << ")";
     }
 
     void PrettyPrinter::visit(ConjunctionExpression *x)
@@ -84,6 +79,17 @@ namespace kompis
       x->_left->accept(this);
       _out << " ";
       x->_right->accept(this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(ExpressionList *x)
+    {
+      _out << "(list";
+      for(std::list<Expression *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
+      {
+        _out << " ";
+        (*it)->accept(this);
+      }
       _out << ")";
     }
 
@@ -147,26 +153,25 @@ namespace kompis
       x->_return_type->accept(this);
       _out << " ";
       x->_name->accept(this);
-      _out << " (list";
-      for(std::list<ParameterDeclaration *>::iterator it = x->_params->begin(); it != x->_params->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << ") (list";
-      for(std::list<VariableDeclaration *>::iterator it = x->_vars->begin(); it != x->_vars->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << ") (list";
-      for(std::list<Statement *>::iterator it = x->_statements->begin(); it != x->_statements->end(); ++it)
-      {
-        _out << " ";
-        (*it)->accept(this);
-      }
-      _out << ") ";
+      _out << " ";
+      x->_params->accept(this);
+      _out << " ";
+      x->_vars->accept(this);
+      _out << " ";
+      x->_statements->accept(this);
+      _out << " ";
       x->_return_expr->accept(this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(MethodDeclarationList *x)
+    {
+      _out << "(list";
+      for(std::list<MethodDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
+      {
+        _out << " ";
+        (*it)->accept(this);
+      }
       _out << ")";
     }
 
@@ -202,6 +207,17 @@ namespace kompis
       _out << ")";
     }
 
+    void PrettyPrinter::visit(ParameterDeclarationList *x)
+    {
+      _out << "(list";
+      for(std::list<ParameterDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
+      {
+        _out << " ";
+        (*it)->accept(this);
+      }
+      _out << ")";
+    }
+
     void PrettyPrinter::visit(PrintStatement *x)
     {
       _out << "(print ";
@@ -213,13 +229,20 @@ namespace kompis
     {
       _out << "(program ";
       x->_main->accept(this);
-      _out << " (list";
-      for(std::list<ClassDeclaration *>::iterator it = x->_classes->begin(); it != x->_classes->end(); ++it)
+      _out << " ";
+      x->_classes->accept(this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(StatementList *x)
+    {
+      _out << "(list";
+      for(std::list<Statement *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
       {
         _out << " ";
         (*it)->accept(this);
       }
-      _out << "))";
+      _out << ")";
     }
 
     void PrettyPrinter::visit(SubtractionExpression *x)
@@ -242,6 +265,17 @@ namespace kompis
       x->_type->accept(this);
       _out << " ";
       x->_name->accept(this);
+      _out << ")";
+    }
+
+    void PrettyPrinter::visit(VariableDeclarationList *x)
+    {
+      _out << "(list";
+      for(std::list<VariableDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
+      {
+        _out << " ";
+        (*it)->accept(this);
+      }
       _out << ")";
     }
 

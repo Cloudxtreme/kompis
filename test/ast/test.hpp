@@ -285,7 +285,7 @@ class ASTTestSuite : public CxxTest::TestSuite
     {
       ThisExpression t;
       Identifier i("do_foo");
-      std::list<Expression *> es;
+      ExpressionList es;
       CallExpression c(&t, &i, &es);
       _pp.visit(&c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list))");
@@ -296,8 +296,8 @@ class ASTTestSuite : public CxxTest::TestSuite
       ThisExpression t;
       Identifier id("do_foo");
       IntegerLiteral il(1);
-      std::list<Expression *> es;
-      es.push_back(&il);
+      ExpressionList es;
+      es._list.push_back(&il);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1))");
@@ -309,9 +309,9 @@ class ASTTestSuite : public CxxTest::TestSuite
       Identifier id("do_foo");
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      std::list<Expression *> es;
-      es.push_back(&i1);
-      es.push_back(&i2);
+      ExpressionList es;
+      es._list.push_back(&i1);
+      es._list.push_back(&i2);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
       TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1 2))");
@@ -323,9 +323,9 @@ class ASTTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       PrintStatement p1(&i1);
       PrintStatement p2(&i2);
-      std::list<Statement *> ss;
-      ss.push_back(&p1);
-      ss.push_back(&p2);
+      StatementList ss;
+      ss._list.push_back(&p1);
+      ss._list.push_back(&p2);
       BlockStatement b(&ss);
       _pp.visit(&b);
       TS_ASSERT_EQUALS(_out.str(), "(block (list (print 1) (print 2)))");
@@ -335,9 +335,9 @@ class ASTTestSuite : public CxxTest::TestSuite
     {
       IntegerType it;
       Identifier id("do_foo");
-      std::list<ParameterDeclaration *> ps;
-      std::list<VariableDeclaration *> vs;
-      std::list<Statement *> ss;
+      ParameterDeclarationList ps;
+      VariableDeclarationList vs;
+      StatementList ss;
       IntegerLiteral il(1);
       MethodDeclaration m(&it, &id, &ps, &vs, &ss, &il);
       _pp.visit(&m);
@@ -347,8 +347,8 @@ class ASTTestSuite : public CxxTest::TestSuite
     void test_class_declaration()
     {
       Identifier i("FooClass");
-      std::list<VariableDeclaration *> vs;
-      std::list<MethodDeclaration *> ms;
+      VariableDeclarationList vs;
+      MethodDeclarationList ms;
       ClassDeclaration c(&i, &vs, &ms);
       _pp.visit(&c);
       TS_ASSERT_EQUALS(_out.str(), "(class FooClass (list) (list))");
@@ -370,7 +370,7 @@ class ASTTestSuite : public CxxTest::TestSuite
       IntegerLiteral il(1);
       PrintStatement ps(&il);
       MainClassDeclaration m(&id, &ps);
-      std::list<ClassDeclaration *> cs;
+      ClassDeclarationList cs;
       ProgramDeclaration pd(&m, &cs);
       _pp.visit(&pd);
       TS_ASSERT_EQUALS(_out.str(), "(program (main MainClass (print 1)) (list))");

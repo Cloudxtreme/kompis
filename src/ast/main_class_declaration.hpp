@@ -1,7 +1,6 @@
 #ifndef KOMPIS_AST_MAIN_CLASS_DECLARATION_HPP
 #define KOMPIS_AST_MAIN_CLASS_DECLARATION_HPP
 
-#include <list>
 #include "ast/node.hpp"
 
 namespace kompis

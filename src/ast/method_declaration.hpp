@@ -1,7 +1,6 @@
 #ifndef KOMPIS_AST_METHOD_DECLARATION_HPP
 #define KOMPIS_AST_METHOD_DECLARATION_HPP
 
-#include <list>
 #include "ast/node.hpp"
 
 namespace kompis
@@ -10,25 +9,36 @@ namespace kompis
   {
     class Expression;
     class Identifier;
-    class ParameterDeclaration;
-    class Statement;
+    class ParameterDeclarationList;
+    class StatementList;
     class Type;
-    class VariableDeclaration;
+    class VariableDeclarationList;
     class Visitor;
 
     class MethodDeclaration : public Node
     {
       public:
-        MethodDeclaration(Type *return_type, Identifier *name, std::list<ParameterDeclaration *> *params, std::list<VariableDeclaration *> *vars, std::list<Statement *> *statements, Expression *return_expr) : _return_type(return_type), _name(name), _params(params), _vars(vars), _statements(statements), _return_expr(return_expr) {}
+        MethodDeclaration(Type *return_type,
+                          Identifier *name,
+                          ParameterDeclarationList *params,
+                          VariableDeclarationList *vars,
+                          StatementList *statements,
+                          Expression *return_expr)
+          : _return_type(return_type),
+            _name(name),
+            _params(params),
+            _vars(vars),
+            _statements(statements),
+            _return_expr(return_expr) {}
 
         void accept(Visitor *);
 
       //private:
         Type *_return_type;
         Identifier *_name;
-        std::list<ParameterDeclaration *> *_params;
-        std::list<VariableDeclaration *> *_vars;
-        std::list<Statement *> *_statements;
+        ParameterDeclarationList *_params;
+        VariableDeclarationList *_vars;
+        StatementList *_statements;
         Expression *_return_expr;
     };
   }
