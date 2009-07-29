@@ -1,25 +1,25 @@
-#include <cxxtest/TestSuite.h>
+#include "cxxtest/TestSuite.h"
 #include "ast/ast.hpp"
 #include "ast/pretty_printer.hpp"
 
 using namespace kompis;
 using namespace ast;
 
-class ASTTestSuite : public CxxTest::TestSuite
+class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
 {
   private:
     PrettyPrinter _pp;
     std::ostringstream _out;
 
   public:
-    ASTTestSuite() : _pp(_out), _out() {}
+    AbstractSyntaxTreePrettyPrinterTestSuite() : _pp(_out), _out() {}
 
-    static ASTTestSuite *createSuite()
+    static AbstractSyntaxTreePrettyPrinterTestSuite *createSuite()
     {
-      return new ASTTestSuite();
+      return new AbstractSyntaxTreePrettyPrinterTestSuite();
     }
 
-    static void destroySuite(ASTTestSuite *suite)
+    static void destroySuite(AbstractSyntaxTreePrettyPrinterTestSuite *suite)
     {
       delete suite;
     }
