@@ -1,7 +1,10 @@
 // vim: set filetype=yacc :
 
 %{
+#include <iostream>
+
 #include "ast/ast.hpp"
+#include "ast/pretty_printer.hpp"
 using namespace kompis;
 using namespace ast;
 
@@ -12,6 +15,11 @@ extern "C"
 }
 
 int yylex();
+
+// These are used to subvert Bison's type system, or lack thereof.
+ExpressionList *expressions;
+ParameterDeclarationList *parameter_declarations;
+ProgramDeclaration *program_declaration;
 %}
 
 %token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE
@@ -24,94 +32,110 @@ int yylex();
 %right '!'
 %left '.'
 
+// The list types in the union could be replaced by global variables.
 %union
 {
+  int value;
+  char *text;
   Node *node;
   ClassDeclarationList *class_declarations;
+  ExpressionList *expressions;
   MethodDeclarationList *method_declarations;
+  ParameterDeclarationList *parameter_declarations;
+  StatementList *statements;
   VariableDeclarationList *variable_declarations;
 }
 
-%type <node> program main_class class_declaration variable_declaration method_declaration parameter_rest type statements statement expression_list expression_rests expression_rest expression
+%type <value> INTEGER_LITERAL
+%type <text> IDENTIFIER
+%type <node> program main_class class_declaration variable_declaration method_declaration parameter_rest type statement expression_rest expression
 %type <class_declarations> class_declarations
-%type <variable_declarations> variable_declarations
-%type <parameter_declarations> parameter_list parameter_rests
+%type <expressions> expression_list expression_rests
 %type <method_declarations> method_declarations
+%type <parameter_declarations> parameter_list parameter_rests
+%type <statements> statements
+%type <variable_declarations> variable_declarations
 
 %%
 
 program
   : main_class class_declarations
-    { $$ = new ProgramDeclaration((MainClassDeclaration *)$1, $2); }
+    { program_declaration = new ProgramDeclaration((MainClassDeclaration *)$1, $2); }
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration(NULL, (Statement *)$15); } // TODO
+    { $$ = new MainClassDeclaration(new Identifier($2), (Statement *)$15); }
   ;
 
 // Of the following two cases, the empty case will be executed first (and only
-// once) ensuring that a new std::list will be allocated before any actual
+// once) ensuring that a new list will be allocated before any actual
 // declarations are executed. (The same pattern is reused for all simple list
 // types.)
 class_declarations
   :
-    { $$ = new std::list<ClassDeclaration *>(); }
+    { $$ = new ClassDeclarationList(); }
   | class_declarations class_declaration
-    { $$->push_back((ClassDeclaration *)$2); }
+    { $$->_list.push_back((ClassDeclaration *)$2); }
   ;
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
-    { $$ = new ClassDeclaration(NULL, $4, $5); } // TODO
+    { $$ = new ClassDeclaration(new Identifier($2), $4, $5); }
   ;
 
+// See class_declarations for explanation.
 variable_declarations
   :
-    { $$ = new std::list<VariableDeclaration *>(); }
+    { $$ = new VariableDeclarationList(); }
   | variable_declarations variable_declaration
-    { $$->push_back((VariableDeclaration *)$2); }
+    { $$->_list.push_back((VariableDeclaration *)$2); }
   ;
 
 variable_declaration
   : type IDENTIFIER ';'
-    { $$ = new VariableDeclaration((Type *)$1, NULL); } // TODO
+    { $$ = new VariableDeclaration((Type *)$1, new Identifier($2)); }
   ;
 
+// See class_declarations for explanation.
 method_declarations
   :
-    { $$ = new std::list<MethodDeclaration *>(); }
+    { $$ = new MethodDeclarationList(); }
   | method_declarations method_declaration
-    { $$->push_back((MethodDeclaration *)$2); }
+    { $$->_list.push_back((MethodDeclaration *)$2); }
   ;
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration((Type *)$2, NULL, NULL, $8, NULL, (Expression *)$11); } // TODO
+    { $$ = new MethodDeclaration((Type *)$2, new Identifier($3), $5, $8, $9, (Expression *)$11); }
   ;
 
+// This is a slightly more complicated type of list.
 parameter_list
   :
     // This clause ONLY gets executed for an empty parameter list.
-    { $$ = new std::list<ParameterDeclaration *>(); }
+    { $$ = parameter_declarations = new ParameterDeclarationList(); }
   | type IDENTIFIER parameter_rests
-    // This clause gets executed once, last, for a non-empty parameter list._rests
-    { $$->push_front(NULL); }
+    // This clause gets executed once, last, for a non-empty parameter list.
+    {
+      parameter_declarations->_list.push_front(new ParameterDeclaration((Type *)$1, new Identifier($2)));
+      $$ = parameter_declarations;
+    }
   ;
 
 parameter_rests
   :
     // This clause gets executed once, first, for a non-empty parameter list.
-    { $$ = new std::list<ParameterDeclaration *>(); }
+    { parameter_declarations = new ParameterDeclarationList(); }
   | parameter_rests parameter_rest
     // This clause gets executed once for each element of a non-empty parameter list, after the parameter_rest clause.
-    { $$->push_back((ParameterDeclaration *)$2); }
+    { parameter_declarations->_list.push_back((ParameterDeclaration *)$2); }
   ;
 
 parameter_rest
   : ',' type IDENTIFIER
     // This clause gets executed once for each element of a non-empty parameter list, before the second parameter_rests clause.
-    { $$ = new ParameterDeclaration((Type *)$2, NULL); }
+    { $$ = new ParameterDeclaration((Type *)$2, new Identifier($3)); }
   ;
 
 type
@@ -120,51 +144,57 @@ type
   | INT
     { $$ = new IntegerType(); }
   | IDENTIFIER
-    { $$ = new IdentifierType(NULL); } // TODO
+    { $$ = new IdentifierType($1); }
   ;
 
+// See class_declarations for explanation.
 statements
   :
-    { $$ = NULL; }
+    { $$ = new StatementList(); }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
-    { $$ = NULL; }
+    { $$->_list.push_back((Statement *)$1); }
   ;
 
 statement
-  : '{' statements '}'
-    { $$ = $2; }
-  | IF '(' expression ')' statement ELSE statement
+  : /*'{' statements '}'
+    { $$ = NULL; } // TODO
+  | */IF '(' expression ')' statement ELSE statement
     { $$ = new IfThenElseStatement((Expression *)$3, (Statement *)$5, (Statement *)$7); }
   | WHILE '(' expression ')' statement
     { $$ = new WhileDoStatement((Expression *)$3, (Statement *)$5); }
   | PRINT '(' expression ')' ';'
     { $$ = new PrintStatement((Expression *)$3); }
   | IDENTIFIER '=' expression ';'
-    { $$ = new AssignmentStatement(NULL, (Expression *)$3); } // TODO
+    { $$ = new AssignmentStatement(new Identifier($1), (Expression *)$3); }
   ;
 
+// See parameter_list for explanation.
 expression_list
   :
-    { $$ = NULL; }
+    { $$ = expressions = new ExpressionList(); }
   | expression expression_rests
-    { $$ = NULL; }
+    {
+      expressions->_list.push_front((Expression *)$1);
+      $$ = expressions;
+    }
   ;
 
 expression_rests
   :
-    { $$ = NULL; }
-  | expression_rest expression_rests
-    { $$ = NULL; }
+    { expressions = new ExpressionList(); }
+  | expression_rests expression_rest
+    { expressions->_list.push_back((Expression *)$2); }
   ;
 
 expression_rest
-  : ',' type IDENTIFIER
-    { $$ = NULL; }
+  : ',' expression
+    { $$ = $2; }
   ;
 
+// TODO
 expression
   : INTEGER_LITERAL
-    { $$ = new IntegerLiteral(0); } // TODO
+    { $$ = new IntegerLiteral($1); }
   ;
 
 /*
@@ -180,7 +210,7 @@ expression
   | expression AND expression
     { $$ = new ConjunctionExpression($1, $2); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression($1, NULL, $3); }
+    { $$ = new CallExpression($1, new Identifier($3), $3); }
   | INTEGER_LITERAL
     { $$ = new IntegerLiteral(yylval); }
   | TRUE
@@ -188,11 +218,11 @@ expression
   | FALSE
     { $$ = new BooleanLiteral(false); }
   | IDENTIFIER
-    { $$ = new IdentifierExpression(NULL); } // TODO
+    { $$ = new IdentifierExpression($1); }
   | THIS
     { $$ = new ThisExpression(); }
   | NEW IDENTIFIER '(' ')'
-    { $$ = new NewObjectExpression(NULL); } // TODO
+    { $$ = new NewObjectExpression(new Identifier($2)); }
   | '!' expression
     { $$ = new NegationExpression($2); }
   | '(' expression ')'
@@ -217,5 +247,8 @@ int yywrap()
 int main(int argc, char *argv[])
 {
   yyparse();
+  PrettyPrinter pp(std::cout);
+  pp.visit(program_declaration);
+  printf("\n");
   return 0;
 }
