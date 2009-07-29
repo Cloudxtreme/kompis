@@ -27,15 +27,21 @@ int yylex();
 %union
 {
   Node *node;
+  std::list<ClassDeclaration *> *class_declarations;
+  std::list<MethodDeclaration *> *method_declarations;
+  std::list<VariableDeclaration *> *variable_declarations;
 }
 
-%type <node> program main_class class_declarations class_declaration variable_declarations variable_declaration method_declarations method_declaration parameter_list parameter_rests parameter_rest type statements statement expression_list expression_rests expression_rest expression
+%type <node> program main_class class_declaration variable_declaration method_declaration parameter_list parameter_rests parameter_rest type statements statement expression_list expression_rests expression_rest expression
+%type <class_declarations> class_declarations
+%type <method_declarations> method_declarations
+%type <variable_declarations> variable_declarations
 
 %%
 
 program
   : main_class class_declarations
-    { $$ = new ProgramDeclaration((MainClassDeclaration *)$1, NULL); } // TODO
+    { $$ = new ProgramDeclaration((MainClassDeclaration *)$1, $2); }
   ;
 
 main_class
@@ -43,23 +49,27 @@ main_class
     { $$ = new MainClassDeclaration(NULL, (Statement *)$15); } // TODO
   ;
 
+// Of the following two cases, the empty case will be executed first (and only
+// once) ensuring that a new std::list will be allocated before any actual
+// declarations are executed. (The same pattern is reused for all simple list
+// types.)
 class_declarations
   :
-    { $$ = NULL; }
+    { $$ = new std::list<ClassDeclaration *>(); }
   | class_declarations class_declaration
-    { $$ = NULL; }
+    { $$->push_back((ClassDeclaration *)$2); }
   ;
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
-    { $$ = new ClassDeclaration(NULL, NULL, NULL); } // TODO
+    { $$ = new ClassDeclaration(NULL, $4, $5); } // TODO
   ;
 
 variable_declarations
   :
-    { $$ = NULL; }
+    { $$ = new std::list<VariableDeclaration *>(); }
   | variable_declarations variable_declaration
-    { $$ = NULL; }
+    { $$->push_back((VariableDeclaration *)$2); }
   ;
 
 variable_declaration
@@ -69,14 +79,14 @@ variable_declaration
 
 method_declarations
   :
-    { $$ = NULL; }
+    { $$ = new std::list<MethodDeclaration *>(); }
   | method_declarations method_declaration
-    { $$ = NULL; }
+    { $$->push_back((MethodDeclaration *)$2); }
   ;
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration((Type *)$2, NULL, NULL, NULL, NULL, (Expression *)$11); } // TODO
+    { $$ = new MethodDeclaration((Type *)$2, NULL, NULL, $8, NULL, (Expression *)$11); } // TODO
   ;
 
 parameter_list
