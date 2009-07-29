@@ -15,14 +15,14 @@ namespace kompis
     class CallExpression : public Node
     {
       public:
-        CallExpression(Expression *self, Identifier *method_name, std::list<Expression *> args) : _self(self), _method_name(method_name), _args(args) {}
+        CallExpression(Expression *self, Identifier *method_name, std::list<Expression *> *args) : _self(self), _method_name(method_name), _args(args) {}
 
         void accept(Visitor *visitor);
 
       //private:
         Expression *_self;
         Identifier *_method_name;
-        std::list<Expression *> _args;
+        std::list<Expression *> *_args;
     };
   }
 }

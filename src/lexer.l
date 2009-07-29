@@ -1,5 +1,10 @@
 %{
-#include <stdlib.h>
+// we need to include this before the parser header...
+// yup, it's ugly
+#include "ast/ast.hpp"
+using namespace kompis;
+using namespace ast;
+
 #include "parser.tab.hpp"
 
 int line_num = 1;
@@ -45,6 +50,6 @@ int line_num = 1;
 
 [ \t]+                  // ignore whitespace
 \n                      { ++line_num; }
-.                       { yyerror("unknown token"); }
+.                       { /*yyerror("unknown token");*/ }
 
 %%

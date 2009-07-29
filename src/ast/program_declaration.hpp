@@ -15,13 +15,13 @@ namespace kompis
     class ProgramDeclaration : public Node
     {
       public:
-        ProgramDeclaration(MainClassDeclaration *main, std::list<ClassDeclaration *> classes) : _main(main), _classes(classes) {}
+        ProgramDeclaration(MainClassDeclaration *main, std::list<ClassDeclaration *> *classes) : _main(main), _classes(classes) {}
 
         void accept(Visitor *);
 
       //private:
         MainClassDeclaration *_main;
-        std::list<ClassDeclaration *> _classes;
+        std::list<ClassDeclaration *> *_classes;
     };
   }
 }

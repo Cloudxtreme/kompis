@@ -1,9 +1,17 @@
-%{
-#include <stdio.h>
-#include "ast/ast.hpp"
+// vim: set filetype=yacc :
 
-void yyerror(const char *str);
-int yywrap();
+%{
+#include "ast/ast.hpp"
+using namespace kompis;
+using namespace ast;
+
+extern "C"
+{
+  void yyerror(const char *);
+  int yywrap();
+}
+
+int yylex();
 %}
 
 %token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE
@@ -16,16 +24,23 @@ int yywrap();
 %right '!'
 %left '.'
 
+%union
+{
+  Node *node;
+}
+
+%type <node> program main_class class_declarations class_declaration variable_declarations variable_declaration method_declarations method_declaration parameter_list parameter_rests parameter_rest type statements statement expression_list expression_rests expression_rest expression
+
 %%
 
 program
   : main_class class_declarations
-    { $$ = new ProgramDeclaration($1, $2); }
+    { $$ = new ProgramDeclaration((MainClassDeclaration *)$1, NULL); } // TODO
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration($2, $15); } // ?
+    { $$ = new MainClassDeclaration(NULL, (Statement *)$15); } // TODO
   ;
 
 class_declarations
@@ -37,7 +52,7 @@ class_declarations
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
-    { $$ = new ClassDeclaration($2, $4, $5); } // ?
+    { $$ = new ClassDeclaration(NULL, NULL, NULL); } // TODO
   ;
 
 variable_declarations
@@ -49,7 +64,7 @@ variable_declarations
 
 variable_declaration
   : type IDENTIFIER ';'
-    { $$ = new VariableDeclaration($1, $2); } // ?
+    { $$ = new VariableDeclaration((Type *)$1, NULL); } // TODO
   ;
 
 method_declarations
@@ -61,7 +76,7 @@ method_declarations
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration($2, $3, $5, $8, $9, $11); }
+    { $$ = new MethodDeclaration((Type *)$2, NULL, NULL, NULL, NULL, (Expression *)$11); } // TODO
   ;
 
 parameter_list
@@ -85,11 +100,11 @@ parameter_rest
 
 type
   : BOOLEAN
-    { return new BooleanType(); }
+    { $$ = new BooleanType(); }
   | INT
-    { return new IntegerType(); }
+    { $$ = new IntegerType(); }
   | IDENTIFIER
-    { return new IdentifierType($1); } // ?
+    { $$ = new IdentifierType(NULL); } // TODO
   ;
 
 statements
@@ -103,13 +118,13 @@ statement
   : '{' statements '}'
     { $$ = $2; }
   | IF '(' expression ')' statement ELSE statement
-    { $$ = new IfThenElseStatement($3, $5, $7); }
+    { $$ = new IfThenElseStatement((Expression *)$3, (Statement *)$5, (Statement *)$7); }
   | WHILE '(' expression ')' statement
-    { $$ = new WhileDoStatement($3, $5); }
+    { $$ = new WhileDoStatement((Expression *)$3, (Statement *)$5); }
   | PRINT '(' expression ')' ';'
-    { $$ = new PrintStatement($3); }
+    { $$ = new PrintStatement((Expression *)$3); }
   | IDENTIFIER '=' expression ';'
-    { $$ = new AssignmentStatement($1, $3); } // ?
+    { $$ = new AssignmentStatement(NULL, (Expression *)$3); } // TODO
   ;
 
 expression_list
@@ -132,6 +147,12 @@ expression_rest
   ;
 
 expression
+  : INTEGER_LITERAL
+    { $$ = new IntegerLiteral(0); } // TODO
+  ;
+
+/*
+expression
   : expression '+' expression
     { $$ = new AdditionExpression($1, $2); }
   | expression '-' expression
@@ -143,7 +164,7 @@ expression
   | expression AND expression
     { $$ = new ConjunctionExpression($1, $2); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression($1, $2, $3); }
+    { $$ = new CallExpression($1, NULL, $3); }
   | INTEGER_LITERAL
     { $$ = new IntegerLiteral(yylval); }
   | TRUE
@@ -151,16 +172,17 @@ expression
   | FALSE
     { $$ = new BooleanLiteral(false); }
   | IDENTIFIER
-    { $$ = new IdentifierExpression($1); } // ?
+    { $$ = new IdentifierExpression(NULL); } // TODO
   | THIS
     { $$ = new ThisExpression(); }
   | NEW IDENTIFIER '(' ')'
-    { $$ = new NewObjectExpression($2); } // ?
+    { $$ = new NewObjectExpression(NULL); } // TODO
   | '!' expression
     { $$ = new NegationExpression($2); }
   | '(' expression ')'
     { $$ = $2; }
   ;
+*/
 
 %%
 
@@ -173,7 +195,7 @@ void yyerror(const char *str)
 
 int yywrap()
 {
-  return 1;
+  return 1; // ?
 }
 
 int main(int argc, char *argv[])

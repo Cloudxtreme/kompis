@@ -13,12 +13,12 @@ namespace kompis
     class BlockStatement : public Statement
     {
       public:
-        BlockStatement(std::list<Statement *> statements) : _statements(statements) {}
+        BlockStatement(std::list<Statement *> *statements) : _statements(statements) {}
 
         void accept(Visitor *visitor);
 
       //private:
-        std::list<Statement *> _statements;
+        std::list<Statement *> *_statements;
     };
   }
 }
