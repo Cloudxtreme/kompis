@@ -2,4 +2,4 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list

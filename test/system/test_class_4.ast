@@ -2,18 +2,18 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list
 		class
 			A
-			list
+			variable_declaration_list
 				variable
 					Integer
 					i
-			list
+			method_declaration_list
 				method
 					Integer
 					a
-					list
-					list
-					list
+					parameter_declaration_list
+					variable_declaration_list
+					statement_list
 					0

@@ -288,7 +288,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ExpressionList es;
       CallExpression c(&t, &i, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\texpression_list\n");
     }
 
     void test_call_expression_with_one_argument()
@@ -300,7 +300,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       es._list.push_back(&il);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n\t\t1\n");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\texpression_list\n\t\t1\n");
     }
 
     void test_call_expression_with_two_arguments()
@@ -314,7 +314,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       es._list.push_back(&i2);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n\t\t1\n\t\t2\n");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\texpression_list\n\t\t1\n\t\t2\n");
     }
 
     void test_block_statement()
@@ -328,7 +328,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ss._list.push_back(&p2);
       BlockStatement b(&ss);
       _pp.visit(&b);
-      TS_ASSERT_EQUALS(_out.str(), "block\n\tlist\n\t\tprint\n\t\t\t1\n\t\tprint\n\t\t\t2\n");
+      TS_ASSERT_EQUALS(_out.str(), "block\n\tstatement_list\n\t\tprint\n\t\t\t1\n\t\tprint\n\t\t\t2\n");
     }
 
     void test_method_declaration()
@@ -341,7 +341,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral il(1);
       MethodDeclaration m(&it, &id, &ps, &vs, &ss, &il);
       _pp.visit(&m);
-      TS_ASSERT_EQUALS(_out.str(), "method\n\tInteger\n\tdo_foo\n\tlist\n\tlist\n\tlist\n\t1\n");
+      TS_ASSERT_EQUALS(_out.str(), "method\n\tInteger\n\tdo_foo\n\tparameter_declaration_list\n\tvariable_declaration_list\n\tstatement_list\n\t1\n");
     }
 
     void test_class_declaration()
@@ -351,7 +351,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       MethodDeclarationList ms;
       ClassDeclaration c(&i, &vs, &ms);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "class\n\tFooClass\n\tlist\n\tlist\n");
+      TS_ASSERT_EQUALS(_out.str(), "class\n\tFooClass\n\tvariable_declaration_list\n\tmethod_declaration_list\n");
     }
 
     void test_main_class_declaration()
@@ -371,7 +371,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ClassDeclarationList cs;
       ProgramDeclaration pd(&m, &cs);
       _pp.visit(&pd);
-      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tlist\n");
+      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tclass_declaration_list\n");
     }
 
     // This case was used to determine that a bug related to statement lists
@@ -428,6 +428,6 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
 
       _pp.visit(&pd);
 
-      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tlist\n\t\tclass\n\t\t\tA\n\t\t\tlist\n\t\t\tlist\n\t\t\t\tmethod\n\t\t\t\t\tInteger\n\t\t\t\t\ta\n\t\t\t\t\tlist\n\t\t\t\t\tlist\n\t\t\t\t\t\tvariable\n\t\t\t\t\t\t\tInteger\n\t\t\t\t\t\t\ti\n\t\t\t\t\tlist\n\t\t\t\t\t\t=\n\t\t\t\t\t\t\ti\n\t\t\t\t\t\t\t0\n\t\t\t\t\t0\n");
+      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tclass_declaration_list\n\t\tclass\n\t\t\tA\n\t\t\tvariable_declaration_list\n\t\t\tmethod_declaration_list\n\t\t\t\tmethod\n\t\t\t\t\tInteger\n\t\t\t\t\ta\n\t\t\t\t\tparameter_declaration_list\n\t\t\t\t\tvariable_declaration_list\n\t\t\t\t\t\tvariable\n\t\t\t\t\t\t\tInteger\n\t\t\t\t\t\t\ti\n\t\t\t\t\tstatement_list\n\t\t\t\t\t\t=\n\t\t\t\t\t\t\ti\n\t\t\t\t\t\t\t0\n\t\t\t\t\t0\n");
     }
 };

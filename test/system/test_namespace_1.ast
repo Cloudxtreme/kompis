@@ -2,24 +2,24 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list
 		class
 			x
-			list
+			variable_declaration_list
 				variable
 					x
 					x
-			list
+			method_declaration_list
 				method
 					x
 					x
-					list
+					parameter_declaration_list
 						parameter
 							x
 							x
-					list
+					variable_declaration_list
 						variable
 							x
 							y
-					list
+					statement_list
 					this

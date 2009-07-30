@@ -1,7 +1,7 @@
 program
 	main
-		list
+		statement_list
 			=
 				i
 				0
-	list
+	class_declaration_list

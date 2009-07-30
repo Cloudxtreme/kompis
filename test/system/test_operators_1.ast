@@ -2,18 +2,18 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list
 		class
 			A
-			list
+			variable_declaration_list
 				variable
 					Integer
 					z
-			list
+			method_declaration_list
 				method
 					Integer
 					f
-					list
+					parameter_declaration_list
 						parameter
 							Integer
 							x
@@ -26,8 +26,8 @@ program
 						parameter
 							Boolean
 							b2
-					list
-					list
+					variable_declaration_list
+					statement_list
 						=
 							x
 							-
@@ -69,7 +69,7 @@ program
 								new
 									A
 								f
-								list
+								expression_list
 									1
 									2
 									true

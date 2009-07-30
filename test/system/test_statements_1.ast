@@ -2,20 +2,20 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list
 		class
 			A
-			list
-			list
+			variable_declaration_list
+			method_declaration_list
 				method
 					Integer
 					f
-					list
+					parameter_declaration_list
 						parameter
 							Integer
 							x
-					list
-					list
+					variable_declaration_list
+					statement_list
 						=
 							x
 							1

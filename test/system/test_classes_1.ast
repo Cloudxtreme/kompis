@@ -2,12 +2,12 @@ program
 	main
 		print
 			1
-	list
+	class_declaration_list
 		class
 			A
-			list
-			list
+			variable_declaration_list
+			method_declaration_list
 		class
 			B
-			list
-			list
+			variable_declaration_list
+			method_declaration_list
