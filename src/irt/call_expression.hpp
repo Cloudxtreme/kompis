@@ -11,7 +11,10 @@ namespace kompis
     class CallExpression : public Expression
     {
       public:
-        CallExpression(Expression &function, std::list<Expression *> args) : _function(function), _args(args) {}
+        CallExpression(Expression &function,
+                       std::list<Expression *> args)
+          : _function(function),
+            _args(args) {}
 
       private:
         Expression &_function;

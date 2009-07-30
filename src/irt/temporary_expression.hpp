@@ -10,7 +10,8 @@ namespace kompis
     class TemporaryExpression : public Expression
     {
       public:
-        TemporaryExpression(int num) : _num(num) {}
+        TemporaryExpression(int num)
+          : _num(num) {}
 
       private:
         int _num;

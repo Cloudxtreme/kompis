@@ -12,7 +12,8 @@ namespace kompis
     class MoveStatement : public Statement
     {
       public:
-        MoveStatement(Expression &dst, Expression &src) : _dst(dst), _src(src) {}
+        MoveStatement(Expression &dst, Expression &src)
+          : _dst(dst), _src(src) {}
 
       private:
         Expression &_dst, &_src;

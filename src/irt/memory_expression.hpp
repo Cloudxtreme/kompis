@@ -10,7 +10,8 @@ namespace kompis
     class MemoryExpression : public Expression
     {
       public:
-        MemoryExpression(Expression &expr) : _expr(expr) {}
+        MemoryExpression(Expression &expr)
+          : _expr(expr) {}
 
       private:
         Expression &_expr;

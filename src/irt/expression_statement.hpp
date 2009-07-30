@@ -12,7 +12,8 @@ namespace kompis
     class ExpressionStatement : public Statement
     {
       public:
-        ExpressionStatement(Expression &expr) : _expr(expr) {}
+        ExpressionStatement(Expression &expr)
+          : _expr(expr) {}
 
       private:
         Expression &_expr;

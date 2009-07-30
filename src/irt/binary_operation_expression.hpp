@@ -7,24 +7,32 @@ namespace kompis
 {
   namespace irt
   {
-    enum BinaryOperator
+    namespace binop
     {
-      ADDITION_OPERATOR,                // +
-      SUBTRACTION_OPERATOR,             // -
-      MULTIPLICAION_OPERATOR,           // *
-      DIVISION_OPERATOR,                // /
-      CONJUNCTION_OPERATOR,             // and
-      DISJUNCTION_OPERATOR,             // or
-      EXCLUSIVE_DISJUNCTION_OPERATOR,   // xor
-    };
+      enum BinaryOperation
+      {
+        ADD,
+        SUB,
+        MUL,
+        DIV,
+        AND,
+        OR,
+        XOR,
+      };
+    }
 
     class BinaryOperationExpression : public Expression
     {
       public:
-        BinaryOperationExpression(BinaryOperator o, Expression &l, Expression &r) : _operation(o), _left(l), _right(r) {}
+        BinaryOperationExpression(binop::BinaryOperation op,
+                                  Expression &left,
+                                  Expression &right)
+          : _op(op),
+            _left(left),
+            _right(right) {}
 
       private:
-        BinaryOperator _operation;
+        binop::BinaryOperation _op;
         Expression &_left;
         Expression &_right;
     };

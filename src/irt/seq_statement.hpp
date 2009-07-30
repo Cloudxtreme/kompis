@@ -10,7 +10,8 @@ namespace kompis
     class SeqStatement : public Statement
     {
       public:
-        SeqStatement(Statement &s1, Statement &s2) : _s1(s1), _s2(s2) {}
+        SeqStatement(Statement &s1, Statement &s2)
+          : _s1(s1), _s2(s2) {}
 
       private:
         Statement &_s1, &_s2;
