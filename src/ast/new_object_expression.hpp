@@ -13,7 +13,8 @@ namespace kompis
     class NewObjectExpression : public Expression
     {
       public:
-        NewObjectExpression(Identifier *class_name) : _class_name(class_name) {}
+        NewObjectExpression(Identifier *class_name)
+          : _class_name(class_name) {}
 
         void accept(Visitor *visitor);
 

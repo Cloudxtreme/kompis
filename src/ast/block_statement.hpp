@@ -13,7 +13,8 @@ namespace kompis
     class BlockStatement : public Statement
     {
       public:
-        BlockStatement(StatementList *statements) : _statements(statements) {}
+        BlockStatement(StatementList *statements)
+          : _statements(statements) {}
 
         void accept(Visitor *visitor);
 

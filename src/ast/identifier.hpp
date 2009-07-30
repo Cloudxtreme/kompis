@@ -13,7 +13,8 @@ namespace kompis
     class Identifier : public Node
     {
       public:
-        Identifier(char *name) : _name(name) {}
+        Identifier(char *name)
+          : _name(name) {}
 
         void accept(Visitor *visitor);
 

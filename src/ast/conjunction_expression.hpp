@@ -12,7 +12,8 @@ namespace kompis
     class ConjunctionExpression : public Expression
     {
       public:
-        ConjunctionExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
+        ConjunctionExpression(Expression *left, Expression *right)
+          : _left(left), _right(right) {}
 
         void accept(Visitor *visitor);
 

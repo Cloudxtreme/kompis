@@ -12,7 +12,8 @@ namespace kompis
     class NegationExpression : public Expression
     {
       public:
-        NegationExpression(Expression *expr) : _expr(expr) {}
+        NegationExpression(Expression *expr)
+          : _expr(expr) {}
 
         void accept(Visitor *visitor);
 

@@ -13,7 +13,12 @@ namespace kompis
     class IfThenElseStatement : public Statement
     {
       public:
-        IfThenElseStatement(Expression *pred, Statement *then_statement, Statement *else_statement) : _pred(pred), _then_statement(then_statement), _else_statement(else_statement) {}
+        IfThenElseStatement(Expression *pred,
+                            Statement *then_statement,
+                            Statement *else_statement)
+          : _pred(pred),
+            _then_statement(then_statement),
+            _else_statement(else_statement) {}
 
         void accept(Visitor *visitor);
 

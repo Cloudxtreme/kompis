@@ -15,7 +15,12 @@ namespace kompis
     class CallExpression : public Node
     {
       public:
-        CallExpression(Expression *self, Identifier *method_name, ExpressionList *args) : _self(self), _method_name(method_name), _args(args) {}
+        CallExpression(Expression *self,
+                       Identifier *method_name,
+                       ExpressionList *args)
+          : _self(self),
+            _method_name(method_name),
+            _args(args) {}
 
         void accept(Visitor *visitor);
 

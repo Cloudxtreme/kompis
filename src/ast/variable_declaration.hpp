@@ -14,7 +14,8 @@ namespace kompis
     class VariableDeclaration : public Node
     {
       public:
-        VariableDeclaration(Type *type, Identifier *name) : _type(type), _name(name) {}
+        VariableDeclaration(Type *type, Identifier *name)
+          : _type(type), _name(name) {}
 
         void accept(Visitor *visitor);
 

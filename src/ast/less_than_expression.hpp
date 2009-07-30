@@ -12,7 +12,8 @@ namespace kompis
     class LessThanExpression : public Expression
     {
       public:
-        LessThanExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
+        LessThanExpression(Expression *left, Expression *right)
+          : _left(left), _right(right) {}
 
         void accept(Visitor *visitor);
 

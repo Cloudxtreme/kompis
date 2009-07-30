@@ -13,7 +13,8 @@ namespace kompis
     class WhileDoStatement : public Statement
     {
       public:
-        WhileDoStatement(Expression *pred, Statement *s) : _pred(pred), _s(s) {}
+        WhileDoStatement(Expression *pred, Statement *s)
+          : _pred(pred), _s(s) {}
 
         void accept(Visitor *visitor);
 

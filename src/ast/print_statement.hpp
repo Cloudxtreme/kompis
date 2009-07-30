@@ -13,7 +13,8 @@ namespace kompis
     class PrintStatement : public Statement
     {
       public:
-        PrintStatement(Expression *expr) : _expr(expr) {}
+        PrintStatement(Expression *expr)
+          : _expr(expr) {}
 
         void accept(Visitor *visitor);
 

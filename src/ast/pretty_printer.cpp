@@ -83,8 +83,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "class_declaration_list\n";
-      for(std::list<ClassDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<ClassDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 
@@ -103,8 +103,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "expression_list\n";
-      for(std::list<Expression *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<Expression *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 
@@ -197,8 +197,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "method_declaration_list\n";
-      for(std::list<MethodDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<MethodDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 
@@ -245,8 +245,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "parameter_declaration_list\n";
-      for(std::list<ParameterDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<ParameterDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 
@@ -274,8 +274,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "statement_list\n";
-      for(std::list<Statement *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<Statement *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 
@@ -312,8 +312,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "variable_declaration_list\n";
-      for(std::list<VariableDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-        (*it)->accept(this);
+      for(std::list<VariableDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
+        (*i)->accept(this);
       --_indentation;
     }
 

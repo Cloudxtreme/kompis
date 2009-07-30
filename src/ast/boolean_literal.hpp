@@ -12,7 +12,8 @@ namespace kompis
     class BooleanLiteral : public Expression
     {
       public:
-        BooleanLiteral(bool value) : _value(value) {}
+        BooleanLiteral(bool value)
+          : _value(value) {}
 
         void accept(Visitor *visitor);
 

@@ -12,7 +12,8 @@ namespace kompis
     class IntegerLiteral : public Expression
     {
       public:
-        IntegerLiteral(int value) : _value(value) {}
+        IntegerLiteral(int value)
+          : _value(value) {}
 
         void accept(Visitor *visitor);
 

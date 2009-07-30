@@ -12,7 +12,8 @@ namespace kompis
     class SubtractionExpression : public Expression
     {
       public:
-        SubtractionExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
+        SubtractionExpression(Expression *left, Expression *right)
+          : _left(left), _right(right) {}
 
         void accept(Visitor *visitor);
 

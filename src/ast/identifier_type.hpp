@@ -13,7 +13,8 @@ namespace kompis
     class IdentifierType : public Type
     {
       public:
-        IdentifierType(char *name) : _name(name) {}
+        IdentifierType(char *name)
+          : _name(name) {}
 
         void accept(Visitor *visitor);
 

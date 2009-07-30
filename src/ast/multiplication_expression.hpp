@@ -12,7 +12,8 @@ namespace kompis
     class MultiplicationExpression : public Expression
     {
       public:
-        MultiplicationExpression(Expression *left, Expression *right) : _left(left), _right(right) {}
+        MultiplicationExpression(Expression *left, Expression *right)
+          : _left(left), _right(right) {}
 
         void accept(Visitor *visitor);
 
