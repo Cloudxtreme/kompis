@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd `dirname $0`
+pushd $(dirname $0)
 
 # build compiler
 pushd ../../src
@@ -19,4 +19,5 @@ done
 pushd ../../src
 rm -f kompis lex.yy.c parser.tab.cpp parser.tab.hpp
 popd
+
 popd
