@@ -374,7 +374,8 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list))");
     }
 
-    // this crashes the parser, but seems to work here...
+    // This case was used to determine that a bug related to statement lists
+    // was in the parser.
     void test_crashing_assignment_statement()
     {
       // main class
