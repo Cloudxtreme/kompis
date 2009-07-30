@@ -1,0 +1,1 @@
+(program (main (print 1)) (list (class x (list (variable x x)) (list (method x x (list (parameter x x)) (list (variable x y)) (list) this)))))
