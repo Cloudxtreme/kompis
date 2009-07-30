@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pushd `dirname $0`
+
 # build compiler
 pushd ../../src
 flex lexer.l && bison -d parser.ypp && g++ -Wall -I. -o kompis lex.yy.c parser.tab.cpp ast/*.cpp
@@ -16,4 +18,5 @@ done
 # remove build products
 pushd ../../src
 rm -f kompis lex.yy.c parser.tab.cpp parser.tab.hpp
+popd
 popd
