@@ -191,28 +191,21 @@ expression_rest
     { $$ = $2; }
   ;
 
-// TODO
-expression
-  : INTEGER_LITERAL
-    { $$ = new IntegerLiteral($1); }
-  ;
-
-/*
 expression
   : expression '+' expression
-    { $$ = new AdditionExpression($1, $2); }
+    { $$ = new AdditionExpression((Expression *)$1, (Expression *)$3); }
   | expression '-' expression
-    { $$ = new SubtractionExpression($1, $2); }
+    { $$ = new SubtractionExpression((Expression *)$1, (Expression *)$3); }
   | expression '*' expression
-    { $$ = new MultiplicationExpression($1, $2); }
+    { $$ = new MultiplicationExpression((Expression *)$1, (Expression *)$3); }
   | expression '<' expression
-    { $$ = new LessThanExpression($1, $2); }
+    { $$ = new LessThanExpression((Expression *)$1, (Expression *)$3); }
   | expression AND expression
-    { $$ = new ConjunctionExpression($1, $2); }
+    { $$ = new ConjunctionExpression((Expression *)$1, (Expression *)$3); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression($1, new Identifier($3), $3); }
+    { $$ = new CallExpression((Expression *)$1, new Identifier($3), $5); }
   | INTEGER_LITERAL
-    { $$ = new IntegerLiteral(yylval); }
+    { $$ = new IntegerLiteral($1); }
   | TRUE
     { $$ = new BooleanLiteral(true); }
   | FALSE
@@ -224,11 +217,10 @@ expression
   | NEW IDENTIFIER '(' ')'
     { $$ = new NewObjectExpression(new Identifier($2)); }
   | '!' expression
-    { $$ = new NegationExpression($2); }
+    { $$ = new NegationExpression((Expression *)$2); }
   | '(' expression ')'
     { $$ = $2; }
   ;
-*/
 
 %%
 
