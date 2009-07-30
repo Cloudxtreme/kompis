@@ -373,4 +373,60 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       _pp.visit(&pd);
       TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list))");
     }
+
+    // this crashes the parser, but seems to work here...
+    void test_crashing_assignment_statement()
+    {
+      // main class
+      IntegerLiteral mcd_il(1);
+      PrintStatement mcd_ps(&mcd_il);
+      MainClassDeclaration mcd(&mcd_ps);
+
+      // class id and variables
+      Identifier c_id("A");
+      VariableDeclarationList c_vs;
+
+      // method return type, name and params
+      IntegerType m_it;
+      Identifier m_id("a");
+      ParameterDeclarationList m_ps;
+
+      // method vars
+      IntegerType var_it;
+      Identifier var_id("i");
+      VariableDeclaration var(&var_it, &var_id);
+      VariableDeclarationList m_vs;
+      m_vs._list.push_back(&var);
+
+      // method statements
+      Identifier ass_id("i");
+      IntegerLiteral ass_il(0);
+      AssignmentStatement ass(&ass_id, &ass_il);
+      StatementList m_ss;
+      m_ss._list.push_back(&ass);
+
+      // method return expression
+      IntegerLiteral m_il(0);
+
+      // method
+      MethodDeclaration c_m(&m_it, &m_id, &m_ps, &m_vs, &m_ss, &m_il);
+
+      // class methods
+      MethodDeclarationList c_ms;
+      c_ms._list.push_back(&c_m);
+
+      // class
+      ClassDeclaration c(&c_id, &c_vs, &c_ms);
+
+      // classes
+      ClassDeclarationList cs;
+      cs._list.push_back(&c);
+
+      // program
+      ProgramDeclaration pd(&mcd, &cs);
+
+      _pp.visit(&pd);
+
+      TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list (class A (list) (list (method Integer a (list) (list (variable Integer i)) (list (= i 0)) 0)))))");
+    }
 };
