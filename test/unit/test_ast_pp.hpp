@@ -40,7 +40,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "1\n");
     }
 
-    void test_addition_expression1()
+    void test_addition_expression_1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -49,7 +49,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "+\n\t1\n\t2\n");
     }
 
-    void test_addition_expression2()
+    void test_addition_expression_2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -60,7 +60,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "+\n\t1\n\t+\n\t\t2\n\t\t3\n");
     }
 
-    void test_addition_expression3()
+    void test_addition_expression_3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -71,7 +71,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "+\n\t+\n\t\t1\n\t\t2\n\t3\n");
     }
 
-    void test_subtraction_expression1()
+    void test_subtraction_expression_1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -80,7 +80,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "-\n\t1\n\t2\n");
     }
 
-    void test_subtraction_expression2()
+    void test_subtraction_expression_2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -91,7 +91,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "-\n\t1\n\t-\n\t\t2\n\t\t3\n");
     }
 
-    void test_subtraction_expression3()
+    void test_subtraction_expression_3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -102,7 +102,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "-\n\t-\n\t\t1\n\t\t2\n\t3\n");
     }
 
-    void test_multiplication_expression1()
+    void test_multiplication_expression_1()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -111,7 +111,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "*\n\t1\n\t2\n");
     }
 
-    void test_multiplication_expression2()
+    void test_multiplication_expression_2()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -122,7 +122,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "*\n\t1\n\t*\n\t\t2\n\t\t3\n");
     }
 
-    void test_multiplication_expression3()
+    void test_multiplication_expression_3()
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
@@ -133,14 +133,14 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       TS_ASSERT_EQUALS(_out.str(), "*\n\t*\n\t\t1\n\t\t2\n\t3\n");
     }
 
-    void test_true_literal()
+    void test_boolean_literal_1()
     {
       BooleanLiteral b(true);
       _pp.visit(&b);
       TS_ASSERT_EQUALS(_out.str(), "true\n");
     }
 
-    void test_false_literal()
+    void test_boolean_literal_2()
     {
       BooleanLiteral b(false);
       _pp.visit(&b);
