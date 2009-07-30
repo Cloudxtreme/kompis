@@ -1,0 +1,1 @@
+(program (main (print 1)) (list (class A (list) (list (method Integer f (list (parameter Integer x)) (list) (list (= x 1) (= x 2)) 0)))))
