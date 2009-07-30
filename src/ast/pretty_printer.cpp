@@ -92,7 +92,7 @@ namespace kompis
     {
       indent();
       ++_indentation;
-      _out << "and\n";
+      _out << "&&\n";
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
@@ -216,7 +216,7 @@ namespace kompis
     {
       indent();
       ++_indentation;
-      _out << "not\n";
+      _out << "!\n";
       x->_expr->accept(this);
       --_indentation;
     }

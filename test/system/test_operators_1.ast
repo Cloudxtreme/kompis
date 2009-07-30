@@ -76,24 +76,24 @@ program
 									false
 						=
 							b2
-							and
-								and
-									and
+							&&
+								&&
+									&&
 										<
 											1
 											2
-										not
+										!
 											<
 												x
 												y
-									not
+									!
 										b2
 								<
 									1
 									x
 						=
 							b2
-							and
+							&&
 								<
 									+
 										1
