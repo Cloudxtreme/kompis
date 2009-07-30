@@ -20,6 +20,7 @@ int yylex();
 ExpressionList *expressions;
 ParameterDeclarationList *parameter_declarations;
 ProgramDeclaration *program_declaration;
+StatementList *statements;
 %}
 
 %token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE
@@ -150,15 +151,18 @@ type
 // See class_declarations for explanation.
 statements
   :
-    { $$ = new StatementList(); }
+    { $$ = statements = new StatementList(); }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
-    { $$->_list.push_back((Statement *)$1); }
+    {
+      statements->_list.push_back((Statement *)$1);
+      $$ = statements;
+    }
   ;
 
 statement
-  : /*'{' statements '}'
-    { $$ = NULL; } // TODO
-  | */IF '(' expression ')' statement ELSE statement
+  : '{' statements '}'
+    { $$ = $2 }
+  | IF '(' expression ')' statement ELSE statement
     { $$ = new IfThenElseStatement((Expression *)$3, (Statement *)$5, (Statement *)$7); }
   | WHILE '(' expression ')' statement
     { $$ = new WhileDoStatement((Expression *)$3, (Statement *)$5); }
@@ -225,6 +229,7 @@ expression
 %%
 
 extern int line_num;
+//extern int yydebug;
 
 void yyerror(const char *str)
 {
@@ -238,6 +243,7 @@ int yywrap()
 
 int main(int argc, char *argv[])
 {
+  //yydebug = 1;
   yyparse();
   PrettyPrinter pp(std::cout);
   pp.visit(program_declaration);

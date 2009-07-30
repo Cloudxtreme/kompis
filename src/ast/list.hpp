@@ -11,9 +11,10 @@ namespace kompis
     class Visitor;
 
     template <class T>
-    class List : public Node
+    class List
     {
       public:
+        virtual ~List() {}
         virtual void accept(Visitor *) = 0;
 
         std::list<T *> _list;
