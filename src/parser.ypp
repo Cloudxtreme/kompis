@@ -154,7 +154,7 @@ statements
     { $$ = statements = new StatementList(); }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
     {
-      statements->_list.push_back((Statement *)$1);
+      statements->_list.push_front((Statement *)$1);
       $$ = statements;
     }
   ;
