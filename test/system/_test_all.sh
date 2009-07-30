@@ -7,6 +7,7 @@ popd
 
 # find all files matching test*.java, run them through compiler, compare output with expected
 for INPUT_FILE in $(ls test*.java); do
+  echo testing $INPUT_FILE...
   ../../src/kompis <$INPUT_FILE >${INPUT_FILE/.java/.out}
   diff -u ${INPUT_FILE/.java/.ast} ${INPUT_FILE/.java/.out}
   rm ${INPUT_FILE/.java/.out}
