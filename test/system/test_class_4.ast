@@ -1,1 +1,19 @@
-(program (main (print 1)) (list (class A (list (variable Integer i)) (list (method Integer a (list) (list) (list) 0)))))
+program
+	main
+		print
+			1
+	list
+		class
+			A
+			list
+				variable
+					Integer
+					i
+			list
+				method
+					Integer
+					a
+					list
+					list
+					list
+					0

@@ -247,6 +247,5 @@ int main(int argc, char *argv[])
   yyparse();
   PrettyPrinter pp(std::cout);
   pp.visit(program_declaration);
-  printf("\n");
   return 0;
 }

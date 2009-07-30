@@ -37,7 +37,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i(1);
       _pp.visit(&i);
-      TS_ASSERT_EQUALS(_out.str(), "1");
+      TS_ASSERT_EQUALS(_out.str(), "1\n");
     }
 
     void test_addition_expression1()
@@ -46,7 +46,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       AdditionExpression a(&i1, &i2);
       _pp.visit(&a);
-      TS_ASSERT_EQUALS(_out.str(), "(+ 1 2)");
+      TS_ASSERT_EQUALS(_out.str(), "+\n\t1\n\t2\n");
     }
 
     void test_addition_expression2()
@@ -57,7 +57,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       AdditionExpression a1(&i2, &i3);
       AdditionExpression a2(&i1, &a1);
       _pp.visit(&a2);
-      TS_ASSERT_EQUALS(_out.str(), "(+ 1 (+ 2 3))");
+      TS_ASSERT_EQUALS(_out.str(), "+\n\t1\n\t+\n\t\t2\n\t\t3\n");
     }
 
     void test_addition_expression3()
@@ -68,7 +68,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       AdditionExpression a1(&i1, &i2);
       AdditionExpression a2(&a1, &i3);
       _pp.visit(&a2);
-      TS_ASSERT_EQUALS(_out.str(), "(+ (+ 1 2) 3)");
+      TS_ASSERT_EQUALS(_out.str(), "+\n\t+\n\t\t1\n\t\t2\n\t3\n");
     }
 
     void test_subtraction_expression1()
@@ -77,7 +77,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       SubtractionExpression s(&i1, &i2);
       _pp.visit(&s);
-      TS_ASSERT_EQUALS(_out.str(), "(- 1 2)");
+      TS_ASSERT_EQUALS(_out.str(), "-\n\t1\n\t2\n");
     }
 
     void test_subtraction_expression2()
@@ -88,7 +88,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       SubtractionExpression s1(&i2, &i3);
       SubtractionExpression s2(&i1, &s1);
       _pp.visit(&s2);
-      TS_ASSERT_EQUALS(_out.str(), "(- 1 (- 2 3))");
+      TS_ASSERT_EQUALS(_out.str(), "-\n\t1\n\t-\n\t\t2\n\t\t3\n");
     }
 
     void test_subtraction_expression3()
@@ -99,7 +99,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       SubtractionExpression s1(&i1, &i2);
       SubtractionExpression s2(&s1, &i3);
       _pp.visit(&s2);
-      TS_ASSERT_EQUALS(_out.str(), "(- (- 1 2) 3)");
+      TS_ASSERT_EQUALS(_out.str(), "-\n\t-\n\t\t1\n\t\t2\n\t3\n");
     }
 
     void test_multiplication_expression1()
@@ -108,7 +108,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       MultiplicationExpression m(&i1, &i2);
       _pp.visit(&m);
-      TS_ASSERT_EQUALS(_out.str(), "(* 1 2)");
+      TS_ASSERT_EQUALS(_out.str(), "*\n\t1\n\t2\n");
     }
 
     void test_multiplication_expression2()
@@ -119,7 +119,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       MultiplicationExpression m1(&i2, &i3);
       MultiplicationExpression m2(&i1, &m1);
       _pp.visit(&m2);
-      TS_ASSERT_EQUALS(_out.str(), "(* 1 (* 2 3))");
+      TS_ASSERT_EQUALS(_out.str(), "*\n\t1\n\t*\n\t\t2\n\t\t3\n");
     }
 
     void test_multiplication_expression3()
@@ -130,21 +130,21 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       MultiplicationExpression m1(&i1, &i2);
       MultiplicationExpression m2(&m1, &i3);
       _pp.visit(&m2);
-      TS_ASSERT_EQUALS(_out.str(), "(* (* 1 2) 3)");
+      TS_ASSERT_EQUALS(_out.str(), "*\n\t*\n\t\t1\n\t\t2\n\t3\n");
     }
 
     void test_true_literal()
     {
       BooleanLiteral b(true);
       _pp.visit(&b);
-      TS_ASSERT_EQUALS(_out.str(), "true");
+      TS_ASSERT_EQUALS(_out.str(), "true\n");
     }
 
     void test_false_literal()
     {
       BooleanLiteral b(false);
       _pp.visit(&b);
-      TS_ASSERT_EQUALS(_out.str(), "false");
+      TS_ASSERT_EQUALS(_out.str(), "false\n");
     }
 
     void test_conjunction_expression()
@@ -153,7 +153,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       BooleanLiteral b2(false);
       ConjunctionExpression c(&b1, &b2);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "(and true false)");
+      TS_ASSERT_EQUALS(_out.str(), "and\n\ttrue\n\tfalse\n");
     }
 
     void test_negation_expression()
@@ -161,7 +161,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       BooleanLiteral b(true);
       NegationExpression n(&b);
       _pp.visit(&n);
-      TS_ASSERT_EQUALS(_out.str(), "(not true)");
+      TS_ASSERT_EQUALS(_out.str(), "not\n\ttrue\n");
     }
 
     void test_less_than_expression()
@@ -170,14 +170,14 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i2(2);
       LessThanExpression l(&i1, &i2);
       _pp.visit(&l);
-      TS_ASSERT_EQUALS(_out.str(), "(< 1 2)");
+      TS_ASSERT_EQUALS(_out.str(), "<\n\t1\n\t2\n");
     }
 
     void test_identifier()
     {
       Identifier i("foo");
       _pp.visit(&i);
-      TS_ASSERT_EQUALS(_out.str(), "foo");
+      TS_ASSERT_EQUALS(_out.str(), "foo\n");
     }
 
     void test_print_statement()
@@ -185,7 +185,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral i(1);
       PrintStatement p(&i);
       _pp.visit(&p);
-      TS_ASSERT_EQUALS(_out.str(), "(print 1)");
+      TS_ASSERT_EQUALS(_out.str(), "print\n\t1\n");
     }
 
     void test_if_then_else_statement()
@@ -197,7 +197,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       PrintStatement p2(&i2);
       IfThenElseStatement if1(&l, &p1, &p2);
       _pp.visit(&if1);
-      TS_ASSERT_EQUALS(_out.str(), "(if (< 1 2) (print 1) (print 2))");
+      TS_ASSERT_EQUALS(_out.str(), "if\n\t<\n\t\t1\n\t\t2\n\tprint\n\t\t1\n\tprint\n\t\t2\n");
     }
 
     void test_while_do_statement()
@@ -208,7 +208,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       PrintStatement p(&i1);
       WhileDoStatement w(&l, &p);
       _pp.visit(&w);
-      TS_ASSERT_EQUALS(_out.str(), "(while (< 1 2) (print 1))");
+      TS_ASSERT_EQUALS(_out.str(), "while\n\t<\n\t\t1\n\t\t2\n\tprint\n\t\t1\n");
     }
 
     void test_assignment_statement()
@@ -217,28 +217,28 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral il(1);
       AssignmentStatement a(&id, &il);
       _pp.visit(&a);
-      TS_ASSERT_EQUALS(_out.str(), "(= foo 1)");
+      TS_ASSERT_EQUALS(_out.str(), "=\n\tfoo\n\t1\n");
     }
 
     void test_boolean_type()
     {
       BooleanType b;
       _pp.visit(&b);
-      TS_ASSERT_EQUALS(_out.str(), "Boolean");
+      TS_ASSERT_EQUALS(_out.str(), "Boolean\n");
     }
 
     void test_integer_type()
     {
       IntegerType i;
       _pp.visit(&i);
-      TS_ASSERT_EQUALS(_out.str(), "Integer");
+      TS_ASSERT_EQUALS(_out.str(), "Integer\n");
     }
 
     void test_identifier_type()
     {
       IdentifierType i("FooClass");
       _pp.visit(&i);
-      TS_ASSERT_EQUALS(_out.str(), "FooClass");
+      TS_ASSERT_EQUALS(_out.str(), "FooClass\n");
     }
 
     void test_variable_declaration()
@@ -247,7 +247,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       Identifier id("foo");
       VariableDeclaration v(&it, &id);
       _pp.visit(&v);
-      TS_ASSERT_EQUALS(_out.str(), "(variable Integer foo)");
+      TS_ASSERT_EQUALS(_out.str(), "variable\n\tInteger\n\tfoo\n");
     }
 
     void test_parameter_declaration()
@@ -256,21 +256,21 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       Identifier id("foo");
       ParameterDeclaration p(&it, &id);
       _pp.visit(&p);
-      TS_ASSERT_EQUALS(_out.str(), "(parameter Integer foo)");
+      TS_ASSERT_EQUALS(_out.str(), "parameter\n\tInteger\n\tfoo\n");
     }
 
     void test_this_expression()
     {
       ThisExpression t;
       _pp.visit(&t);
-      TS_ASSERT_EQUALS(_out.str(), "this");
+      TS_ASSERT_EQUALS(_out.str(), "this\n");
     }
 
     void test_identifier_expression()
     {
       IdentifierExpression i("foo");
       _pp.visit(&i);
-      TS_ASSERT_EQUALS(_out.str(), "foo");
+      TS_ASSERT_EQUALS(_out.str(), "foo\n");
     }
 
     void test_new_object_expression()
@@ -278,7 +278,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       Identifier i("foo");
       NewObjectExpression n(&i);
       _pp.visit(&n);
-      TS_ASSERT_EQUALS(_out.str(), "(new foo)");
+      TS_ASSERT_EQUALS(_out.str(), "new\n\tfoo\n");
     }
 
     void test_call_expression_without_arguments()
@@ -288,7 +288,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ExpressionList es;
       CallExpression c(&t, &i, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list))");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n");
     }
 
     void test_call_expression_with_one_argument()
@@ -300,7 +300,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       es._list.push_back(&il);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1))");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n\t\t1\n");
     }
 
     void test_call_expression_with_two_arguments()
@@ -314,7 +314,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       es._list.push_back(&i2);
       CallExpression c(&t, &id, &es);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "(call this do_foo (list 1 2))");
+      TS_ASSERT_EQUALS(_out.str(), "call\n\tthis\n\tdo_foo\n\tlist\n\t\t1\n\t\t2\n");
     }
 
     void test_block_statement()
@@ -328,7 +328,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ss._list.push_back(&p2);
       BlockStatement b(&ss);
       _pp.visit(&b);
-      TS_ASSERT_EQUALS(_out.str(), "(block (list (print 1) (print 2)))");
+      TS_ASSERT_EQUALS(_out.str(), "block\n\tlist\n\t\tprint\n\t\t\t1\n\t\tprint\n\t\t\t2\n");
     }
 
     void test_method_declaration()
@@ -341,7 +341,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       IntegerLiteral il(1);
       MethodDeclaration m(&it, &id, &ps, &vs, &ss, &il);
       _pp.visit(&m);
-      TS_ASSERT_EQUALS(_out.str(), "(method Integer do_foo (list) (list) (list) 1)");
+      TS_ASSERT_EQUALS(_out.str(), "method\n\tInteger\n\tdo_foo\n\tlist\n\tlist\n\tlist\n\t1\n");
     }
 
     void test_class_declaration()
@@ -351,7 +351,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       MethodDeclarationList ms;
       ClassDeclaration c(&i, &vs, &ms);
       _pp.visit(&c);
-      TS_ASSERT_EQUALS(_out.str(), "(class FooClass (list) (list))");
+      TS_ASSERT_EQUALS(_out.str(), "class\n\tFooClass\n\tlist\n\tlist\n");
     }
 
     void test_main_class_declaration()
@@ -360,7 +360,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       PrintStatement p(&il);
       MainClassDeclaration m(&p);
       _pp.visit(&m);
-      TS_ASSERT_EQUALS(_out.str(), "(main (print 1))");
+      TS_ASSERT_EQUALS(_out.str(), "main\n\tprint\n\t\t1\n");
     }
 
     void test_program_declaration()
@@ -371,7 +371,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
       ClassDeclarationList cs;
       ProgramDeclaration pd(&m, &cs);
       _pp.visit(&pd);
-      TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list))");
+      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tlist\n");
     }
 
     // This case was used to determine that a bug related to statement lists
@@ -428,6 +428,6 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
 
       _pp.visit(&pd);
 
-      TS_ASSERT_EQUALS(_out.str(), "(program (main (print 1)) (list (class A (list) (list (method Integer a (list) (list (variable Integer i)) (list (= i 0)) 0)))))");
+      TS_ASSERT_EQUALS(_out.str(), "program\n\tmain\n\t\tprint\n\t\t\t1\n\tlist\n\t\tclass\n\t\t\tA\n\t\t\tlist\n\t\t\tlist\n\t\t\t\tmethod\n\t\t\t\t\tInteger\n\t\t\t\t\ta\n\t\t\t\t\tlist\n\t\t\t\t\tlist\n\t\t\t\t\t\tvariable\n\t\t\t\t\t\t\tInteger\n\t\t\t\t\t\t\ti\n\t\t\t\t\tlist\n\t\t\t\t\t\t=\n\t\t\t\t\t\t\ti\n\t\t\t\t\t\t\t0\n\t\t\t\t\t0\n");
     }
 };

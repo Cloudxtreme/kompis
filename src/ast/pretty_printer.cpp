@@ -5,285 +5,326 @@ namespace kompis
 {
   namespace ast
   {
+    void PrettyPrinter::indent()
+    {
+      for(int i = 0; i < _indentation; ++i)
+        _out << '\t';
+    }
+
     void PrettyPrinter::visit(AdditionExpression *x)
     {
-      _out << "(+ ";
+      indent();
+      ++_indentation;
+      _out << "+\n";
       x->_left->accept(this);
-      _out << " ";
       x->_right->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(AssignmentStatement *x)
     {
-      _out << "(= ";
+      indent();
+      ++_indentation;
+      _out << "=\n";
       x->_id->accept(this);
-      _out << " ";
       x->_expr->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(BlockStatement *x)
     {
-      _out << "(block ";
+      indent();
+      ++_indentation;
+      _out << "block\n";
       x->_statements->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(BooleanLiteral *x)
     {
-      _out << (x->_value ? "true" : "false");
+      indent();
+      ++_indentation;
+      _out << (x->_value ? "true" : "false") << "\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(BooleanType *x)
     {
-      _out << "Boolean";
+      indent();
+      ++_indentation;
+      _out << "Boolean\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(CallExpression *x)
     {
-      _out << "(call ";
+      indent();
+      ++_indentation;
+      _out << "call\n";
       x->_self->accept(this);
-      _out << " ";
       x->_method_name->accept(this);
-      _out << " ";
       x->_args->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ClassDeclaration *x)
     {
-      _out << "(class ";
+      indent();
+      ++_indentation;
+      _out << "class\n";
       x->_name->accept(this);
-      _out << " ";
       x->_vars->accept(this);
-      _out << " ";
       x->_methods->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ClassDeclarationList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<ClassDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ConjunctionExpression *x)
     {
-      _out << "(and ";
+      indent();
+      ++_indentation;
+      _out << "and\n";
       x->_left->accept(this);
-      _out << " ";
       x->_right->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ExpressionList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<Expression *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(Identifier *x)
     {
-      _out << x->_name;
+      indent();
+      ++_indentation;
+      _out << x->_name << "\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(IdentifierExpression *x)
     {
-      _out << x->_name;
+      indent();
+      ++_indentation;
+      _out << x->_name << "\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(IdentifierType *x)
     {
-      _out << x->_name;
+      indent();
+      ++_indentation;
+      _out << x->_name << "\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(IfThenElseStatement *x)
     {
-      _out << "(if ";
+      indent();
+      ++_indentation;
+      _out << "if\n";
       x->_pred->accept(this);
-      _out << " ";
       x->_then_statement->accept(this);
-      _out << " ";
       x->_else_statement->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(IntegerLiteral *x)
     {
-      _out << x->_value;
+      indent();
+      ++_indentation;
+      _out << x->_value << "\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(IntegerType *x)
     {
-      _out << "Integer";
+      indent();
+      ++_indentation;
+      _out << "Integer\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(LessThanExpression *x)
     {
-      _out << "(< ";
+      indent();
+      ++_indentation;
+      _out << "<\n";
       x->_left->accept(this);
-      _out << " ";
       x->_right->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(MainClassDeclaration *x)
     {
-      _out << "(main ";
+      indent();
+      ++_indentation;
+      _out << "main\n";
       x->_statement->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(MethodDeclaration *x)
     {
-      _out << "(method ";
+      indent();
+      ++_indentation;
+      _out << "method\n";
       x->_return_type->accept(this);
-      _out << " ";
       x->_name->accept(this);
-      _out << " ";
       x->_params->accept(this);
-      _out << " ";
       x->_vars->accept(this);
-      _out << " ";
       x->_statements->accept(this);
-      _out << " ";
       x->_return_expr->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(MethodDeclarationList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<MethodDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(MultiplicationExpression *x)
     {
-      _out << "(* ";
+      indent();
+      ++_indentation;
+      _out << "*\n";
       x->_left->accept(this);
-      _out << " ";
       x->_right->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(NegationExpression *x)
     {
-      _out << "(not ";
+      indent();
+      ++_indentation;
+      _out << "not\n";
       x->_expr->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(NewObjectExpression *x)
     {
-      _out << "(new ";
+      indent();
+      ++_indentation;
+      _out << "new\n";
       x->_class_name->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ParameterDeclaration *x)
     {
-      _out << "(parameter ";
+      indent();
+      ++_indentation;
+      _out << "parameter\n";
       x->_type->accept(this);
-      _out << " ";
       x->_name->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ParameterDeclarationList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<ParameterDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(PrintStatement *x)
     {
-      _out << "(print ";
+      indent();
+      ++_indentation;
+      _out << "print\n";
       x->_expr->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ProgramDeclaration *x)
     {
-      _out << "(program ";
+      indent();
+      ++_indentation;
+      _out << "program\n";
       x->_main->accept(this);
-      _out << " ";
       x->_classes->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(StatementList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<Statement *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(SubtractionExpression *x)
     {
-      _out << "(- ";
+      indent();
+      ++_indentation;
+      _out << "-\n";
       x->_left->accept(this);
-      _out << " ";
       x->_right->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(ThisExpression *x)
     {
-      _out << "this";
+      indent();
+      ++_indentation;
+      _out << "this\n";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(VariableDeclaration *x)
     {
-      _out << "(variable ";
+      indent();
+      ++_indentation;
+      _out << "variable\n";
       x->_type->accept(this);
-      _out << " ";
       x->_name->accept(this);
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(VariableDeclarationList *x)
     {
-      _out << "(list";
+      indent();
+      ++_indentation;
+      _out << "list\n";
       for(std::list<VariableDeclaration *>::iterator it = x->_list.begin(); it != x->_list.end(); ++it)
-      {
-        _out << " ";
         (*it)->accept(this);
-      }
-      _out << ")";
+      --_indentation;
     }
 
     void PrettyPrinter::visit(WhileDoStatement *x)
     {
-      _out << "(while ";
+      indent();
+      ++_indentation;
+      _out << "while\n";
       x->_pred->accept(this);
-      _out << " ";
       x->_s->accept(this);
-      _out << ")";
+      --_indentation;
     }
   }
 }

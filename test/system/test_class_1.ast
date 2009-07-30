@@ -1,1 +1,9 @@
-(program (main (print 1)) (list (class A (list) (list))))
+program
+	main
+		print
+			1
+	list
+		class
+			A
+			list
+			list

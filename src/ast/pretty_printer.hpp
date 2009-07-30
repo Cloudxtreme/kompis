@@ -45,7 +45,7 @@ namespace kompis
     class PrettyPrinter : public Visitor
     {
       public:
-        PrettyPrinter(std::ostream &out) : _out(out) {}
+        PrettyPrinter(std::ostream &out) : _out(out), _indentation(0) {}
 
         void visit(AdditionExpression *);
         void visit(AssignmentStatement *);
@@ -82,7 +82,10 @@ namespace kompis
         void visit(WhileDoStatement *);
 
       private:
+        void indent();
+
         std::ostream &_out;
+        int _indentation;
     };
   }
 }
