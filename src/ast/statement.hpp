@@ -2,12 +2,13 @@
 #define KOMPIS_AST_STATEMENT_HPP
 
 #include "ast/node.hpp"
-#include "ast/visitor.hpp"
 
 namespace kompis
 {
   namespace ast
   {
+    class Visitor;
+
     class Statement : public Node
     {
       public:

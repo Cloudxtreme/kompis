@@ -4,7 +4,7 @@ pushd $(dirname $0)
 
 # build compiler
 pushd ../../src
-flex lexer.l && bison -d parser.ypp && g++ -Wall -I. -o kompis lex.yy.c parser.tab.cpp ast/*.cpp
+flex lexer.l && bison -d parser.ypp && g++ -Wall -I. -o kompis lex.yy.c parser.tab.cpp ast/*.cpp sema/*.cpp
 popd
 
 # find all files matching test*.java, run them through compiler, compare output with expected

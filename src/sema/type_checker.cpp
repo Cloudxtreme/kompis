@@ -1,9 +1,8 @@
-#include "ast/type_checker.hpp"
-#include "ast/ast.hpp"
+#include "sema/type_checker.hpp"
 
 namespace kompis
 {
-  namespace ast
+  namespace sema
   {
     void TypeChecker::visit(AdditionExpression *x)
     {

@@ -5,9 +5,10 @@
 
 #include "ast/ast.hpp"
 #include "ast/pretty_printer.hpp"
-#include "ast/type_checker.hpp"
+#include "sema/type_checker.hpp"
 using namespace kompis;
 using namespace ast;
+using namespace sema;
 
 extern "C"
 {

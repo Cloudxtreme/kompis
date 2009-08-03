@@ -6,8 +6,10 @@
 
 namespace kompis
 {
-  namespace ast
+  namespace sema
   {
+    using namespace ast;
+
     class TypeChecker : public Visitor
     {
       public:
