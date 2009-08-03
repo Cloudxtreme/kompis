@@ -5,6 +5,7 @@
 
 #include "ast/ast.hpp"
 #include "ast/pretty_printer.hpp"
+#include "ast/type_checker.hpp"
 using namespace kompis;
 using namespace ast;
 
@@ -247,5 +248,7 @@ int main(int argc, char *argv[])
   yyparse();
   PrettyPrinter pp(std::cout);
   pp.visit(program_declaration);
+  TypeChecker tc;
+  tc.visit(program_declaration);
   return 0;
 }
