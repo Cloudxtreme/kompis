@@ -13,7 +13,7 @@ namespace kompis
     class IdentifierExpression : public Expression
     {
       public:
-        IdentifierExpression(char *name)
+        IdentifierExpression(const char *name)
           : _name(name) {}
 
         void accept(Visitor *visitor);
