@@ -10,44 +10,50 @@ namespace kompis
   {
     using namespace ast;
 
+    class TypeData : public VisitorData
+    {
+      public:
+        virtual ~TypeData() {}
+    };
+
     class TypeChecker : public Visitor
     {
       public:
         TypeChecker() {}
 
-        void visit(AdditionExpression *);
-        void visit(AssignmentStatement *);
-        void visit(BlockStatement *);
-        void visit(BooleanLiteral *);
-        void visit(BooleanType *);
-        void visit(CallExpression *);
-        void visit(ClassDeclaration *);
-        void visit(ClassDeclarationList *);
-        void visit(ConjunctionExpression *);
-        void visit(ExpressionList *);
-        void visit(Identifier *);
-        void visit(IdentifierExpression *);
-        void visit(IdentifierType *);
-        void visit(IfThenElseStatement *);
-        void visit(IntegerLiteral *);
-        void visit(IntegerType *);
-        void visit(LessThanExpression *);
-        void visit(MainClassDeclaration *);
-        void visit(MethodDeclaration *);
-        void visit(MethodDeclarationList *);
-        void visit(MultiplicationExpression *);
-        void visit(NegationExpression *);
-        void visit(NewObjectExpression *);
-        void visit(ParameterDeclaration *);
-        void visit(ParameterDeclarationList *);
-        void visit(PrintStatement *);
-        void visit(ProgramDeclaration *);
-        void visit(SubtractionExpression *);
-        void visit(StatementList *);
-        void visit(ThisExpression *);
-        void visit(VariableDeclaration *);
-        void visit(VariableDeclarationList *);
-        void visit(WhileDoStatement *);
+        TypeData *visit(AdditionExpression *);
+        TypeData *visit(AssignmentStatement *);
+        TypeData *visit(BlockStatement *);
+        TypeData *visit(BooleanLiteral *);
+        TypeData *visit(BooleanType *);
+        TypeData *visit(CallExpression *);
+        TypeData *visit(ClassDeclaration *);
+        TypeData *visit(ClassDeclarationList *);
+        TypeData *visit(ConjunctionExpression *);
+        TypeData *visit(ExpressionList *);
+        TypeData *visit(Identifier *);
+        TypeData *visit(IdentifierExpression *);
+        TypeData *visit(IdentifierType *);
+        TypeData *visit(IfThenElseStatement *);
+        TypeData *visit(IntegerLiteral *);
+        TypeData *visit(IntegerType *);
+        TypeData *visit(LessThanExpression *);
+        TypeData *visit(MainClassDeclaration *);
+        TypeData *visit(MethodDeclaration *);
+        TypeData *visit(MethodDeclarationList *);
+        TypeData *visit(MultiplicationExpression *);
+        TypeData *visit(NegationExpression *);
+        TypeData *visit(NewObjectExpression *);
+        TypeData *visit(ParameterDeclaration *);
+        TypeData *visit(ParameterDeclarationList *);
+        TypeData *visit(PrintStatement *);
+        TypeData *visit(ProgramDeclaration *);
+        TypeData *visit(SubtractionExpression *);
+        TypeData *visit(StatementList *);
+        TypeData *visit(ThisExpression *);
+        TypeData *visit(VariableDeclaration *);
+        TypeData *visit(VariableDeclarationList *);
+        TypeData *visit(WhileDoStatement *);
     };
   }
 }

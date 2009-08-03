@@ -4,136 +4,169 @@ namespace kompis
 {
   namespace sema
   {
-    void TypeChecker::visit(AdditionExpression *x)
+    TypeData *TypeChecker::visit(AdditionExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(AssignmentStatement *x)
+    TypeData *TypeChecker::visit(AssignmentStatement *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(BlockStatement *x)
+    TypeData *TypeChecker::visit(BlockStatement *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(BooleanLiteral *x)
+    TypeData *TypeChecker::visit(BooleanLiteral *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(BooleanType *x)
+    TypeData *TypeChecker::visit(BooleanType *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(CallExpression *x)
+    TypeData *TypeChecker::visit(CallExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ClassDeclaration *x)
+    TypeData *TypeChecker::visit(ClassDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ClassDeclarationList *x)
+    TypeData *TypeChecker::visit(ClassDeclarationList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ConjunctionExpression *x)
+    TypeData *TypeChecker::visit(ConjunctionExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ExpressionList *x)
+    TypeData *TypeChecker::visit(ExpressionList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(Identifier *x)
+    TypeData *TypeChecker::visit(Identifier *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(IdentifierExpression *x)
+    TypeData *TypeChecker::visit(IdentifierExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(IdentifierType *x)
+    TypeData *TypeChecker::visit(IdentifierType *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(IfThenElseStatement *x)
+    TypeData *TypeChecker::visit(IfThenElseStatement *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(IntegerLiteral *x)
+    TypeData *TypeChecker::visit(IntegerLiteral *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(IntegerType *x)
+    TypeData *TypeChecker::visit(IntegerType *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(LessThanExpression *x)
+    TypeData *TypeChecker::visit(LessThanExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(MainClassDeclaration *x)
+    TypeData *TypeChecker::visit(MainClassDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(MethodDeclaration *x)
+    TypeData *TypeChecker::visit(MethodDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(MethodDeclarationList *x)
+    TypeData *TypeChecker::visit(MethodDeclarationList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(MultiplicationExpression *x)
+    TypeData *TypeChecker::visit(MultiplicationExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(NegationExpression *x)
+    TypeData *TypeChecker::visit(NegationExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(NewObjectExpression *x)
+    TypeData *TypeChecker::visit(NewObjectExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ParameterDeclaration *x)
+    TypeData *TypeChecker::visit(ParameterDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ParameterDeclarationList *x)
+    TypeData *TypeChecker::visit(ParameterDeclarationList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(PrintStatement *x)
+    TypeData *TypeChecker::visit(PrintStatement *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ProgramDeclaration *x)
+    TypeData *TypeChecker::visit(ProgramDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(StatementList *x)
+    TypeData *TypeChecker::visit(StatementList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(SubtractionExpression *x)
+    TypeData *TypeChecker::visit(SubtractionExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(ThisExpression *x)
+    TypeData *TypeChecker::visit(ThisExpression *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(VariableDeclaration *x)
+    TypeData *TypeChecker::visit(VariableDeclaration *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(VariableDeclarationList *x)
+    TypeData *TypeChecker::visit(VariableDeclarationList *x)
     {
+      return NULL;
     }
 
-    void TypeChecker::visit(WhileDoStatement *x)
+    TypeData *TypeChecker::visit(WhileDoStatement *x)
     {
+      return NULL;
     }
   }
 }
