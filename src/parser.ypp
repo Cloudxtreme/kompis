@@ -256,6 +256,11 @@ int main(int argc, char *argv[])
 {
   //yydebug = 1;
   yyparse();
+
+  if (program_declaration == NULL) {
+    exit(1);
+  }
+
   PrettyPrinter pp(std::cout);
   pp.visit(program_declaration);
   return 0;
