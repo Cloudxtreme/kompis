@@ -2,6 +2,9 @@
 #define KOMPIS_AST_AST_HPP
 
 #include "ast/addition_expression.hpp"
+#include "ast/array_assignment_statement.hpp"
+#include "ast/array_length_expression.hpp"
+#include "ast/array_subscript_expression.hpp"
 #include "ast/assignment_statement.hpp"
 #include "ast/block_statement.hpp"
 #include "ast/boolean_literal.hpp"
@@ -16,6 +19,7 @@
 #include "ast/identifier_expression.hpp"
 #include "ast/identifier_type.hpp"
 #include "ast/if_then_else_statement.hpp"
+#include "ast/integer_array_type.hpp"
 #include "ast/integer_literal.hpp"
 #include "ast/integer_type.hpp"
 #include "ast/less_than_expression.hpp"
@@ -24,6 +28,7 @@
 #include "ast/method_declaration_list.hpp"
 #include "ast/multiplication_expression.hpp"
 #include "ast/negation_expression.hpp"
+#include "ast/new_integer_array_expression.hpp"
 #include "ast/new_object_expression.hpp"
 #include "ast/node.hpp"
 #include "ast/parameter_declaration.hpp"

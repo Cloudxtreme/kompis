@@ -31,6 +31,7 @@ int line_num = 1;
 "false"                 { return FALSE; }
 "if"                    { return IF; }
 "int"                   { return INT; }
+"length"                { return LENGTH; }
 "main"                  { return MAIN; }
 "new"                   { return NEW; }
 "public"                { return PUBLIC; }

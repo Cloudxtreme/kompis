@@ -8,40 +8,6 @@ namespace kompis
 {
   namespace ast
   {
-    class AdditionExpression;
-    class AssignmentStatement;
-    class BlockStatement;
-    class BooleanLiteral;
-    class BooleanType;
-    class CallExpression;
-    class ClassDeclaration;
-    class ClassDeclarationList;
-    class ConjunctionExpression;
-    class ExpressionList;
-    class Identifier;
-    class IdentifierExpression;
-    class IdentifierType;
-    class IfThenElseStatement;
-    class IntegerLiteral;
-    class IntegerType;
-    class LessThanExpression;
-    class MainClassDeclaration;
-    class MethodDeclaration;
-    class MethodDeclarationList;
-    class MultiplicationExpression;
-    class NegationExpression;
-    class NewObjectExpression;
-    class ParameterDeclaration;
-    class ParameterDeclarationList;
-    class PrintStatement;
-    class ProgramDeclaration;
-    class StatementList;
-    class SubtractionExpression;
-    class ThisExpression;
-    class VariableDeclaration;
-    class VariableDeclarationList;
-    class WhileDoStatement;
-
     class PrettyPrinter : public Visitor
     {
       public:
@@ -49,6 +15,9 @@ namespace kompis
           : _out(out), _indentation(0) {}
 
         void visit(AdditionExpression *);
+        void visit(ArrayAssignmentStatement *);
+        void visit(ArrayLengthExpression *);
+        void visit(ArraySubscriptExpression *);
         void visit(AssignmentStatement *);
         void visit(BlockStatement *);
         void visit(BooleanLiteral *);
@@ -62,6 +31,7 @@ namespace kompis
         void visit(IdentifierExpression *);
         void visit(IdentifierType *);
         void visit(IfThenElseStatement *);
+        void visit(IntegerArrayType *);
         void visit(IntegerLiteral *);
         void visit(IntegerType *);
         void visit(LessThanExpression *);
@@ -70,13 +40,14 @@ namespace kompis
         void visit(MethodDeclarationList *);
         void visit(MultiplicationExpression *);
         void visit(NegationExpression *);
+        void visit(NewIntegerArrayExpression *);
         void visit(NewObjectExpression *);
         void visit(ParameterDeclaration *);
         void visit(ParameterDeclarationList *);
         void visit(PrintStatement *);
         void visit(ProgramDeclaration *);
-        void visit(SubtractionExpression *);
         void visit(StatementList *);
+        void visit(SubtractionExpression *);
         void visit(ThisExpression *);
         void visit(VariableDeclaration *);
         void visit(VariableDeclarationList *);

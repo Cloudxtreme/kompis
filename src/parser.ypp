@@ -23,7 +23,7 @@ ProgramDeclaration *program_declaration;
 StatementList *statements;
 %}
 
-%token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE
+%token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE LENGTH
 %left ','
 %right '='
 %left AND
@@ -32,6 +32,7 @@ StatementList *statements;
 %left '*'
 %right '!'
 %left '.'
+%left '['
 
 // The list types in the union could be replaced by global variables.
 %union
@@ -140,7 +141,9 @@ parameter_rest
   ;
 
 type
-  : BOOLEAN
+  : INT '[' ']'
+    { $$ = new IntegerArrayType(); }
+  | BOOLEAN
     { $$ = new BooleanType(); }
   | INT
     { $$ = new IntegerType(); }
@@ -170,6 +173,8 @@ statement
     { $$ = new PrintStatement((Expression *)$3); }
   | IDENTIFIER '=' expression ';'
     { $$ = new AssignmentStatement(new Identifier($1), (Expression *)$3); }
+  | IDENTIFIER '[' expression ']' '=' expression ';'
+    { $$ = new ArrayAssignmentStatement(new Identifier($1), (Expression *)$3, (Expression *)$6); }
   ;
 
 // See parameter_list for explanation.
@@ -206,6 +211,10 @@ expression
     { $$ = new LessThanExpression((Expression *)$1, (Expression *)$3); }
   | expression AND expression
     { $$ = new ConjunctionExpression((Expression *)$1, (Expression *)$3); }
+  | expression '[' expression ']'
+    { $$ = new ArraySubscriptExpression((Expression *)$1, (Expression *)$3); }
+  | expression '.' LENGTH
+    { $$ = new ArrayLengthExpression((Expression *)$1); }
   | expression '.' IDENTIFIER '(' expression_list ')'
     { $$ = new CallExpression((Expression *)$1, new Identifier($3), $5); }
   | INTEGER_LITERAL
@@ -218,6 +227,8 @@ expression
     { $$ = new IdentifierExpression($1); }
   | THIS
     { $$ = new ThisExpression(); }
+  | NEW INT '[' expression ']'
+    { $$ = new NewIntegerArrayExpression((Expression *)$4); }
   | NEW IDENTIFIER '(' ')'
     { $$ = new NewObjectExpression(new Identifier($2)); }
   | '!' expression

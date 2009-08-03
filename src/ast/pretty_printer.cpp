@@ -21,6 +21,36 @@ namespace kompis
       --_indentation;
     }
 
+    void PrettyPrinter::visit(ArrayAssignmentStatement *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "[]=\n";
+      x->_id->accept(this);
+      x->_index->accept(this);
+      x->_value->accept(this);
+      --_indentation;
+    }
+
+    void PrettyPrinter::visit(ArrayLengthExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "length\n";
+      x->_array->accept(this);
+      --_indentation;
+    }
+
+    void PrettyPrinter::visit(ArraySubscriptExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "[]\n";
+      x->_array->accept(this);
+      x->_index->accept(this);
+      --_indentation;
+    }
+
     void PrettyPrinter::visit(AssignmentStatement *x)
     {
       indent();
@@ -143,6 +173,14 @@ namespace kompis
       --_indentation;
     }
 
+    void PrettyPrinter::visit(IntegerArrayType *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "Integer[]\n";
+      --_indentation;
+    }
+
     void PrettyPrinter::visit(IntegerLiteral *x)
     {
       indent();
@@ -218,6 +256,15 @@ namespace kompis
       ++_indentation;
       _out << "!\n";
       x->_expr->accept(this);
+      --_indentation;
+    }
+
+    void PrettyPrinter::visit(NewIntegerArrayExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "new Integer[]\n";
+      x->_count->accept(this);
       --_indentation;
     }
 

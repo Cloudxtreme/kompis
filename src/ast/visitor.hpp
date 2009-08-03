@@ -6,6 +6,9 @@ namespace kompis
   namespace ast
   {
     class AdditionExpression;
+    class ArrayAssignmentStatement;
+    class ArrayLengthExpression;
+    class ArraySubscriptExpression;
     class AssignmentStatement;
     class BlockStatement;
     class BooleanLiteral;
@@ -19,6 +22,7 @@ namespace kompis
     class IdentifierExpression;
     class IdentifierType;
     class IfThenElseStatement;
+    class IntegerArrayType;
     class IntegerLiteral;
     class IntegerType;
     class LessThanExpression;
@@ -27,6 +31,7 @@ namespace kompis
     class MethodDeclarationList;
     class MultiplicationExpression;
     class NegationExpression;
+    class NewIntegerArrayExpression;
     class NewObjectExpression;
     class ParameterDeclaration;
     class ParameterDeclarationList;
@@ -45,6 +50,9 @@ namespace kompis
         virtual ~Visitor() {}
 
         virtual void visit(AdditionExpression *) = 0;
+        virtual void visit(ArrayAssignmentStatement *) = 0;
+        virtual void visit(ArrayLengthExpression *) = 0;
+        virtual void visit(ArraySubscriptExpression *) = 0;
         virtual void visit(AssignmentStatement *) = 0;
         virtual void visit(BlockStatement *) = 0;
         virtual void visit(BooleanLiteral *) = 0;
@@ -58,6 +66,7 @@ namespace kompis
         virtual void visit(IdentifierExpression *) = 0;
         virtual void visit(IdentifierType *) = 0;
         virtual void visit(IfThenElseStatement *) = 0;
+        virtual void visit(IntegerArrayType *) = 0;
         virtual void visit(IntegerLiteral *) = 0;
         virtual void visit(IntegerType *) = 0;
         virtual void visit(LessThanExpression *) = 0;
@@ -66,13 +75,14 @@ namespace kompis
         virtual void visit(MethodDeclarationList *) = 0;
         virtual void visit(MultiplicationExpression *) = 0;
         virtual void visit(NegationExpression *) = 0;
+        virtual void visit(NewIntegerArrayExpression *) = 0;
         virtual void visit(NewObjectExpression *) = 0;
         virtual void visit(ParameterDeclaration *) = 0;
         virtual void visit(ParameterDeclarationList *) = 0;
         virtual void visit(PrintStatement *) = 0;
         virtual void visit(ProgramDeclaration *) = 0;
-        virtual void visit(SubtractionExpression *) = 0;
         virtual void visit(StatementList *) = 0;
+        virtual void visit(SubtractionExpression *) = 0;
         virtual void visit(ThisExpression *) = 0;
         virtual void visit(VariableDeclaration *) = 0;
         virtual void visit(VariableDeclarationList *) = 0;
