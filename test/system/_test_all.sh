@@ -11,21 +11,22 @@ popd
 for INPUT_FILE in $(ls test*.java); do
   echo testing $INPUT_FILE...
 
-  # run kompis, put stdout in *.astout and stderr in *.errout
-  ../../src/kompis <$INPUT_FILE >${INPUT_FILE/.java/.astout} 2>${INPUT_FILE/.java/.errout}
+  # set some filenames
+  AST_FILE=${INPUT_FILE/.java/.ast}
+  ERR_FILE=${INPUT_FILE/.java/.err}
+  [ -f $AST_FILE ] && ASTOUT_FILE=${INPUT_FILE/.java/.astout} || ASTOUT_FILE="/dev/null"
+  [ -f $ERR_FILE ] && ERROUT_FILE=${INPUT_FILE/.java/.errout} || ERROUT_FILE="/dev/null"
+
+  # run kompis
+  ../../src/kompis <$INPUT_FILE >$ASTOUT_FILE 2>$ERROUT_FILE
 
   # if a *.ast file with expected stdout output exists, diff it with *.astout
-  if [ -f ${INPUT_FILE/.java/.ast} ]; then
-    diff -u ${INPUT_FILE/.java/.ast} ${INPUT_FILE/.java/.astout}
-  fi
+  # remove output file only if there was no diff
+  [ -f $AST_FILE ] && diff -q $AST_FILE $ASTOUT_FILE && rm $ASTOUT_FILE
 
   # if a *.err file with expected stderr output exists, diff it with *.errout
-  if [ -f ${INPUT_FILE/.java/.err} ]; then
-    diff -u ${INPUT_FILE/.java/.err} ${INPUT_FILE/.java/.errout}
-  fi
-
-  # remove output files
-  rm ${INPUT_FILE/.java/.astout} ${INPUT_FILE/.java/.errout}
+  # remove output file only if there was no diff
+  [ -f $ERR_FILE ] && diff -q $ERR_FILE $ERROUT_FILE && rm $ERROUT_FILE
 done
 
 # remove build products
