@@ -5,7 +5,7 @@
 using namespace kompis;
 using namespace ast;
 
-#include "parser.tab.hpp"
+#include "parser.hpp"
 
 int line_num = 1;
 %}
