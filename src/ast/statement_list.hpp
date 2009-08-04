@@ -9,11 +9,15 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class StatementList : public List<Statement>, public Statement
     {
       public:
-        void accept(Visitor *visitor);
+        StatementList(int line_num = 0)
+          : Statement(line_num) {}
+
+        VisitorData *accept(Visitor *visitor);
     };
   }
 }

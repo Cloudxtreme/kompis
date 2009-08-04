@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void IntegerType::accept(Visitor *visitor)
+    VisitorData *IntegerType::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

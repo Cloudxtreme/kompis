@@ -11,18 +11,21 @@ namespace kompis
     class ExpressionList;
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class CallExpression : public Node
     {
       public:
         CallExpression(Expression *self,
                        Identifier *method_name,
-                       ExpressionList *args)
-          : _self(self),
+                       ExpressionList *args,
+                       int line_num = 0)
+          : Node(line_num),
+            _self(self),
             _method_name(method_name),
             _args(args) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_self;

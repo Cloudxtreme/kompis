@@ -10,16 +10,19 @@ namespace kompis
     class ClassDeclaration;
     class MainClassDeclaration;
     class Visitor;
+    class VisitorData;
 
     class ProgramDeclaration : public Node
     {
       public:
         ProgramDeclaration(MainClassDeclaration *main,
-                           ClassDeclarationList *classes)
-          : _main(main),
+                           ClassDeclarationList *classes,
+                           int line_num = 0)
+          : Node(line_num),
+            _main(main),
             _classes(classes) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         MainClassDeclaration *_main;

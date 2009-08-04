@@ -9,14 +9,17 @@ namespace kompis
   {
     class StatementList;
     class Visitor;
+    class VisitorData;
 
     class BlockStatement : public Statement
     {
       public:
-        BlockStatement(StatementList *statements)
-          : _statements(statements) {}
+        BlockStatement(StatementList *statements,
+                       int line_num = 0)
+          : Statement(line_num),
+            _statements(statements) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         StatementList *_statements;

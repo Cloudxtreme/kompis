@@ -9,14 +9,19 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class WhileDoStatement : public Statement
     {
       public:
-        WhileDoStatement(Expression *pred, Statement *s)
-          : _pred(pred), _s(s) {}
+        WhileDoStatement(Expression *pred,
+                         Statement *s,
+                         int line_num = 0)
+          : Statement(line_num),
+            _pred(pred),
+            _s(s) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_pred;

@@ -9,11 +9,12 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class ExpressionList : public List<Expression>
     {
       public:
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
     };
   }
 }

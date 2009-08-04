@@ -11,7 +11,7 @@ namespace kompis
         _out << '\t';
     }
 
-    void PrettyPrinter::visit(AdditionExpression *x)
+    VisitorData *PrettyPrinter::visit(AdditionExpression *x)
     {
       indent();
       ++_indentation;
@@ -19,9 +19,10 @@ namespace kompis
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ArrayAssignmentStatement *x)
+    VisitorData *PrettyPrinter::visit(ArrayAssignmentStatement *x)
     {
       indent();
       ++_indentation;
@@ -30,18 +31,20 @@ namespace kompis
       x->_index->accept(this);
       x->_value->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ArrayLengthExpression *x)
+    VisitorData *PrettyPrinter::visit(ArrayLengthExpression *x)
     {
       indent();
       ++_indentation;
       _out << "length\n";
       x->_array->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ArraySubscriptExpression *x)
+    VisitorData *PrettyPrinter::visit(ArraySubscriptExpression *x)
     {
       indent();
       ++_indentation;
@@ -49,9 +52,10 @@ namespace kompis
       x->_array->accept(this);
       x->_index->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(AssignmentStatement *x)
+    VisitorData *PrettyPrinter::visit(AssignmentStatement *x)
     {
       indent();
       ++_indentation;
@@ -59,34 +63,38 @@ namespace kompis
       x->_id->accept(this);
       x->_expr->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(BlockStatement *x)
+    VisitorData *PrettyPrinter::visit(BlockStatement *x)
     {
       indent();
       ++_indentation;
       _out << "block\n";
       x->_statements->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(BooleanLiteral *x)
+    VisitorData *PrettyPrinter::visit(BooleanLiteral *x)
     {
       indent();
       ++_indentation;
       _out << (x->_value ? "true" : "false") << "\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(BooleanType *x)
+    VisitorData *PrettyPrinter::visit(BooleanType *x)
     {
       indent();
       ++_indentation;
       _out << "Boolean\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(CallExpression *x)
+    VisitorData *PrettyPrinter::visit(CallExpression *x)
     {
       indent();
       ++_indentation;
@@ -95,9 +103,10 @@ namespace kompis
       x->_method_name->accept(this);
       x->_args->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ClassDeclaration *x)
+    VisitorData *PrettyPrinter::visit(ClassDeclaration *x)
     {
       indent();
       ++_indentation;
@@ -106,9 +115,10 @@ namespace kompis
       x->_vars->accept(this);
       x->_methods->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ClassDeclarationList *x)
+    VisitorData *PrettyPrinter::visit(ClassDeclarationList *x)
     {
       indent();
       ++_indentation;
@@ -116,9 +126,10 @@ namespace kompis
       for(std::list<ClassDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ConjunctionExpression *x)
+    VisitorData *PrettyPrinter::visit(ConjunctionExpression *x)
     {
       indent();
       ++_indentation;
@@ -126,9 +137,10 @@ namespace kompis
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ExpressionList *x)
+    VisitorData *PrettyPrinter::visit(ExpressionList *x)
     {
       indent();
       ++_indentation;
@@ -136,33 +148,37 @@ namespace kompis
       for(std::list<Expression *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(Identifier *x)
+    VisitorData *PrettyPrinter::visit(Identifier *x)
     {
       indent();
       ++_indentation;
       _out << x->_name << "\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IdentifierExpression *x)
+    VisitorData *PrettyPrinter::visit(IdentifierExpression *x)
     {
       indent();
       ++_indentation;
       _out << x->_name << "\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IdentifierType *x)
+    VisitorData *PrettyPrinter::visit(IdentifierType *x)
     {
       indent();
       ++_indentation;
       _out << x->_name << "\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IfThenElseStatement *x)
+    VisitorData *PrettyPrinter::visit(IfThenElseStatement *x)
     {
       indent();
       ++_indentation;
@@ -171,33 +187,37 @@ namespace kompis
       x->_then_statement->accept(this);
       x->_else_statement->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IntegerArrayType *x)
+    VisitorData *PrettyPrinter::visit(IntegerArrayType *x)
     {
       indent();
       ++_indentation;
       _out << "Integer[]\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IntegerLiteral *x)
+    VisitorData *PrettyPrinter::visit(IntegerLiteral *x)
     {
       indent();
       ++_indentation;
       _out << x->_value << "\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(IntegerType *x)
+    VisitorData *PrettyPrinter::visit(IntegerType *x)
     {
       indent();
       ++_indentation;
       _out << "Integer\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(LessThanExpression *x)
+    VisitorData *PrettyPrinter::visit(LessThanExpression *x)
     {
       indent();
       ++_indentation;
@@ -205,18 +225,20 @@ namespace kompis
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(MainClassDeclaration *x)
+    VisitorData *PrettyPrinter::visit(MainClassDeclaration *x)
     {
       indent();
       ++_indentation;
       _out << "main\n";
       x->_statement->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(MethodDeclaration *x)
+    VisitorData *PrettyPrinter::visit(MethodDeclaration *x)
     {
       indent();
       ++_indentation;
@@ -228,9 +250,10 @@ namespace kompis
       x->_statements->accept(this);
       x->_return_expr->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(MethodDeclarationList *x)
+    VisitorData *PrettyPrinter::visit(MethodDeclarationList *x)
     {
       indent();
       ++_indentation;
@@ -238,9 +261,10 @@ namespace kompis
       for(std::list<MethodDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(MultiplicationExpression *x)
+    VisitorData *PrettyPrinter::visit(MultiplicationExpression *x)
     {
       indent();
       ++_indentation;
@@ -248,36 +272,40 @@ namespace kompis
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(NegationExpression *x)
+    VisitorData *PrettyPrinter::visit(NegationExpression *x)
     {
       indent();
       ++_indentation;
       _out << "!\n";
       x->_expr->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(NewIntegerArrayExpression *x)
+    VisitorData *PrettyPrinter::visit(NewIntegerArrayExpression *x)
     {
       indent();
       ++_indentation;
       _out << "new Integer[]\n";
       x->_count->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(NewObjectExpression *x)
+    VisitorData *PrettyPrinter::visit(NewObjectExpression *x)
     {
       indent();
       ++_indentation;
       _out << "new\n";
       x->_class_name->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ParameterDeclaration *x)
+    VisitorData *PrettyPrinter::visit(ParameterDeclaration *x)
     {
       indent();
       ++_indentation;
@@ -285,9 +313,10 @@ namespace kompis
       x->_type->accept(this);
       x->_name->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ParameterDeclarationList *x)
+    VisitorData *PrettyPrinter::visit(ParameterDeclarationList *x)
     {
       indent();
       ++_indentation;
@@ -295,18 +324,20 @@ namespace kompis
       for(std::list<ParameterDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(PrintStatement *x)
+    VisitorData *PrettyPrinter::visit(PrintStatement *x)
     {
       indent();
       ++_indentation;
       _out << "print\n";
       x->_expr->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ProgramDeclaration *x)
+    VisitorData *PrettyPrinter::visit(ProgramDeclaration *x)
     {
       indent();
       ++_indentation;
@@ -314,9 +345,10 @@ namespace kompis
       x->_main->accept(this);
       x->_classes->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(StatementList *x)
+    VisitorData *PrettyPrinter::visit(StatementList *x)
     {
       indent();
       ++_indentation;
@@ -324,9 +356,10 @@ namespace kompis
       for(std::list<Statement *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(SubtractionExpression *x)
+    VisitorData *PrettyPrinter::visit(SubtractionExpression *x)
     {
       indent();
       ++_indentation;
@@ -334,17 +367,19 @@ namespace kompis
       x->_left->accept(this);
       x->_right->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(ThisExpression *x)
+    VisitorData *PrettyPrinter::visit(ThisExpression *x)
     {
       indent();
       ++_indentation;
       _out << "this\n";
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(VariableDeclaration *x)
+    VisitorData *PrettyPrinter::visit(VariableDeclaration *x)
     {
       indent();
       ++_indentation;
@@ -352,9 +387,10 @@ namespace kompis
       x->_type->accept(this);
       x->_name->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(VariableDeclarationList *x)
+    VisitorData *PrettyPrinter::visit(VariableDeclarationList *x)
     {
       indent();
       ++_indentation;
@@ -362,9 +398,10 @@ namespace kompis
       for(std::list<VariableDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       --_indentation;
+      return NULL;
     }
 
-    void PrettyPrinter::visit(WhileDoStatement *x)
+    VisitorData *PrettyPrinter::visit(WhileDoStatement *x)
     {
       indent();
       ++_indentation;
@@ -372,6 +409,7 @@ namespace kompis
       x->_pred->accept(this);
       x->_s->accept(this);
       --_indentation;
+      return NULL;
     }
   }
 }

@@ -9,14 +9,17 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class PrintStatement : public Statement
     {
       public:
-        PrintStatement(Expression *expr)
-          : _expr(expr) {}
+        PrintStatement(Expression *expr,
+                       int line_num = 0)
+          : Statement(line_num),
+            _expr(expr) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_expr;

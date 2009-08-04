@@ -10,14 +10,19 @@ namespace kompis
     class Identifier;
     class Type;
     class Visitor;
+    class VisitorData;
 
     class ParameterDeclaration : public Node
     {
       public:
-        ParameterDeclaration(Type *type, Identifier *name)
-          : _type(type), _name(name) {}
+        ParameterDeclaration(Type *type,
+                             Identifier *name,
+                             int line_num = 0)
+          : Node(line_num),
+            _type(type),
+            _name(name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Type *_type;

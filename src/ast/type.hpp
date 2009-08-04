@@ -2,17 +2,23 @@
 #define KOMPIS_AST_TYPE_HPP
 
 #include "ast/node.hpp"
-#include "ast/visitor.hpp"
 
 namespace kompis
 {
   namespace ast
   {
+    class Visitor;
+    class VisitorData;
+
     class Type : public Node
     {
       public:
+        Type(int line_num = 0)
+          : Node(line_num) {}
+
         virtual ~Type() {}
-        virtual void accept(Visitor *) = 0;
+
+        virtual VisitorData *accept(Visitor *) = 0;
     };
   }
 }

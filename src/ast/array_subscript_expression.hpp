@@ -9,14 +9,19 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class ArraySubscriptExpression : public Expression
     {
       public:
-        ArraySubscriptExpression(Expression *array, Expression *index)
-          : _array(array), _index(index) {}
+        ArraySubscriptExpression(Expression *array,
+                                 Expression *index,
+                                 int line_num)
+          : Expression(line_num),
+            _array(array),
+            _index(index) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_array;

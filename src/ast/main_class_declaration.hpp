@@ -10,14 +10,17 @@ namespace kompis
     class Identifier;
     class Statement;
     class Visitor;
+    class VisitorData;
 
     class MainClassDeclaration : public Node
     {
       public:
-        MainClassDeclaration(Statement *statement)
-          : _statement(statement) {}
+        MainClassDeclaration(Statement *statement,
+                             int line_num = 0)
+          : Node(line_num),
+            _statement(statement) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         Statement *_statement;

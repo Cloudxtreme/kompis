@@ -8,14 +8,17 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class BooleanLiteral : public Expression
     {
       public:
-        BooleanLiteral(bool value)
-          : _value(value) {}
+        BooleanLiteral(bool value,
+                       int line_num = 0)
+          : Expression(line_num),
+            _value(value) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         bool _value;

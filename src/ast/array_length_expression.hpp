@@ -10,14 +10,17 @@ namespace kompis
     class Expression;
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class ArrayLengthExpression : public Expression
     {
       public:
-        ArrayLengthExpression(Expression *array)
-          : _array(array) {}
+        ArrayLengthExpression(Expression *array,
+                              int line_num)
+          : Expression(line_num),
+            _array(array) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_array;

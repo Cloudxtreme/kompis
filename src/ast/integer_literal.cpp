@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void IntegerLiteral::accept(Visitor *visitor)
+    VisitorData *IntegerLiteral::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

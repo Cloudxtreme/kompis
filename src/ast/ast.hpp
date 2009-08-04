@@ -23,6 +23,7 @@
 #include "ast/integer_literal.hpp"
 #include "ast/integer_type.hpp"
 #include "ast/less_than_expression.hpp"
+#include "ast/list.hpp"
 #include "ast/main_class_declaration.hpp"
 #include "ast/method_declaration.hpp"
 #include "ast/method_declaration_list.hpp"

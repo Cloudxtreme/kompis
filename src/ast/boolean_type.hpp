@@ -9,11 +9,15 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class BooleanType : public Type
     {
       public:
-        void accept(Visitor *visitor);
+        BooleanType(int line_num = 0)
+          : Type(line_num) {}
+
+        VisitorData *accept(Visitor *visitor);
     };
   }
 }

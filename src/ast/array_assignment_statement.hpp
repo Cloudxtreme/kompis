@@ -10,14 +10,21 @@ namespace kompis
     class Expression;
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class ArrayAssignmentStatement : public Statement
     {
       public:
-        ArrayAssignmentStatement(Identifier *id, Expression *index, Expression *value)
-          : _id(id), _index(index), _value(value) {}
+        ArrayAssignmentStatement(Identifier *id,
+                                 Expression *index,
+                                 Expression *value,
+                                 int line_num = 0)
+          : Statement(line_num),
+            _id(id),
+            _index(index),
+            _value(value) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Identifier *_id;

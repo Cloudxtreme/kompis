@@ -8,14 +8,17 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class NegationExpression : public Expression
     {
       public:
-        NegationExpression(Expression *expr)
-          : _expr(expr) {}
+        NegationExpression(Expression *expr,
+                           int line_num = 0)
+          : Expression(line_num),
+            _expr(expr) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_expr;

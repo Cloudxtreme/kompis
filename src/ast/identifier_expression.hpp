@@ -9,14 +9,17 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class IdentifierExpression : public Expression
     {
       public:
-        IdentifierExpression(const char *name)
-          : _name(name) {}
+        IdentifierExpression(const char *name,
+                             int line_num = 0)
+          : Expression(line_num),
+            _name(name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         std::string _name;

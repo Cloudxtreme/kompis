@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void ArrayAssignmentStatement::accept(Visitor *visitor)
+    VisitorData *ArrayAssignmentStatement::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

@@ -8,14 +8,18 @@ namespace kompis
   namespace ast
   {
     class Expression;
+    class Visitor;
+    class VisitorData;
 
     class NewIntegerArrayExpression : public Expression
     {
       public:
-        NewIntegerArrayExpression(Expression *count)
-          : _count(count) {}
+        NewIntegerArrayExpression(Expression *count,
+                                  int line_num)
+          : Expression(line_num),
+            _count(count) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_count;

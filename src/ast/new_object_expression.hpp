@@ -9,14 +9,17 @@ namespace kompis
   {
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class NewObjectExpression : public Expression
     {
       public:
-        NewObjectExpression(Identifier *class_name)
-          : _class_name(class_name) {}
+        NewObjectExpression(Identifier *class_name,
+                            int line_num = 0)
+          : Expression(line_num),
+            _class_name(class_name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Identifier *_class_name;

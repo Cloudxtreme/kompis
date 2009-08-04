@@ -14,6 +14,7 @@ namespace kompis
     class Type;
     class VariableDeclarationList;
     class Visitor;
+    class VisitorData;
 
     class MethodDeclaration : public Node
     {
@@ -23,15 +24,17 @@ namespace kompis
                           ParameterDeclarationList *params,
                           VariableDeclarationList *vars,
                           StatementList *statements,
-                          Expression *return_expr)
-          : _return_type(return_type),
+                          Expression *return_expr,
+                          int line_num = 0)
+          : Node(line_num),
+            _return_type(return_type),
             _name(name),
             _params(params),
             _vars(vars),
             _statements(statements),
             _return_expr(return_expr) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         Type *_return_type;

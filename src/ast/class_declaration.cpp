@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void ClassDeclaration::accept(Visitor *visitor)
+    VisitorData *ClassDeclaration::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

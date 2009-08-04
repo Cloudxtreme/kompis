@@ -44,49 +44,55 @@ namespace kompis
     class VariableDeclarationList;
     class WhileDoStatement;
 
+    class VisitorData
+    {
+      public:
+        virtual ~VisitorData() {}
+    };
+
     class Visitor
     {
       public:
         virtual ~Visitor() {}
 
-        virtual void visit(AdditionExpression *) = 0;
-        virtual void visit(ArrayAssignmentStatement *) = 0;
-        virtual void visit(ArrayLengthExpression *) = 0;
-        virtual void visit(ArraySubscriptExpression *) = 0;
-        virtual void visit(AssignmentStatement *) = 0;
-        virtual void visit(BlockStatement *) = 0;
-        virtual void visit(BooleanLiteral *) = 0;
-        virtual void visit(BooleanType *) = 0;
-        virtual void visit(CallExpression *) = 0;
-        virtual void visit(ClassDeclaration *) = 0;
-        virtual void visit(ClassDeclarationList *) = 0;
-        virtual void visit(ConjunctionExpression *) = 0;
-        virtual void visit(ExpressionList *) = 0;
-        virtual void visit(Identifier *) = 0;
-        virtual void visit(IdentifierExpression *) = 0;
-        virtual void visit(IdentifierType *) = 0;
-        virtual void visit(IfThenElseStatement *) = 0;
-        virtual void visit(IntegerArrayType *) = 0;
-        virtual void visit(IntegerLiteral *) = 0;
-        virtual void visit(IntegerType *) = 0;
-        virtual void visit(LessThanExpression *) = 0;
-        virtual void visit(MainClassDeclaration *) = 0;
-        virtual void visit(MethodDeclaration *) = 0;
-        virtual void visit(MethodDeclarationList *) = 0;
-        virtual void visit(MultiplicationExpression *) = 0;
-        virtual void visit(NegationExpression *) = 0;
-        virtual void visit(NewIntegerArrayExpression *) = 0;
-        virtual void visit(NewObjectExpression *) = 0;
-        virtual void visit(ParameterDeclaration *) = 0;
-        virtual void visit(ParameterDeclarationList *) = 0;
-        virtual void visit(PrintStatement *) = 0;
-        virtual void visit(ProgramDeclaration *) = 0;
-        virtual void visit(StatementList *) = 0;
-        virtual void visit(SubtractionExpression *) = 0;
-        virtual void visit(ThisExpression *) = 0;
-        virtual void visit(VariableDeclaration *) = 0;
-        virtual void visit(VariableDeclarationList *) = 0;
-        virtual void visit(WhileDoStatement *) = 0;
+        virtual VisitorData *visit(AdditionExpression *) = 0;
+        virtual VisitorData *visit(ArrayAssignmentStatement *) = 0;
+        virtual VisitorData *visit(ArrayLengthExpression *) = 0;
+        virtual VisitorData *visit(ArraySubscriptExpression *) = 0;
+        virtual VisitorData *visit(AssignmentStatement *) = 0;
+        virtual VisitorData *visit(BlockStatement *) = 0;
+        virtual VisitorData *visit(BooleanLiteral *) = 0;
+        virtual VisitorData *visit(BooleanType *) = 0;
+        virtual VisitorData *visit(CallExpression *) = 0;
+        virtual VisitorData *visit(ClassDeclaration *) = 0;
+        virtual VisitorData *visit(ClassDeclarationList *) = 0;
+        virtual VisitorData *visit(ConjunctionExpression *) = 0;
+        virtual VisitorData *visit(ExpressionList *) = 0;
+        virtual VisitorData *visit(Identifier *) = 0;
+        virtual VisitorData *visit(IdentifierExpression *) = 0;
+        virtual VisitorData *visit(IdentifierType *) = 0;
+        virtual VisitorData *visit(IfThenElseStatement *) = 0;
+        virtual VisitorData *visit(IntegerArrayType *) = 0;
+        virtual VisitorData *visit(IntegerLiteral *) = 0;
+        virtual VisitorData *visit(IntegerType *) = 0;
+        virtual VisitorData *visit(LessThanExpression *) = 0;
+        virtual VisitorData *visit(MainClassDeclaration *) = 0;
+        virtual VisitorData *visit(MethodDeclaration *) = 0;
+        virtual VisitorData *visit(MethodDeclarationList *) = 0;
+        virtual VisitorData *visit(MultiplicationExpression *) = 0;
+        virtual VisitorData *visit(NegationExpression *) = 0;
+        virtual VisitorData *visit(NewIntegerArrayExpression *) = 0;
+        virtual VisitorData *visit(NewObjectExpression *) = 0;
+        virtual VisitorData *visit(ParameterDeclaration *) = 0;
+        virtual VisitorData *visit(ParameterDeclarationList *) = 0;
+        virtual VisitorData *visit(PrintStatement *) = 0;
+        virtual VisitorData *visit(ProgramDeclaration *) = 0;
+        virtual VisitorData *visit(StatementList *) = 0;
+        virtual VisitorData *visit(SubtractionExpression *) = 0;
+        virtual VisitorData *visit(ThisExpression *) = 0;
+        virtual VisitorData *visit(VariableDeclaration *) = 0;
+        virtual VisitorData *visit(VariableDeclarationList *) = 0;
+        virtual VisitorData *visit(WhileDoStatement *) = 0;
     };
   }
 }

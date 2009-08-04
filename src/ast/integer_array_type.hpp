@@ -9,11 +9,15 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class IntegerArrayType : public Type
     {
       public:
-        void accept(Visitor *visitor);
+        IntegerArrayType(int line_num = 0)
+          : Type(line_num) {}
+
+        VisitorData *accept(Visitor *visitor);
     };
   }
 }

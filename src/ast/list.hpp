@@ -9,13 +9,14 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     template <class T>
     class List
     {
       public:
         virtual ~List() {}
-        virtual void accept(Visitor *) = 0;
+        virtual VisitorData *accept(Visitor *) = 0;
 
         std::list<T *> _list;
     };

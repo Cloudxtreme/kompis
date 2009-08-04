@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void ArraySubscriptExpression::accept(Visitor *visitor)
+    VisitorData *ArraySubscriptExpression::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }
