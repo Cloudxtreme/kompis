@@ -14,8 +14,8 @@ namespace kompis
     class Identifier : public Node
     {
       public:
-        Identifier(const char *name)
-          : _name(name) {}
+        Identifier(int line_num, const char *name)
+          : Node(line_num), _name(name) {}
 
         VisitorData *accept(Visitor *visitor);
 

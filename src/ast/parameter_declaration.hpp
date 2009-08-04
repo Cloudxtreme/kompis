@@ -15,8 +15,8 @@ namespace kompis
     class ParameterDeclaration : public Node
     {
       public:
-        ParameterDeclaration(Type *type, Identifier *name)
-          : _type(type), _name(name) {}
+        ParameterDeclaration(int line_num, Type *type, Identifier *name)
+          : Node(line_num), _type(type), _name(name) {}
 
         VisitorData *accept(Visitor *visitor);
 

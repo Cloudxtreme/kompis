@@ -13,7 +13,11 @@ namespace kompis
     class Statement : public Node
     {
       public:
+        Statement(int line_num)
+          : Node(line_num) {}
+
         virtual ~Statement() {}
+
         virtual VisitorData *accept(Visitor *) = 0;
     };
   }

@@ -13,8 +13,8 @@ namespace kompis
     class BooleanLiteral : public Expression
     {
       public:
-        BooleanLiteral(bool value)
-          : _value(value) {}
+        BooleanLiteral(int line_num, bool value)
+          : Expression(line_num), _value(value) {}
 
         VisitorData *accept(Visitor *visitor);
 

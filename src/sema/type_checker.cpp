@@ -14,12 +14,12 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
       if(l->_type != type::T_INT)
       {
-        error("", 0, "type", "lhs of '+' not int");
+        error("", x->_line_num, "type", "lhs of '+' not int");
         return new TypeData(type::T_ERROR);
       }
       if(r->_type != type::T_INT)
       {
-        error("", 0, "type", "rhs of '+' not int");
+        error("", x->_line_num, "type", "rhs of '+' not int");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_INT);
@@ -30,7 +30,7 @@ namespace kompis
       TypeData *l = static_cast<TypeData *>(x->_id->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
       if(l->_type != r->_type)
-        error("", 0, "type", "lhs and rhs of '=' of different type");
+        error("", x->_line_num, "type", "lhs and rhs of '=' of different type");
       return NULL;
     }
 
@@ -80,12 +80,12 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
       if(l->_type != type::T_BOOLEAN)
       {
-        error("", 0, "type", "lhs of '&&' not boolean");
+        error("", x->_line_num, "type", "lhs of '&&' not boolean");
         return new TypeData(type::T_ERROR);
       }
       if(r->_type != type::T_BOOLEAN)
       {
-        error("", 0, "type", "rhs of '&&' not boolean");
+        error("", x->_line_num, "type", "rhs of '&&' not boolean");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_BOOLEAN);
@@ -138,12 +138,12 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
       if(l->_type != type::T_INT)
       {
-        error("", 0, "type", "lhs of '<' not int");
+        error("", x->_line_num, "type", "lhs of '<' not int");
         return new TypeData(type::T_ERROR);
       }
       if(r->_type != type::T_INT)
       {
-        error("", 0, "type", "rhs of '<' not int");
+        error("", x->_line_num, "type", "rhs of '<' not int");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_BOOLEAN);
@@ -179,12 +179,12 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
       if(l->_type != type::T_INT)
       {
-        error("", 0, "type", "lhs of '*' not int");
+        error("", x->_line_num, "type", "lhs of '*' not int");
         return new TypeData(type::T_ERROR);
       }
       if(r->_type != type::T_INT)
       {
-        error("", 0, "type", "rhs of '*' not int");
+        error("", x->_line_num, "type", "rhs of '*' not int");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_INT);
@@ -195,7 +195,7 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
       if(r->_type != type::T_BOOLEAN)
       {
-        error("", 0, "type", "rhs of '!' not boolean");
+        error("", x->_line_num, "type", "rhs of '!' not boolean");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_BOOLEAN);
@@ -226,7 +226,7 @@ namespace kompis
     {
       TypeData *e = static_cast<TypeData *>(x->_expr->accept(this));
       if(e->_type != type::T_INT)
-        error("", 0, "type", "argument to 'System.out.println' not int");
+        error("", x->_line_num, "type", "argument to 'System.out.println' not int");
       return NULL;
     }
 
@@ -250,12 +250,12 @@ namespace kompis
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
       if(l->_type != type::T_INT)
       {
-        error("", 0, "type", "lhs of '-' not int");
+        error("", x->_line_num, "type", "lhs of '-' not int");
         return new TypeData(type::T_ERROR);
       }
       if(r->_type != type::T_INT)
       {
-        error("", 0, "type", "rhs of '-' not int");
+        error("", x->_line_num, "type", "rhs of '-' not int");
         return new TypeData(type::T_ERROR);
       }
       return new TypeData(type::T_INT);

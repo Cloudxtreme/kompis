@@ -13,8 +13,8 @@ namespace kompis
     class ConjunctionExpression : public Expression
     {
       public:
-        ConjunctionExpression(Expression *left, Expression *right)
-          : _left(left), _right(right) {}
+        ConjunctionExpression(int line_num, Expression *left, Expression *right)
+          : Expression(line_num), _left(left), _right(right) {}
 
         VisitorData *accept(Visitor *visitor);
 

@@ -15,8 +15,8 @@ namespace kompis
     class AssignmentStatement : public Statement
     {
       public:
-        AssignmentStatement(Identifier *id, Expression *expr)
-          : _id(id), _expr(expr) {}
+        AssignmentStatement(int line_num, Identifier *id, Expression *expr)
+          : Statement(line_num), _id(id), _expr(expr) {}
 
         VisitorData *accept(Visitor *visitor);
 

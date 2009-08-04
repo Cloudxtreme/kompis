@@ -14,10 +14,12 @@ namespace kompis
     class IfThenElseStatement : public Statement
     {
       public:
-        IfThenElseStatement(Expression *pred,
+        IfThenElseStatement(int line_num,
+                            Expression *pred,
                             Statement *then_statement,
                             Statement *else_statement)
-          : _pred(pred),
+          : Statement(line_num),
+            _pred(pred),
             _then_statement(then_statement),
             _else_statement(else_statement) {}
 

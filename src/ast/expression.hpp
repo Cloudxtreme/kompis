@@ -13,7 +13,11 @@ namespace kompis
     class Expression : public Node
     {
       public:
+        Expression(int line_num)
+          : Node(line_num) {}
+
         virtual ~Expression() {}
+
         virtual VisitorData *accept(Visitor *) = 0;
     };
   }

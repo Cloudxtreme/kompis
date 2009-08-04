@@ -14,6 +14,9 @@ namespace kompis
     class BooleanType : public Type
     {
       public:
+        BooleanType(int line_num)
+          : Type(line_num) {}
+
         VisitorData *accept(Visitor *visitor);
     };
   }

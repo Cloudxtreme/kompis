@@ -11,8 +11,14 @@ namespace kompis
     class Node
     {
       public:
+        Node(int line_num)
+          : _line_num(line_num) {}
+
         virtual ~Node() {}
+
         virtual VisitorData *accept(Visitor *) = 0;
+
+        int _line_num;
     };
   }
 }

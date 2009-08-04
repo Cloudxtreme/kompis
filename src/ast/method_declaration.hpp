@@ -19,13 +19,15 @@ namespace kompis
     class MethodDeclaration : public Node
     {
       public:
-        MethodDeclaration(Type *return_type,
+        MethodDeclaration(int line_num,
+                          Type *return_type,
                           Identifier *name,
                           ParameterDeclarationList *params,
                           VariableDeclarationList *vars,
                           StatementList *statements,
                           Expression *return_expr)
-          : _return_type(return_type),
+          : Node(line_num),
+            _return_type(return_type),
             _name(name),
             _params(params),
             _vars(vars),

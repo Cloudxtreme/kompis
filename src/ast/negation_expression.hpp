@@ -13,8 +13,8 @@ namespace kompis
     class NegationExpression : public Expression
     {
       public:
-        NegationExpression(Expression *expr)
-          : _expr(expr) {}
+        NegationExpression(int line_num, Expression *expr)
+          : Expression(line_num), _expr(expr) {}
 
         VisitorData *accept(Visitor *visitor);
 

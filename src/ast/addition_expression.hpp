@@ -13,8 +13,8 @@ namespace kompis
     class AdditionExpression : public Expression
     {
       public:
-        AdditionExpression(Expression *left, Expression *right)
-          : _left(left), _right(right) {}
+        AdditionExpression(int line_num, Expression *left, Expression *right)
+          : Expression(line_num), _left(left), _right(right) {}
 
         VisitorData *accept(Visitor *visitor);
 

@@ -14,6 +14,9 @@ namespace kompis
     class StatementList : public List<Statement>, public Statement
     {
       public:
+        StatementList(int line_num)
+          : Statement(line_num) {}
+
         VisitorData *accept(Visitor *visitor);
     };
   }

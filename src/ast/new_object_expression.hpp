@@ -14,8 +14,8 @@ namespace kompis
     class NewObjectExpression : public Expression
     {
       public:
-        NewObjectExpression(Identifier *class_name)
-          : _class_name(class_name) {}
+        NewObjectExpression(int line_num, Identifier *class_name)
+          : Expression(line_num), _class_name(class_name) {}
 
         VisitorData *accept(Visitor *visitor);
 

@@ -14,8 +14,8 @@ namespace kompis
     class IdentifierType : public Type
     {
       public:
-        IdentifierType(const char *name)
-          : _name(name) {}
+        IdentifierType(int line_num, const char *name)
+          : Type(line_num), _name(name) {}
 
         VisitorData *accept(Visitor *visitor);
 
