@@ -55,11 +55,33 @@ namespace kompis
       return NULL;
     }
 
+    VisitorData *PrettyPrinter::visit(BinaryBooleanExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << x->op_str() << "\n";
+      x->_left->accept(this);
+      x->_right->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(BinaryIntBooleanExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << x->op_str() << "\n";
+      x->_left->accept(this);
+      x->_right->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
     VisitorData *PrettyPrinter::visit(BinaryIntExpression *x)
     {
       indent();
       ++_indentation;
-      _out << binop::str(x->_op) << "\n";
+      _out << x->op_str() << "\n";
       x->_lhs->accept(this);
       x->_rhs->accept(this);
       --_indentation;
@@ -125,17 +147,6 @@ namespace kompis
       _out << "class_declaration_list\n";
       for(std::list<ClassDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(ConjunctionExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "&&\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
       --_indentation;
       return NULL;
     }
@@ -217,17 +228,6 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(LessThanExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "<\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
     VisitorData *PrettyPrinter::visit(MainClassDeclaration *x)
     {
       indent();
@@ -260,16 +260,6 @@ namespace kompis
       _out << "method_declaration_list\n";
       for(std::list<MethodDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(NegationExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "!\n";
-      x->_expr->accept(this);
       --_indentation;
       return NULL;
     }
@@ -353,6 +343,16 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "this\n";
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(UnaryBooleanExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << x->op_str() << "\n";
+      x->_expr->accept(this);
       --_indentation;
       return NULL;
     }

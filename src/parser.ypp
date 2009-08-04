@@ -206,15 +206,15 @@ expression_rest
 
 expression
   : expression '+' expression
-    { $$ = new BinaryIntExpression(binop::ADD, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(BinaryIntExpression::ADD, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '-' expression
-    { $$ = new BinaryIntExpression(binop::SUB, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(BinaryIntExpression::SUB, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '*' expression
-    { $$ = new BinaryIntExpression(binop::MUL, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(BinaryIntExpression::MUL, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '<' expression
-    { $$ = new LessThanExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntBooleanExpression(BinaryIntBooleanExpression::LT, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression AND expression
-    { $$ = new ConjunctionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryBooleanExpression(BinaryBooleanExpression::BOOLEAN_AND, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '[' expression ']'
     { $$ = new ArraySubscriptExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '.' LENGTH
@@ -236,7 +236,7 @@ expression
   | NEW IDENTIFIER '(' ')'
     { $$ = new NewObjectExpression(new Identifier($2, line_num), line_num); }
   | '!' expression
-    { $$ = new NegationExpression(static_cast<Expression *>($2), line_num); }
+    { $$ = new UnaryBooleanExpression(UnaryBooleanExpression::BOOLEAN_NEG, static_cast<Expression *>($2), line_num); }
   | '(' expression ')'
     { $$ = $2; }
   ;

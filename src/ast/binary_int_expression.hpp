@@ -1,33 +1,27 @@
 #ifndef KOMPIS_AST_BINARY_INT_EXPRESSION_HPP
 #define KOMPIS_AST_BINARY_INT_EXPRESSION_HPP
 
-#include <string>
 #include "ast/expression.hpp"
 
 namespace kompis
 {
   namespace ast
   {
-    namespace binop
-    {
-      enum BinaryOperation
-      {
-        ADD,
-        SUB,
-        MUL,
-        DIV,
-      };
-
-      const char *str(BinaryOperation b);
-    }
-
     class Visitor;
     class VisitorData;
 
     class BinaryIntExpression : public Expression
     {
       public:
-        BinaryIntExpression(binop::BinaryOperation op,
+        enum Operation
+        {
+          ADD,
+          SUB,
+          MUL,
+          DIV,
+        };
+
+        BinaryIntExpression(Operation op,
                             Expression *lhs,
                             Expression *rhs,
                             int line_num = 0)
@@ -37,8 +31,9 @@ namespace kompis
             _rhs(rhs) {}
 
         VisitorData *accept(Visitor *visitor);
+        const char *op_str();
 
-        binop::BinaryOperation _op;
+        Operation _op;
         Expression *_lhs, *_rhs;
     };
   }

@@ -69,6 +69,48 @@ namespace kompis
       return NULL;
     }
 
+    TypeData *TypeChecker::visit(BinaryBooleanExpression *x)
+    {
+      type::Type t = type::T_BOOLEAN;
+
+      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
+      if(l->_type != type::T_BOOLEAN)
+      {
+        error("", x->_line_num, "type", "lhs of '&&' not boolean");
+        t = type::T_ERROR;
+      }
+
+      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      if(r->_type != type::T_BOOLEAN)
+      {
+        error("", x->_line_num, "type", "rhs of '&&' not boolean");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
+    }
+
+    TypeData *TypeChecker::visit(BinaryIntBooleanExpression *x)
+    {
+      type::Type t = type::T_BOOLEAN;
+
+      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
+      if(l->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "lhs of '<' not int");
+        t = type::T_ERROR;
+      }
+
+      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      if(r->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "rhs of '<' not int");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
+    }
+
     TypeData *TypeChecker::visit(BinaryIntExpression *x)
     {
       // TODO: use binop::str
@@ -140,27 +182,6 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(ConjunctionExpression *x)
-    {
-      type::Type t = type::T_BOOLEAN;
-
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
-      if(l->_type != type::T_BOOLEAN)
-      {
-        error("", x->_line_num, "type", "lhs of '&&' not boolean");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
-      if(r->_type != type::T_BOOLEAN)
-      {
-        error("", x->_line_num, "type", "rhs of '&&' not boolean");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
     TypeData *TypeChecker::visit(ExpressionList *x)
     {
       for(std::list<Expression *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
@@ -210,27 +231,6 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(LessThanExpression *x)
-    {
-      type::Type t = type::T_BOOLEAN;
-
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
-      if(l->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "lhs of '<' not int");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
-      if(r->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "rhs of '<' not int");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
     TypeData *TypeChecker::visit(MainClassDeclaration *x)
     {
       x->_statement->accept(this);
@@ -253,20 +253,6 @@ namespace kompis
       for(std::list<MethodDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
-    }
-
-    TypeData *TypeChecker::visit(NegationExpression *x)
-    {
-      type::Type t = type::T_BOOLEAN;
-
-      TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
-      if(r->_type != type::T_BOOLEAN)
-      {
-        error("", x->_line_num, "type", "rhs of '!' not boolean");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(NewIntegerArrayExpression *x)
@@ -339,6 +325,20 @@ namespace kompis
     {
       // TODO: correct behavior?
       return new TypeData(type::T_OBJECT);
+    }
+
+    TypeData *TypeChecker::visit(UnaryBooleanExpression *x)
+    {
+      type::Type t = type::T_BOOLEAN;
+
+      TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
+      if(r->_type != type::T_BOOLEAN)
+      {
+        error("", x->_line_num, "type", "rhs of '!' not boolean");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(VariableDeclaration *x)

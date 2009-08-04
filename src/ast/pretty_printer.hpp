@@ -18,6 +18,8 @@ namespace kompis
         VisitorData *visit(ArrayLengthExpression *);
         VisitorData *visit(ArraySubscriptExpression *);
         VisitorData *visit(AssignmentStatement *);
+        VisitorData *visit(BinaryBooleanExpression *);
+        VisitorData *visit(BinaryIntBooleanExpression *);
         VisitorData *visit(BinaryIntExpression *);
         VisitorData *visit(BlockStatement *);
         VisitorData *visit(BooleanLiteral *);
@@ -25,7 +27,6 @@ namespace kompis
         VisitorData *visit(CallExpression *);
         VisitorData *visit(ClassDeclaration *);
         VisitorData *visit(ClassDeclarationList *);
-        VisitorData *visit(ConjunctionExpression *);
         VisitorData *visit(ExpressionList *);
         VisitorData *visit(Identifier *);
         VisitorData *visit(IdentifierExpression *);
@@ -34,11 +35,9 @@ namespace kompis
         VisitorData *visit(IntegerArrayType *);
         VisitorData *visit(IntegerLiteral *);
         VisitorData *visit(IntegerType *);
-        VisitorData *visit(LessThanExpression *);
         VisitorData *visit(MainClassDeclaration *);
         VisitorData *visit(MethodDeclaration *);
         VisitorData *visit(MethodDeclarationList *);
-        VisitorData *visit(NegationExpression *);
         VisitorData *visit(NewIntegerArrayExpression *);
         VisitorData *visit(NewObjectExpression *);
         VisitorData *visit(ParameterDeclaration *);
@@ -47,6 +46,7 @@ namespace kompis
         VisitorData *visit(ProgramDeclaration *);
         VisitorData *visit(StatementList *);
         VisitorData *visit(ThisExpression *);
+        VisitorData *visit(UnaryBooleanExpression *);
         VisitorData *visit(VariableDeclaration *);
         VisitorData *visit(VariableDeclarationList *);
         VisitorData *visit(WhileDoStatement *);

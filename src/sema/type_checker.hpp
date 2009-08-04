@@ -42,6 +42,8 @@ namespace kompis
         TypeData *visit(ArrayLengthExpression *);
         TypeData *visit(ArraySubscriptExpression *);
         TypeData *visit(AssignmentStatement *);
+        TypeData *visit(BinaryBooleanExpression *);
+        TypeData *visit(BinaryIntBooleanExpression *);
         TypeData *visit(BinaryIntExpression *);
         TypeData *visit(BlockStatement *);
         TypeData *visit(BooleanLiteral *);
@@ -49,7 +51,6 @@ namespace kompis
         TypeData *visit(CallExpression *);
         TypeData *visit(ClassDeclaration *);
         TypeData *visit(ClassDeclarationList *);
-        TypeData *visit(ConjunctionExpression *);
         TypeData *visit(ExpressionList *);
         TypeData *visit(Identifier *);
         TypeData *visit(IdentifierExpression *);
@@ -58,11 +59,9 @@ namespace kompis
         TypeData *visit(IntegerArrayType *);
         TypeData *visit(IntegerLiteral *);
         TypeData *visit(IntegerType *);
-        TypeData *visit(LessThanExpression *);
         TypeData *visit(MainClassDeclaration *);
         TypeData *visit(MethodDeclaration *);
         TypeData *visit(MethodDeclarationList *);
-        TypeData *visit(NegationExpression *);
         TypeData *visit(NewIntegerArrayExpression *);
         TypeData *visit(NewObjectExpression *);
         TypeData *visit(ParameterDeclaration *);
@@ -71,6 +70,7 @@ namespace kompis
         TypeData *visit(ProgramDeclaration *);
         TypeData *visit(StatementList *);
         TypeData *visit(ThisExpression *);
+        TypeData *visit(UnaryBooleanExpression *);
         TypeData *visit(VariableDeclaration *);
         TypeData *visit(VariableDeclarationList *);
         TypeData *visit(WhileDoStatement *);

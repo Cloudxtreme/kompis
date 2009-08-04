@@ -4,27 +4,24 @@ namespace kompis
 {
   namespace ast
   {
-    namespace binop
-    {
-      const char *str(BinaryOperation b)
-      {
-        switch(b)
-        {
-          case ADD:
-            return "+";
-          case SUB:
-            return "-";
-          case MUL:
-            return "*";
-          case DIV:
-            return "/";
-        }
-      }
-    }
-
     VisitorData *BinaryIntExpression::accept(Visitor *visitor)
     {
       return visitor->visit(this);
+    }
+
+    const char *BinaryIntExpression::op_str()
+    {
+      switch(_op)
+      {
+        case ADD:
+          return "+";
+        case SUB:
+          return "-";
+        case MUL:
+          return "*";
+        case DIV:
+          return "/";
+      }
     }
   }
 }

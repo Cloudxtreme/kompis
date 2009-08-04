@@ -112,7 +112,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       BooleanLiteral b1(true);
       BooleanLiteral b2(false);
-      ConjunctionExpression c(&b1, &b2);
+      BinaryBooleanExpression c(&b1, &b2);
       _pp.visit(&c);
       TS_ASSERT_EQUALS(_out.str(), "&&\n\ttrue\n\tfalse\n");
     }
@@ -170,7 +170,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
     {
       IntegerLiteral i1(1);
       IntegerLiteral i2(2);
-      LessThanExpression l(&i1, &i2);
+      BinaryIntBooleanExpression l(&i1, &i2);
       _pp.visit(&l);
       TS_ASSERT_EQUALS(_out.str(), "<\n\t1\n\t2\n");
     }
@@ -211,7 +211,7 @@ class AbstractSyntaxTreePrettyPrinterTestSuite : public CxxTest::TestSuite
     void test_negation_expression()
     {
       BooleanLiteral b(true);
-      NegationExpression n(&b);
+      UnaryBooleanExpression n(&b);
       _pp.visit(&n);
       TS_ASSERT_EQUALS(_out.str(), "!\n\ttrue\n");
     }
