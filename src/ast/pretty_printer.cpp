@@ -11,39 +11,6 @@ namespace kompis
         _out << '\t';
     }
 
-    VisitorData *PrettyPrinter::visit(IntArrayAssignmentStatement *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "[]=\n";
-      x->_id->accept(this);
-      x->_index->accept(this);
-      x->_rhs->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(IntArrayLengthExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "length\n";
-      x->_array->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(IntArraySubscriptExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "[]\n";
-      x->_array->accept(this);
-      x->_index->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
     VisitorData *PrettyPrinter::visit(AssignmentStatement *x)
     {
       indent();
@@ -56,17 +23,6 @@ namespace kompis
     }
 
     VisitorData *PrettyPrinter::visit(BinaryBooleanExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << x->op_str() << "\n";
-      x->_lhs->accept(this);
-      x->_rhs->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(ComparisonExpression *x)
     {
       indent();
       ++_indentation;
@@ -151,6 +107,17 @@ namespace kompis
       return NULL;
     }
 
+    VisitorData *PrettyPrinter::visit(ComparisonExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << x->op_str() << "\n";
+      x->_lhs->accept(this);
+      x->_rhs->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
     VisitorData *PrettyPrinter::visit(ExpressionList *x)
     {
       indent();
@@ -197,6 +164,39 @@ namespace kompis
       x->_condition->accept(this);
       x->_then_statement->accept(this);
       x->_else_statement->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(IntArrayAssignmentStatement *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "[]=\n";
+      x->_id->accept(this);
+      x->_index->accept(this);
+      x->_rhs->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(IntArrayLengthExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "length\n";
+      x->_array->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(IntArraySubscriptExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << "[]\n";
+      x->_array->accept(this);
+      x->_index->accept(this);
       --_indentation;
       return NULL;
     }

@@ -8,58 +8,6 @@ namespace kompis
 
   namespace sema
   {
-    TypeData *TypeChecker::visit(IntArrayAssignmentStatement *x)
-    {
-      TypeData *a = static_cast<TypeData *>(x->_id->accept(this));
-      if(a->_type != type::T_INT_ARRAY)
-        error("", x->_line_num, "type", "lhs of '[]=' not int array");
-
-      TypeData *i = static_cast<TypeData *>(x->_index->accept(this));
-      if(i->_type != type::T_INT)
-        error("", x->_line_num, "type", "array index not int");
-
-      TypeData *v = static_cast<TypeData *>(x->_rhs->accept(this));
-      if(v->_type != type::T_INT)
-        error("", x->_line_num, "type", "rhs of '[]=' not int");
-
-      return NULL;
-    }
-
-    TypeData *TypeChecker::visit(IntArrayLengthExpression *x)
-    {
-      type::Type t = type::T_INT;
-
-      TypeData *a = static_cast<TypeData *>(x->_array->accept(this));
-      if(a->_type != type::T_INT_ARRAY)
-      {
-        error("", x->_line_num, "type", "self of 'length' not int array"); // TODO: better error message?
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
-    TypeData *TypeChecker::visit(IntArraySubscriptExpression *x)
-    {
-      type::Type t = type::T_INT;
-
-      TypeData *a = static_cast<TypeData *>(x->_array->accept(this));
-      if(a->_type != type::T_INT_ARRAY)
-      {
-        error("", x->_line_num, "type", "self of 'length' not int array"); // TODO: better error message?
-        t = type::T_ERROR;
-      }
-
-      TypeData *i = static_cast<TypeData *>(x->_index->accept(this));
-      if(i->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "array index not int");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
     TypeData *TypeChecker::visit(AssignmentStatement *x)
     {
       TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
@@ -84,27 +32,6 @@ namespace kompis
       if(r->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "rhs of '&&' not boolean");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
-    TypeData *TypeChecker::visit(ComparisonExpression *x)
-    {
-      type::Type t = type::T_BOOLEAN;
-
-      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
-      if(l->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "lhs of '<' not int");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
-      if(r->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "rhs of '<' not int");
         t = type::T_ERROR;
       }
 
@@ -182,6 +109,27 @@ namespace kompis
       return NULL;
     }
 
+    TypeData *TypeChecker::visit(ComparisonExpression *x)
+    {
+      type::Type t = type::T_BOOLEAN;
+
+      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
+      if(l->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "lhs of '<' not int");
+        t = type::T_ERROR;
+      }
+
+      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
+      if(r->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "rhs of '<' not int");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
+    }
+
     TypeData *TypeChecker::visit(ExpressionList *x)
     {
       for(std::list<Expression *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
@@ -214,6 +162,58 @@ namespace kompis
       x->_else_statement->accept(this);
 
       return NULL;
+    }
+
+    TypeData *TypeChecker::visit(IntArrayAssignmentStatement *x)
+    {
+      TypeData *a = static_cast<TypeData *>(x->_id->accept(this));
+      if(a->_type != type::T_INT_ARRAY)
+        error("", x->_line_num, "type", "lhs of '[]=' not int array");
+
+      TypeData *i = static_cast<TypeData *>(x->_index->accept(this));
+      if(i->_type != type::T_INT)
+        error("", x->_line_num, "type", "array index not int");
+
+      TypeData *v = static_cast<TypeData *>(x->_rhs->accept(this));
+      if(v->_type != type::T_INT)
+        error("", x->_line_num, "type", "rhs of '[]=' not int");
+
+      return NULL;
+    }
+
+    TypeData *TypeChecker::visit(IntArrayLengthExpression *x)
+    {
+      type::Type t = type::T_INT;
+
+      TypeData *a = static_cast<TypeData *>(x->_array->accept(this));
+      if(a->_type != type::T_INT_ARRAY)
+      {
+        error("", x->_line_num, "type", "self of 'length' not int array"); // TODO: better error message?
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
+    }
+
+    TypeData *TypeChecker::visit(IntArraySubscriptExpression *x)
+    {
+      type::Type t = type::T_INT;
+
+      TypeData *a = static_cast<TypeData *>(x->_array->accept(this));
+      if(a->_type != type::T_INT_ARRAY)
+      {
+        error("", x->_line_num, "type", "self of 'length' not int array"); // TODO: better error message?
+        t = type::T_ERROR;
+      }
+
+      TypeData *i = static_cast<TypeData *>(x->_index->accept(this));
+      if(i->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "array index not int");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(IntArrayType *x)
