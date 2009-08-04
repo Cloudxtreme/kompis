@@ -11,7 +11,7 @@ namespace kompis
     class Node
     {
       public:
-        Node(int line_num)
+        Node(int line_num = 0)
           : _line_num(line_num) {}
 
         virtual ~Node() {}

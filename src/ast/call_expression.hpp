@@ -16,10 +16,10 @@ namespace kompis
     class CallExpression : public Node
     {
       public:
-        CallExpression(int line_num,
-                       Expression *self,
+        CallExpression(Expression *self,
                        Identifier *method_name,
-                       ExpressionList *args)
+                       ExpressionList *args,
+                       int line_num = 0)
           : Node(line_num),
             _self(self),
             _method_name(method_name),

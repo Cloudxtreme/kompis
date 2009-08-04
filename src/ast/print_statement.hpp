@@ -14,8 +14,10 @@ namespace kompis
     class PrintStatement : public Statement
     {
       public:
-        PrintStatement(int line_num, Expression *expr)
-          : Statement(line_num), _expr(expr) {}
+        PrintStatement(Expression *expr,
+                       int line_num = 0)
+          : Statement(line_num),
+            _expr(expr) {}
 
         VisitorData *accept(Visitor *visitor);
 

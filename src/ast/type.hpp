@@ -13,7 +13,7 @@ namespace kompis
     class Type : public Node
     {
       public:
-        Type(int line_num)
+        Type(int line_num = 0)
           : Node(line_num) {}
 
         virtual ~Type() {}

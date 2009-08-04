@@ -16,10 +16,10 @@ namespace kompis
     class ClassDeclaration : public Node
     {
       public:
-        ClassDeclaration(int line_num,
-                         Identifier *name,
+        ClassDeclaration(Identifier *name,
                          VariableDeclarationList *vars,
-                         MethodDeclarationList *methods)
+                         MethodDeclarationList *methods,
+                         int line_num = 0)
           : Node(line_num),
             _name(name),
             _vars(vars),

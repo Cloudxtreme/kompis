@@ -15,8 +15,12 @@ namespace kompis
     class VariableDeclaration : public Node
     {
       public:
-        VariableDeclaration(int line_num, Type *type, Identifier *name)
-          : Node(line_num), _type(type), _name(name) {}
+        VariableDeclaration(Type *type,
+                            Identifier *name,
+                            int line_num = 0)
+          : Node(line_num),
+            _type(type),
+            _name(name) {}
 
         VisitorData *accept(Visitor *visitor);
 

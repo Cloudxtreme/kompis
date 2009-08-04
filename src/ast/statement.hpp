@@ -13,7 +13,7 @@ namespace kompis
     class Statement : public Node
     {
       public:
-        Statement(int line_num)
+        Statement(int line_num = 0)
           : Node(line_num) {}
 
         virtual ~Statement() {}

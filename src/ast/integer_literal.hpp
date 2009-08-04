@@ -13,8 +13,10 @@ namespace kompis
     class IntegerLiteral : public Expression
     {
       public:
-        IntegerLiteral(int line_num, int value)
-          : Expression(line_num), _value(value) {}
+        IntegerLiteral(int value,
+                       int line_num = 0)
+          : Expression(line_num),
+            _value(value) {}
 
         VisitorData *accept(Visitor *visitor);
 

@@ -13,9 +13,9 @@ namespace kompis
     class SubtractionExpression : public Expression
     {
       public:
-        SubtractionExpression(int line_num,
-                              Expression *left,
-                              Expression *right)
+        SubtractionExpression(Expression *left,
+                              Expression *right,
+                              int line_num = 0)
           : Expression(line_num),
             _left(left),
             _right(right) {}

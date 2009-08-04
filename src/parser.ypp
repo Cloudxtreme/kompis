@@ -65,12 +65,12 @@ StatementList *statements;
 
 program
   : main_class class_declarations
-    { program_declaration = new ProgramDeclaration(line_num, (MainClassDeclaration *)$1, $2); }
+    { program_declaration = new ProgramDeclaration((MainClassDeclaration *)$1, $2, line_num); }
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration(line_num, (Statement *)$15); }
+    { $$ = new MainClassDeclaration((Statement *)$15, line_num); }
   ;
 
 // Of the following two cases, the empty case will be executed first (and only
@@ -86,7 +86,7 @@ class_declarations
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
-    { $$ = new ClassDeclaration(line_num, new Identifier(line_num, $2), $4, $5); }
+    { $$ = new ClassDeclaration(new Identifier($2, line_num), $4, $5, line_num); }
   ;
 
 // See class_declarations for explanation.
@@ -99,7 +99,7 @@ variable_declarations
 
 variable_declaration
   : type IDENTIFIER ';'
-    { $$ = new VariableDeclaration(line_num, (Type *)$1, new Identifier(line_num, $2)); }
+    { $$ = new VariableDeclaration((Type *)$1, new Identifier($2, line_num), line_num); }
   ;
 
 // See class_declarations for explanation.
@@ -112,7 +112,7 @@ method_declarations
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration(line_num, (Type *)$2, new Identifier(line_num, $3), $5, $8, $9, (Expression *)$11); }
+    { $$ = new MethodDeclaration((Type *)$2, new Identifier($3, line_num), $5, $8, $9, (Expression *)$11, line_num); }
   ;
 
 // This is a slightly more complicated type of list.
@@ -123,7 +123,7 @@ parameter_list
   | type IDENTIFIER parameter_rests
     // This clause gets executed once, last, for a non-empty parameter list.
     {
-      parameter_declarations->_list.push_front(new ParameterDeclaration(line_num, (Type *)$1, new Identifier(line_num, $2)));
+      parameter_declarations->_list.push_front(new ParameterDeclaration((Type *)$1, new Identifier($2, line_num), line_num));
       $$ = parameter_declarations;
     }
   ;
@@ -140,7 +140,7 @@ parameter_rests
 parameter_rest
   : ',' type IDENTIFIER
     // This clause gets executed once for each element of a non-empty parameter list, before the second parameter_rests clause.
-    { $$ = new ParameterDeclaration(line_num, (Type *)$2, new Identifier(line_num, $3)); }
+    { $$ = new ParameterDeclaration((Type *)$2, new Identifier($3, line_num), line_num); }
   ;
 
 type
@@ -149,7 +149,7 @@ type
   | INT
     { $$ = new IntegerType(line_num); }
   | IDENTIFIER
-    { $$ = new IdentifierType(line_num, $1); }
+    { $$ = new IdentifierType($1, line_num); }
   ;
 
 // See class_declarations for explanation.
@@ -167,13 +167,13 @@ statement
   : '{' statements '}'
     { $$ = $2 }
   | IF '(' expression ')' statement ELSE statement
-    { $$ = new IfThenElseStatement(line_num, (Expression *)$3, (Statement *)$5, (Statement *)$7); }
+    { $$ = new IfThenElseStatement((Expression *)$3, (Statement *)$5, (Statement *)$7, line_num); }
   | WHILE '(' expression ')' statement
-    { $$ = new WhileDoStatement(line_num, (Expression *)$3, (Statement *)$5); }
+    { $$ = new WhileDoStatement((Expression *)$3, (Statement *)$5, line_num); }
   | PRINT '(' expression ')' ';'
-    { $$ = new PrintStatement(line_num, (Expression *)$3); }
+    { $$ = new PrintStatement((Expression *)$3, line_num); }
   | IDENTIFIER '=' expression ';'
-    { $$ = new AssignmentStatement(line_num, new Identifier(line_num, $1), (Expression *)$3); }
+    { $$ = new AssignmentStatement(new Identifier($1, line_num), (Expression *)$3, line_num); }
   ;
 
 // See parameter_list for explanation.
@@ -201,31 +201,31 @@ expression_rest
 
 expression
   : expression '+' expression
-    { $$ = new AdditionExpression(line_num, (Expression *)$1, (Expression *)$3); }
+    { $$ = new AdditionExpression((Expression *)$1, (Expression *)$3, line_num); }
   | expression '-' expression
-    { $$ = new SubtractionExpression(line_num, (Expression *)$1, (Expression *)$3); }
+    { $$ = new SubtractionExpression((Expression *)$1, (Expression *)$3, line_num); }
   | expression '*' expression
-    { $$ = new MultiplicationExpression(line_num, (Expression *)$1, (Expression *)$3); }
+    { $$ = new MultiplicationExpression((Expression *)$1, (Expression *)$3, line_num); }
   | expression '<' expression
-    { $$ = new LessThanExpression(line_num, (Expression *)$1, (Expression *)$3); }
+    { $$ = new LessThanExpression((Expression *)$1, (Expression *)$3, line_num); }
   | expression AND expression
-    { $$ = new ConjunctionExpression(line_num, (Expression *)$1, (Expression *)$3); }
+    { $$ = new ConjunctionExpression((Expression *)$1, (Expression *)$3, line_num); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression(line_num, (Expression *)$1, new Identifier(line_num, $3), $5); }
+    { $$ = new CallExpression((Expression *)$1, new Identifier($3, line_num), $5, line_num); }
   | INTEGER_LITERAL
-    { $$ = new IntegerLiteral(line_num, $1); }
+    { $$ = new IntegerLiteral($1, line_num); }
   | TRUE
-    { $$ = new BooleanLiteral(line_num, true); }
+    { $$ = new BooleanLiteral(true, line_num); }
   | FALSE
-    { $$ = new BooleanLiteral(line_num, false); }
+    { $$ = new BooleanLiteral(false, line_num); }
   | IDENTIFIER
-    { $$ = new IdentifierExpression(line_num, $1); }
+    { $$ = new IdentifierExpression($1, line_num); }
   | THIS
     { $$ = new ThisExpression(line_num); }
   | NEW IDENTIFIER '(' ')'
-    { $$ = new NewObjectExpression(line_num, new Identifier(line_num, $2)); }
+    { $$ = new NewObjectExpression(new Identifier($2, line_num), line_num); }
   | '!' expression
-    { $$ = new NegationExpression(line_num, (Expression *)$2); }
+    { $$ = new NegationExpression((Expression *)$2, line_num); }
   | '(' expression ')'
     { $$ = $2; }
   ;

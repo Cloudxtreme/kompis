@@ -15,9 +15,9 @@ namespace kompis
     class ProgramDeclaration : public Node
     {
       public:
-        ProgramDeclaration(int line_num,
-                           MainClassDeclaration *main,
-                           ClassDeclarationList *classes)
+        ProgramDeclaration(MainClassDeclaration *main,
+                           ClassDeclarationList *classes,
+                           int line_num = 0)
           : Node(line_num),
             _main(main),
             _classes(classes) {}

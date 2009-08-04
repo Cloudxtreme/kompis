@@ -14,7 +14,7 @@ namespace kompis
     class IntegerType : public Type
     {
       public:
-        IntegerType(int line_num)
+        IntegerType(int line_num = 0)
           : Type(line_num) {}
 
         VisitorData *accept(Visitor *visitor);

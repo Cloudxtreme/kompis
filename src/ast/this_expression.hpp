@@ -14,7 +14,7 @@ namespace kompis
     class ThisExpression : public Expression
     {
       public:
-        ThisExpression(int line_num)
+        ThisExpression(int line_num = 0)
           : Expression(line_num) {}
 
         VisitorData *accept(Visitor *visitor);

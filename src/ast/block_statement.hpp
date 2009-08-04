@@ -14,8 +14,10 @@ namespace kompis
     class BlockStatement : public Statement
     {
       public:
-        BlockStatement(int line_num, StatementList *statements)
-          : Statement(line_num), _statements(statements) {}
+        BlockStatement(StatementList *statements,
+                       int line_num = 0)
+          : Statement(line_num),
+            _statements(statements) {}
 
         VisitorData *accept(Visitor *visitor);
 

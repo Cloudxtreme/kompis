@@ -14,8 +14,10 @@ namespace kompis
     class IdentifierExpression : public Expression
     {
       public:
-        IdentifierExpression(int line_num, const char *name)
-          : Expression(line_num), _name(name) {}
+        IdentifierExpression(const char *name,
+                             int line_num = 0)
+          : Expression(line_num),
+            _name(name) {}
 
         VisitorData *accept(Visitor *visitor);
 

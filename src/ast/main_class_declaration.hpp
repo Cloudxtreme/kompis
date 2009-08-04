@@ -15,8 +15,10 @@ namespace kompis
     class MainClassDeclaration : public Node
     {
       public:
-        MainClassDeclaration(int line_num, Statement *statement)
-          : Node(line_num), _statement(statement) {}
+        MainClassDeclaration(Statement *statement,
+                             int line_num = 0)
+          : Node(line_num),
+            _statement(statement) {}
 
         VisitorData *accept(Visitor *);
 
