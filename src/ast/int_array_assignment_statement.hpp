@@ -12,10 +12,10 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class ArrayAssignmentStatement : public Statement
+    class IntArrayAssignmentStatement : public Statement
     {
       public:
-        ArrayAssignmentStatement(Identifier *id,
+        IntArrayAssignmentStatement(Identifier *id,
                                  Expression *index,
                                  Expression *value,
                                  int line_num = 0)
@@ -26,7 +26,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         Identifier *_id;
         Expression *_index;
         Expression *_value;

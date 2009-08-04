@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *ArraySubscriptExpression::accept(Visitor *visitor)
+    VisitorData *IntArraySubscriptExpression::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }

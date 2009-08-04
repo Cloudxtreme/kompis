@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *IntegerArrayType::accept(Visitor *visitor)
+    VisitorData *IntLiteral::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }

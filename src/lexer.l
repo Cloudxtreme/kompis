@@ -44,7 +44,7 @@ int line_num = 1;
 
 [A-Za-z_][A-Za-z0-9_]*  { yylval.text = strdup(yytext); return IDENTIFIER; /* TODO: memory leak */ }
 
-[0-9]+                  { yylval.value = strtol(yytext, NULL, 10); return INTEGER_LITERAL; }
+[0-9]+                  { yylval.value = strtol(yytext, NULL, 10); return INT_LITERAL; }
 
 [-+*<!=.,;(){}\[\]]     { return yytext[0]; }
 "&&"                    { return AND; }

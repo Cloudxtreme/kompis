@@ -38,9 +38,6 @@ namespace kompis
       public:
         TypeChecker() {}
 
-        TypeData *visit(ArrayAssignmentStatement *);
-        TypeData *visit(ArrayLengthExpression *);
-        TypeData *visit(ArraySubscriptExpression *);
         TypeData *visit(AssignmentStatement *);
         TypeData *visit(BinaryBooleanExpression *);
         TypeData *visit(BinaryIntBooleanExpression *);
@@ -55,14 +52,17 @@ namespace kompis
         TypeData *visit(Identifier *);
         TypeData *visit(IdentifierExpression *);
         TypeData *visit(IdentifierType *);
-        TypeData *visit(IfThenElseStatement *);
-        TypeData *visit(IntegerArrayType *);
-        TypeData *visit(IntegerLiteral *);
-        TypeData *visit(IntegerType *);
+        TypeData *visit(IfElseStatement *);
+        TypeData *visit(IntArrayAssignmentStatement *);
+        TypeData *visit(IntArrayLengthExpression *);
+        TypeData *visit(IntArraySubscriptExpression *);
+        TypeData *visit(IntArrayType *);
+        TypeData *visit(IntLiteral *);
+        TypeData *visit(IntType *);
         TypeData *visit(MainClassDeclaration *);
         TypeData *visit(MethodDeclaration *);
         TypeData *visit(MethodDeclarationList *);
-        TypeData *visit(NewIntegerArrayExpression *);
+        TypeData *visit(NewIntArrayExpression *);
         TypeData *visit(NewObjectExpression *);
         TypeData *visit(ParameterDeclaration *);
         TypeData *visit(ParameterDeclarationList *);
@@ -73,7 +73,7 @@ namespace kompis
         TypeData *visit(UnaryBooleanExpression *);
         TypeData *visit(VariableDeclaration *);
         TypeData *visit(VariableDeclarationList *);
-        TypeData *visit(WhileDoStatement *);
+        TypeData *visit(WhileStatement *);
     };
   }
 }

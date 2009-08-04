@@ -8,7 +8,7 @@ namespace kompis
 
   namespace sema
   {
-    TypeData *TypeChecker::visit(ArrayAssignmentStatement *x)
+    TypeData *TypeChecker::visit(IntArrayAssignmentStatement *x)
     {
       TypeData *a = static_cast<TypeData *>(x->_id->accept(this));
       if(a->_type != type::T_INT_ARRAY)
@@ -25,7 +25,7 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(ArrayLengthExpression *x)
+    TypeData *TypeChecker::visit(IntArrayLengthExpression *x)
     {
       type::Type t = type::T_INT;
 
@@ -39,7 +39,7 @@ namespace kompis
       return new TypeData(t);
     }
 
-    TypeData *TypeChecker::visit(ArraySubscriptExpression *x)
+    TypeData *TypeChecker::visit(IntArraySubscriptExpression *x)
     {
       type::Type t = type::T_INT;
 
@@ -204,7 +204,7 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(IfThenElseStatement *x)
+    TypeData *TypeChecker::visit(IfElseStatement *x)
     {
       TypeData *p = static_cast<TypeData *>(x->_pred->accept(this));
       if(p->_type != type::T_BOOLEAN)
@@ -216,17 +216,17 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(IntegerArrayType *x)
+    TypeData *TypeChecker::visit(IntArrayType *x)
     {
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(IntegerLiteral *x)
+    TypeData *TypeChecker::visit(IntLiteral *x)
     {
       return new TypeData(type::T_INT);
     }
 
-    TypeData *TypeChecker::visit(IntegerType *x)
+    TypeData *TypeChecker::visit(IntType *x)
     {
       return NULL;
     }
@@ -255,7 +255,7 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(NewIntegerArrayExpression *x)
+    TypeData *TypeChecker::visit(NewIntArrayExpression *x)
     {
       type::Type t = type::T_INT_ARRAY;
 
@@ -355,7 +355,7 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(WhileDoStatement *x)
+    TypeData *TypeChecker::visit(WhileStatement *x)
     {
       TypeData *p = static_cast<TypeData *>(x->_pred->accept(this));
       if(p->_type != type::T_BOOLEAN)

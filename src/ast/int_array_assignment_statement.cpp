@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *IfThenElseStatement::accept(Visitor *visitor)
+    VisitorData *IntArrayAssignmentStatement::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }

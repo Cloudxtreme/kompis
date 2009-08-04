@@ -27,7 +27,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *);
 
-      //private:
         Identifier *_name;
         VariableDeclarationList *_vars;
         MethodDeclarationList *_methods;

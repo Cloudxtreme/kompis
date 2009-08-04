@@ -14,9 +14,6 @@ namespace kompis
         PrettyPrinter(std::ostream &out)
           : _out(out), _indentation(0) {}
 
-        VisitorData *visit(ArrayAssignmentStatement *);
-        VisitorData *visit(ArrayLengthExpression *);
-        VisitorData *visit(ArraySubscriptExpression *);
         VisitorData *visit(AssignmentStatement *);
         VisitorData *visit(BinaryBooleanExpression *);
         VisitorData *visit(BinaryIntBooleanExpression *);
@@ -31,14 +28,17 @@ namespace kompis
         VisitorData *visit(Identifier *);
         VisitorData *visit(IdentifierExpression *);
         VisitorData *visit(IdentifierType *);
-        VisitorData *visit(IfThenElseStatement *);
-        VisitorData *visit(IntegerArrayType *);
-        VisitorData *visit(IntegerLiteral *);
-        VisitorData *visit(IntegerType *);
+        VisitorData *visit(IfElseStatement *);
+        VisitorData *visit(IntArrayAssignmentStatement *);
+        VisitorData *visit(IntArrayLengthExpression *);
+        VisitorData *visit(IntArraySubscriptExpression *);
+        VisitorData *visit(IntArrayType *);
+        VisitorData *visit(IntLiteral *);
+        VisitorData *visit(IntType *);
         VisitorData *visit(MainClassDeclaration *);
         VisitorData *visit(MethodDeclaration *);
         VisitorData *visit(MethodDeclarationList *);
-        VisitorData *visit(NewIntegerArrayExpression *);
+        VisitorData *visit(NewIntArrayExpression *);
         VisitorData *visit(NewObjectExpression *);
         VisitorData *visit(ParameterDeclaration *);
         VisitorData *visit(ParameterDeclarationList *);
@@ -49,7 +49,7 @@ namespace kompis
         VisitorData *visit(UnaryBooleanExpression *);
         VisitorData *visit(VariableDeclaration *);
         VisitorData *visit(VariableDeclarationList *);
-        VisitorData *visit(WhileDoStatement *);
+        VisitorData *visit(WhileStatement *);
 
       private:
         void indent();

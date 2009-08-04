@@ -27,7 +27,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         Expression *_self;
         Identifier *_method_name;
         ExpressionList *_args;

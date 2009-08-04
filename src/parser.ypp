@@ -27,7 +27,7 @@ ProgramDeclaration *program_declaration;
 StatementList *statements;
 %}
 
-%token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INTEGER_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE LENGTH
+%token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INT_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE LENGTH
 %left ','
 %right '='
 %left AND
@@ -52,7 +52,7 @@ StatementList *statements;
   VariableDeclarationList *variable_declarations;
 }
 
-%type <value> INTEGER_LITERAL
+%type <value> INT_LITERAL
 %type <text> IDENTIFIER
 %type <node> program main_class class_declaration variable_declaration method_declaration parameter_rest type statement expression_rest expression
 %type <class_declarations> class_declarations
@@ -146,11 +146,11 @@ parameter_rest
 
 type
   : INT '[' ']'
-    { $$ = new IntegerArrayType(line_num); }
+    { $$ = new IntArrayType(line_num); }
   | BOOLEAN
     { $$ = new BooleanType(line_num); }
   | INT
-    { $$ = new IntegerType(line_num); }
+    { $$ = new IntType(line_num); }
   | IDENTIFIER
     { $$ = new IdentifierType($1, line_num); }
   ;
@@ -170,15 +170,15 @@ statement
   : '{' statements '}'
     { $$ = $2 }
   | IF '(' expression ')' statement ELSE statement
-    { $$ = new IfThenElseStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), static_cast<Statement *>($7), line_num); }
+    { $$ = new IfElseStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), static_cast<Statement *>($7), line_num); }
   | WHILE '(' expression ')' statement
-    { $$ = new WhileDoStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), line_num); }
+    { $$ = new WhileStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), line_num); }
   | PRINT '(' expression ')' ';'
     { $$ = new PrintStatement(static_cast<Expression *>($3), line_num); }
   | IDENTIFIER '=' expression ';'
     { $$ = new AssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), line_num); }
   | IDENTIFIER '[' expression ']' '=' expression ';'
-    { $$ = new ArrayAssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), static_cast<Expression *>($6), line_num); }
+    { $$ = new IntArrayAssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), static_cast<Expression *>($6), line_num); }
   ;
 
 // See parameter_list for explanation.
@@ -216,13 +216,13 @@ expression
   | expression AND expression
     { $$ = new BinaryBooleanExpression(BinaryBooleanExpression::BOOLEAN_AND, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '[' expression ']'
-    { $$ = new ArraySubscriptExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new IntArraySubscriptExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '.' LENGTH
-    { $$ = new ArrayLengthExpression(static_cast<Expression *>($1), line_num); }
+    { $$ = new IntArrayLengthExpression(static_cast<Expression *>($1), line_num); }
   | expression '.' IDENTIFIER '(' expression_list ')'
     { $$ = new CallExpression(static_cast<Expression *>($1), new Identifier($3, line_num), $5, line_num); }
-  | INTEGER_LITERAL
-    { $$ = new IntegerLiteral($1, line_num); }
+  | INT_LITERAL
+    { $$ = new IntLiteral($1, line_num); }
   | TRUE
     { $$ = new BooleanLiteral(true, line_num); }
   | FALSE
@@ -232,7 +232,7 @@ expression
   | THIS
     { $$ = new ThisExpression(line_num); }
   | NEW INT '[' expression ']'
-    { $$ = new NewIntegerArrayExpression(static_cast<Expression *>($4), line_num); }
+    { $$ = new NewIntArrayExpression(static_cast<Expression *>($4), line_num); }
   | NEW IDENTIFIER '(' ')'
     { $$ = new NewObjectExpression(new Identifier($2, line_num), line_num); }
   | '!' expression

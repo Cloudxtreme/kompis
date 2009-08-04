@@ -11,7 +11,7 @@ namespace kompis
         _out << '\t';
     }
 
-    VisitorData *PrettyPrinter::visit(ArrayAssignmentStatement *x)
+    VisitorData *PrettyPrinter::visit(IntArrayAssignmentStatement *x)
     {
       indent();
       ++_indentation;
@@ -23,7 +23,7 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(ArrayLengthExpression *x)
+    VisitorData *PrettyPrinter::visit(IntArrayLengthExpression *x)
     {
       indent();
       ++_indentation;
@@ -33,7 +33,7 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(ArraySubscriptExpression *x)
+    VisitorData *PrettyPrinter::visit(IntArraySubscriptExpression *x)
     {
       indent();
       ++_indentation;
@@ -111,7 +111,7 @@ namespace kompis
     {
       indent();
       ++_indentation;
-      _out << "Boolean\n";
+      _out << "boolean\n";
       --_indentation;
       return NULL;
     }
@@ -189,7 +189,7 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(IfThenElseStatement *x)
+    VisitorData *PrettyPrinter::visit(IfElseStatement *x)
     {
       indent();
       ++_indentation;
@@ -201,16 +201,16 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(IntegerArrayType *x)
+    VisitorData *PrettyPrinter::visit(IntArrayType *x)
     {
       indent();
       ++_indentation;
-      _out << "Integer[]\n";
+      _out << "int[]\n";
       --_indentation;
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(IntegerLiteral *x)
+    VisitorData *PrettyPrinter::visit(IntLiteral *x)
     {
       indent();
       ++_indentation;
@@ -219,11 +219,11 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(IntegerType *x)
+    VisitorData *PrettyPrinter::visit(IntType *x)
     {
       indent();
       ++_indentation;
-      _out << "Integer\n";
+      _out << "int\n";
       --_indentation;
       return NULL;
     }
@@ -264,11 +264,11 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(NewIntegerArrayExpression *x)
+    VisitorData *PrettyPrinter::visit(NewIntArrayExpression *x)
     {
       indent();
       ++_indentation;
-      _out << "new Integer[]\n";
+      _out << "new int[]\n";
       x->_count->accept(this);
       --_indentation;
       return NULL;
@@ -379,7 +379,7 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(WhileDoStatement *x)
+    VisitorData *PrettyPrinter::visit(WhileStatement *x)
     {
       indent();
       ++_indentation;

@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_INTEGER_ARRAY_TYPE_HPP
-#define KOMPIS_AST_INTEGER_ARRAY_TYPE_HPP
+#ifndef KOMPIS_AST_INT_ARRAY_TYPE_HPP
+#define KOMPIS_AST_INT_ARRAY_TYPE_HPP
 
 #include <string>
 #include "ast/type.hpp"
@@ -11,10 +11,10 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class IntegerArrayType : public Type
+    class IntArrayType : public Type
     {
       public:
-        IntegerArrayType(int line_num = 0)
+        IntArrayType(int line_num = 0)
           : Type(line_num) {}
 
         VisitorData *accept(Visitor *visitor);

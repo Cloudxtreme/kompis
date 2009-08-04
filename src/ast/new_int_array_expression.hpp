@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_NEW_INTEGER_ARRAY_EXPRESSION_HPP
-#define KOMPIS_AST_NEW_INTEGER_ARRAY_EXPRESSION_HPP
+#ifndef KOMPIS_AST_NEW_INT_ARRAY_EXPRESSION_HPP
+#define KOMPIS_AST_NEW_INT_ARRAY_EXPRESSION_HPP
 
 #include "ast/expression.hpp"
 
@@ -11,17 +11,16 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class NewIntegerArrayExpression : public Expression
+    class NewIntArrayExpression : public Expression
     {
       public:
-        NewIntegerArrayExpression(Expression *count,
+        NewIntArrayExpression(Expression *count,
                                   int line_num)
           : Expression(line_num),
             _count(count) {}
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         Expression *_count;
     };
   }

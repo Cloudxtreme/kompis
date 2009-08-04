@@ -20,7 +20,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         bool _value;
     };
   }

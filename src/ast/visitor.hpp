@@ -5,9 +5,6 @@ namespace kompis
 {
   namespace ast
   {
-    class ArrayAssignmentStatement;
-    class ArrayLengthExpression;
-    class ArraySubscriptExpression;
     class AssignmentStatement;
     class BinaryBooleanExpression;
     class BinaryIntBooleanExpression;
@@ -22,14 +19,17 @@ namespace kompis
     class Identifier;
     class IdentifierExpression;
     class IdentifierType;
-    class IfThenElseStatement;
-    class IntegerArrayType;
-    class IntegerLiteral;
-    class IntegerType;
+    class IfElseStatement;
+    class IntArrayAssignmentStatement;
+    class IntArrayLengthExpression;
+    class IntArraySubscriptExpression;
+    class IntArrayType;
+    class IntLiteral;
+    class IntType;
     class MainClassDeclaration;
     class MethodDeclaration;
     class MethodDeclarationList;
-    class NewIntegerArrayExpression;
+    class NewIntArrayExpression;
     class NewObjectExpression;
     class ParameterDeclaration;
     class ParameterDeclarationList;
@@ -40,7 +40,7 @@ namespace kompis
     class UnaryBooleanExpression;
     class VariableDeclaration;
     class VariableDeclarationList;
-    class WhileDoStatement;
+    class WhileStatement;
 
     class VisitorData
     {
@@ -53,9 +53,6 @@ namespace kompis
       public:
         virtual ~Visitor() {}
 
-        virtual VisitorData *visit(ArrayAssignmentStatement *) = 0;
-        virtual VisitorData *visit(ArrayLengthExpression *) = 0;
-        virtual VisitorData *visit(ArraySubscriptExpression *) = 0;
         virtual VisitorData *visit(AssignmentStatement *) = 0;
         virtual VisitorData *visit(BinaryBooleanExpression *) = 0;
         virtual VisitorData *visit(BinaryIntBooleanExpression *) = 0;
@@ -70,14 +67,17 @@ namespace kompis
         virtual VisitorData *visit(Identifier *) = 0;
         virtual VisitorData *visit(IdentifierExpression *) = 0;
         virtual VisitorData *visit(IdentifierType *) = 0;
-        virtual VisitorData *visit(IfThenElseStatement *) = 0;
-        virtual VisitorData *visit(IntegerArrayType *) = 0;
-        virtual VisitorData *visit(IntegerLiteral *) = 0;
-        virtual VisitorData *visit(IntegerType *) = 0;
+        virtual VisitorData *visit(IfElseStatement *) = 0;
+        virtual VisitorData *visit(IntArrayAssignmentStatement *) = 0;
+        virtual VisitorData *visit(IntArrayLengthExpression *) = 0;
+        virtual VisitorData *visit(IntArraySubscriptExpression *) = 0;
+        virtual VisitorData *visit(IntArrayType *) = 0;
+        virtual VisitorData *visit(IntLiteral *) = 0;
+        virtual VisitorData *visit(IntType *) = 0;
         virtual VisitorData *visit(MainClassDeclaration *) = 0;
         virtual VisitorData *visit(MethodDeclaration *) = 0;
         virtual VisitorData *visit(MethodDeclarationList *) = 0;
-        virtual VisitorData *visit(NewIntegerArrayExpression *) = 0;
+        virtual VisitorData *visit(NewIntArrayExpression *) = 0;
         virtual VisitorData *visit(NewObjectExpression *) = 0;
         virtual VisitorData *visit(ParameterDeclaration *) = 0;
         virtual VisitorData *visit(ParameterDeclarationList *) = 0;
@@ -88,7 +88,7 @@ namespace kompis
         virtual VisitorData *visit(UnaryBooleanExpression *) = 0;
         virtual VisitorData *visit(VariableDeclaration *) = 0;
         virtual VisitorData *visit(VariableDeclarationList *) = 0;
-        virtual VisitorData *visit(WhileDoStatement *) = 0;
+        virtual VisitorData *visit(WhileStatement *) = 0;
     };
   }
 }

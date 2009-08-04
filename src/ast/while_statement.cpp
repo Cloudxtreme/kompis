@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *ArrayLengthExpression::accept(Visitor *visitor)
+    VisitorData *WhileStatement::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }

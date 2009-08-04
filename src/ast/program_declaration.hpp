@@ -24,7 +24,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *);
 
-      //private:
         MainClassDeclaration *_main;
         ClassDeclarationList *_classes;
     };

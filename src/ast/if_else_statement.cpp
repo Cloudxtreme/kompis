@@ -4,7 +4,7 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *WhileDoStatement::accept(Visitor *visitor)
+    VisitorData *IfElseStatement::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }

@@ -36,7 +36,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *);
 
-      //private:
         Type *_return_type;
         Identifier *_name;
         ParameterDeclarationList *_params;

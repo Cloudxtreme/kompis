@@ -10,17 +10,16 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class ArrayLengthExpression : public Expression
+    class IntArrayLengthExpression : public Expression
     {
       public:
-        ArrayLengthExpression(Expression *array,
+        IntArrayLengthExpression(Expression *array,
                               int line_num)
           : Expression(line_num),
             _array(array) {}
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         Expression *_array;
     };
   }

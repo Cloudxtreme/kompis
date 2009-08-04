@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_INTEGER_LITERAL_HPP
-#define KOMPIS_AST_INTEGER_LITERAL_HPP
+#ifndef KOMPIS_AST_INT_LITERAL_HPP
+#define KOMPIS_AST_INT_LITERAL_HPP
 
 #include "ast/expression.hpp"
 
@@ -10,17 +10,16 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class IntegerLiteral : public Expression
+    class IntLiteral : public Expression
     {
       public:
-        IntegerLiteral(int value,
+        IntLiteral(int value,
                        int line_num = 0)
           : Expression(line_num),
             _value(value) {}
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         int _value;
     };
   }

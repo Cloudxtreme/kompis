@@ -10,10 +10,10 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class ArraySubscriptExpression : public Expression
+    class IntArraySubscriptExpression : public Expression
     {
       public:
-        ArraySubscriptExpression(Expression *array,
+        IntArraySubscriptExpression(Expression *array,
                                  Expression *index,
                                  int line_num)
           : Expression(line_num),
@@ -22,7 +22,6 @@ namespace kompis
 
         VisitorData *accept(Visitor *visitor);
 
-      //private:
         Expression *_array;
         Expression *_index;
     };
