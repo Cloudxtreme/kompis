@@ -12,12 +12,14 @@ namespace kompis
     class EseqExpression : public Expression
     {
       public:
-        EseqExpression(Statement &s, Expression &e)
-          : _s(s), _e(e) {}
+        EseqExpression(Statement *s,
+                       Expression *e)
+          : _s(s),
+            _e(e) {}
 
       private:
-        Statement &_s;
-        Expression &_e;
+        Statement *_s;
+        Expression *_e;
     };
   }
 }

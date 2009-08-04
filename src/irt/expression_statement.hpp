@@ -12,11 +12,11 @@ namespace kompis
     class ExpressionStatement : public Statement
     {
       public:
-        ExpressionStatement(Expression &expr)
+        ExpressionStatement(Expression *expr)
           : _expr(expr) {}
 
       private:
-        Expression &_expr;
+        Expression *_expr;
     };
   }
 }

@@ -7,9 +7,9 @@ namespace kompis
 {
   namespace irt
   {
-    namespace binop
+    class BinaryOperationExpression : public Expression
     {
-      enum BinaryOperation
+      enum Operation
       {
         ADD,
         SUB,
@@ -17,24 +17,20 @@ namespace kompis
         DIV,
         AND,
         OR,
-        XOR,
       };
-    }
 
-    class BinaryOperationExpression : public Expression
-    {
       public:
-        BinaryOperationExpression(binop::BinaryOperation op,
-                                  Expression &left,
-                                  Expression &right)
+        BinaryOperationExpression(Operation op,
+                                  Expression *lhs,
+                                  Expression *rhs)
           : _op(op),
-            _left(left),
-            _right(right) {}
+            _lhs(lhs),
+            _rhs(rhs) {}
 
       private:
-        binop::BinaryOperation _op;
-        Expression &_left;
-        Expression &_right;
+        BinaryOperation _op;
+        Expression *_lhs;
+        Expression *_rhs;
     };
   }
 }
