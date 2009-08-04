@@ -73,14 +73,14 @@ namespace kompis
     {
       type::Type t = type::T_BOOLEAN;
 
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
+      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
       if(l->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "lhs of '&&' not boolean");
         t = type::T_ERROR;
       }
 
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
       if(r->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "rhs of '&&' not boolean");
@@ -94,14 +94,14 @@ namespace kompis
     {
       type::Type t = type::T_BOOLEAN;
 
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
+      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
       if(l->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "lhs of '<' not int");
         t = type::T_ERROR;
       }
 
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
       if(r->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "rhs of '<' not int");

@@ -21,19 +21,19 @@ namespace kompis
         };
 
         BinaryBooleanExpression(Operation op,
-                                Expression *left,
-                                Expression *right,
+                                Expression *lhs,
+                                Expression *rhs,
                                 int line_num = 0)
           : Expression(line_num),
             _op(op),
-            _left(left),
-            _right(right) {}
+            _lhs(lhs),
+            _rhs(rhs) {}
 
         VisitorData *accept(Visitor *visitor);
         const char *op_str();
 
         Operation _op;
-        Expression *_left, *_right;
+        Expression *_lhs, *_rhs;
     };
   }
 }

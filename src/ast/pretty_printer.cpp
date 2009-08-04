@@ -60,8 +60,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << x->op_str() << "\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
+      x->_lhs->accept(this);
+      x->_rhs->accept(this);
       --_indentation;
       return NULL;
     }
@@ -71,8 +71,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << x->op_str() << "\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
+      x->_lhs->accept(this);
+      x->_rhs->accept(this);
       --_indentation;
       return NULL;
     }
