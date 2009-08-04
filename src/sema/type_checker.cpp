@@ -33,12 +33,12 @@ namespace kompis
 
     TypeData *TypeChecker::visit(ArrayLengthExpression *x)
     {
-      return NULL;
+      return new TypeData(type::T_INT);
     }
 
     TypeData *TypeChecker::visit(ArraySubscriptExpression *x)
     {
-      return NULL;
+      return new TypeData(type::T_INT);
     }
 
     TypeData *TypeChecker::visit(AssignmentStatement *x)
@@ -228,14 +228,14 @@ namespace kompis
 
     TypeData *TypeChecker::visit(NewIntegerArrayExpression *x)
     {
-      return NULL;
+      return new TypeData(type::T_INT_ARRAY);
     }
 
     TypeData *TypeChecker::visit(NewObjectExpression *x)
     {
       // TODO
       x->_class_name->accept(this);
-      return NULL;
+      return new TypeData(type::T_OBJECT);
     }
 
     TypeData *TypeChecker::visit(ParameterDeclaration *x)
