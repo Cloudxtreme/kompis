@@ -9,6 +9,7 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class WhileDoStatement : public Statement
     {
@@ -16,7 +17,7 @@ namespace kompis
         WhileDoStatement(Expression *pred, Statement *s)
           : _pred(pred), _s(s) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_pred;

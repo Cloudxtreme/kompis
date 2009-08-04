@@ -9,11 +9,12 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class StatementList : public List<Statement>, public Statement
     {
       public:
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
     };
   }
 }

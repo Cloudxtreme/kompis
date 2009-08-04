@@ -9,6 +9,7 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class IfThenElseStatement : public Statement
     {
@@ -20,7 +21,7 @@ namespace kompis
             _then_statement(then_statement),
             _else_statement(else_statement) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_pred;

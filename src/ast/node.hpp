@@ -6,12 +6,13 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class Node
     {
       public:
         virtual ~Node() {}
-        virtual void accept(Visitor *) = 0;
+        virtual VisitorData *accept(Visitor *) = 0;
     };
   }
 }

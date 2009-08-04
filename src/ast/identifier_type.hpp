@@ -9,6 +9,7 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class IdentifierType : public Type
     {
@@ -16,7 +17,7 @@ namespace kompis
         IdentifierType(const char *name)
           : _name(name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         std::string _name;

@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void NewObjectExpression::accept(Visitor *visitor)
+    VisitorData *NewObjectExpression::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

@@ -10,10 +10,27 @@ namespace kompis
   {
     using namespace ast;
 
+    namespace type
+    {
+      enum Type
+      {
+        T_BOOLEAN,
+        T_INT,
+        T_INT_ARRAY,
+        T_OBJECT,
+        T_ERROR
+      };
+    }
+
     class TypeData : public VisitorData
     {
       public:
+        TypeData(type::Type t)
+          : _type(t) {}
+
         virtual ~TypeData() {}
+
+        type::Type _type;
     };
 
     class TypeChecker : public Visitor

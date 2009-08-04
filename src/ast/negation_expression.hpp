@@ -8,6 +8,7 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class NegationExpression : public Expression
     {
@@ -15,7 +16,7 @@ namespace kompis
         NegationExpression(Expression *expr)
           : _expr(expr) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_expr;

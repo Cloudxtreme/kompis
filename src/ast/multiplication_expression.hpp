@@ -8,6 +8,7 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class MultiplicationExpression : public Expression
     {
@@ -15,7 +16,7 @@ namespace kompis
         MultiplicationExpression(Expression *left, Expression *right)
           : _left(left), _right(right) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_left, *_right;

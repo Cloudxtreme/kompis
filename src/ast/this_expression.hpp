@@ -9,11 +9,12 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class ThisExpression : public Expression
     {
       public:
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
     };
   }
 }

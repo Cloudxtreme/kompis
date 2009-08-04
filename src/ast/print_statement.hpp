@@ -9,6 +9,7 @@ namespace kompis
   {
     class Expression;
     class Visitor;
+    class VisitorData;
 
     class PrintStatement : public Statement
     {
@@ -16,7 +17,7 @@ namespace kompis
         PrintStatement(Expression *expr)
           : _expr(expr) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_expr;

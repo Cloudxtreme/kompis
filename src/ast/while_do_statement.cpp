@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void WhileDoStatement::accept(Visitor *visitor)
+    VisitorData *WhileDoStatement::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

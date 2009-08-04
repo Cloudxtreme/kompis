@@ -11,6 +11,7 @@ namespace kompis
     class ExpressionList;
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class CallExpression : public Node
     {
@@ -22,7 +23,7 @@ namespace kompis
             _method_name(method_name),
             _args(args) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Expression *_self;

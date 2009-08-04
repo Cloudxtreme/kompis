@@ -8,6 +8,7 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class IntegerLiteral : public Expression
     {
@@ -15,7 +16,7 @@ namespace kompis
         IntegerLiteral(int value)
           : _value(value) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         int _value;

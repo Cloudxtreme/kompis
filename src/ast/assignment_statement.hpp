@@ -10,6 +10,7 @@ namespace kompis
     class Expression;
     class Identifier;
     class Visitor;
+    class VisitorData;
 
     class AssignmentStatement : public Statement
     {
@@ -17,7 +18,7 @@ namespace kompis
         AssignmentStatement(Identifier *id, Expression *expr)
           : _id(id), _expr(expr) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Identifier *_id;

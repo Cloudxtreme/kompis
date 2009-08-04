@@ -9,6 +9,7 @@ namespace kompis
   {
     class StatementList;
     class Visitor;
+    class VisitorData;
 
     class BlockStatement : public Statement
     {
@@ -16,7 +17,7 @@ namespace kompis
         BlockStatement(StatementList *statements)
           : _statements(statements) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         StatementList *_statements;

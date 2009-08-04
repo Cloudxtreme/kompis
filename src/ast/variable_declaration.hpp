@@ -10,6 +10,7 @@ namespace kompis
     class Identifier;
     class Type;
     class Visitor;
+    class VisitorData;
 
     class VariableDeclaration : public Node
     {
@@ -17,7 +18,7 @@ namespace kompis
         VariableDeclaration(Type *type, Identifier *name)
           : _type(type), _name(name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         Type *_type;

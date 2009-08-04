@@ -9,6 +9,7 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class IdentifierExpression : public Expression
     {
@@ -16,7 +17,7 @@ namespace kompis
         IdentifierExpression(const char *name)
           : _name(name) {}
 
-        void accept(Visitor *visitor);
+        VisitorData *accept(Visitor *visitor);
 
       //private:
         std::string _name;

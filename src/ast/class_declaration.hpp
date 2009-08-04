@@ -11,6 +11,7 @@ namespace kompis
     class MethodDeclarationList;
     class VariableDeclarationList;
     class Visitor;
+    class VisitorData;
 
     class ClassDeclaration : public Node
     {
@@ -22,7 +23,7 @@ namespace kompis
             _vars(vars),
             _methods(methods) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         Identifier *_name;

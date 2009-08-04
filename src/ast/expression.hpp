@@ -8,12 +8,13 @@ namespace kompis
   namespace ast
   {
     class Visitor;
+    class VisitorData;
 
     class Expression : public Node
     {
       public:
         virtual ~Expression() {}
-        virtual void accept(Visitor *) = 0;
+        virtual VisitorData *accept(Visitor *) = 0;
     };
   }
 }

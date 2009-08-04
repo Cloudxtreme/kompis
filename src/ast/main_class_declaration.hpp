@@ -10,6 +10,7 @@ namespace kompis
     class Identifier;
     class Statement;
     class Visitor;
+    class VisitorData;
 
     class MainClassDeclaration : public Node
     {
@@ -17,7 +18,7 @@ namespace kompis
         MainClassDeclaration(Statement *statement)
           : _statement(statement) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         Statement *_statement;

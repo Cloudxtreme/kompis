@@ -10,6 +10,7 @@ namespace kompis
     class ClassDeclaration;
     class MainClassDeclaration;
     class Visitor;
+    class VisitorData;
 
     class ProgramDeclaration : public Node
     {
@@ -19,7 +20,7 @@ namespace kompis
           : _main(main),
             _classes(classes) {}
 
-        void accept(Visitor *);
+        VisitorData *accept(Visitor *);
 
       //private:
         MainClassDeclaration *_main;

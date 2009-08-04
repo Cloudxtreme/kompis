@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void VariableDeclaration::accept(Visitor *visitor)
+    VisitorData *VariableDeclaration::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }

@@ -4,9 +4,9 @@ namespace kompis
 {
   namespace ast
   {
-    void StatementList::accept(Visitor *visitor)
+    VisitorData *StatementList::accept(Visitor *visitor)
     {
-      visitor->visit(this);
+      return visitor->visit(this);
     }
   }
 }
