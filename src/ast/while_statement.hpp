@@ -14,17 +14,17 @@ namespace kompis
     class WhileStatement : public Statement
     {
       public:
-        WhileStatement(Expression *pred,
-                       Statement *s,
+        WhileStatement(Expression *condition,
+                       Statement *statement,
                        int line_num = 0)
           : Statement(line_num),
-            _pred(pred),
-            _s(s) {}
+            _condition(condition),
+            _statement(statement) {}
 
         VisitorData *accept(Visitor *visitor);
 
-        Expression *_pred;
-        Statement *_s;
+        Expression *_condition;
+        Statement *_statement;
     };
   }
 }

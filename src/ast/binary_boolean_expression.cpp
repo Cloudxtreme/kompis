@@ -17,8 +17,6 @@ namespace kompis
           return "&&";
         case BOOLEAN_OR:
           return "||";
-        case BOOLEAN_XOR:
-          return "xor";
       }
     }
   }

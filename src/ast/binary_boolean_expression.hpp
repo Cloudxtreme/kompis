@@ -17,7 +17,6 @@ namespace kompis
         {
           BOOLEAN_AND,
           BOOLEAN_OR,
-          BOOLEAN_XOR,
         };
 
         BinaryBooleanExpression(Operation op,

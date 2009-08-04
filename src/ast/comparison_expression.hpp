@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_BINARY_INT_BOOLEAN_EXPRESSION_HPP
-#define KOMPIS_AST_BINARY_INT_BOOLEAN_EXPRESSION_HPP
+#ifndef KOMPIS_AST_COMPARISON_EXPRESSION_HPP
+#define KOMPIS_AST_COMPARISON_EXPRESSION_HPP
 
 #include "ast/expression.hpp"
 
@@ -10,7 +10,7 @@ namespace kompis
     class Visitor;
     class VisitorData;
 
-    class BinaryIntBooleanExpression : public Expression
+    class ComparisonExpression : public Expression
     {
       public:
         enum Operation
@@ -23,10 +23,10 @@ namespace kompis
           GE,
         };
 
-        BinaryIntBooleanExpression(Operation op,
-                                   Expression *lhs,
-                                   Expression *rhs,
-                                   int line_num = 0)
+        ComparisonExpression(Operation op,
+                             Expression *lhs,
+                             Expression *rhs,
+                             int line_num = 0)
           : Expression(line_num),
             _op(op),
             _lhs(lhs),

@@ -3,7 +3,6 @@
 
 #include "ast/assignment_statement.hpp"
 #include "ast/binary_boolean_expression.hpp"
-#include "ast/binary_int_boolean_expression.hpp"
 #include "ast/binary_int_expression.hpp"
 #include "ast/block_statement.hpp"
 #include "ast/boolean_literal.hpp"
@@ -11,6 +10,7 @@
 #include "ast/call_expression.hpp"
 #include "ast/class_declaration.hpp"
 #include "ast/class_declaration_list.hpp"
+#include "ast/comparison_expression.hpp"
 #include "ast/expression.hpp"
 #include "ast/expression_list.hpp"
 #include "ast/identifier.hpp"

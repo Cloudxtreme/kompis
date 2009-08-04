@@ -15,7 +15,7 @@ namespace kompis
     {
       public:
         NewIntArrayExpression(Expression *count,
-                                  int line_num)
+                              int line_num)
           : Expression(line_num),
             _count(count) {}
 

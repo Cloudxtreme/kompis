@@ -1,7 +1,6 @@
 #ifndef KOMPIS_AST_INT_ARRAY_TYPE_HPP
 #define KOMPIS_AST_INT_ARRAY_TYPE_HPP
 
-#include <string>
 #include "ast/type.hpp"
 
 namespace kompis

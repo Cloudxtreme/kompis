@@ -14,7 +14,7 @@ namespace kompis
     {
       public:
         IntLiteral(int value,
-                       int line_num = 0)
+                   int line_num = 0)
           : Expression(line_num),
             _value(value) {}
 

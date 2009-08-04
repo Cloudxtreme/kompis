@@ -16,19 +16,19 @@ namespace kompis
     {
       public:
         IntArrayAssignmentStatement(Identifier *id,
-                                 Expression *index,
-                                 Expression *value,
-                                 int line_num = 0)
+                                    Expression *index,
+                                    Expression *rhs,
+                                    int line_num = 0)
           : Statement(line_num),
             _id(id),
             _index(index),
-            _value(value) {}
+            _rhs(rhs) {}
 
         VisitorData *accept(Visitor *visitor);
 
         Identifier *_id;
         Expression *_index;
-        Expression *_value;
+        Expression *_rhs;
     };
   }
 }

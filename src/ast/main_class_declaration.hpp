@@ -7,7 +7,6 @@ namespace kompis
 {
   namespace ast
   {
-    class Identifier;
     class Statement;
     class Visitor;
     class VisitorData;

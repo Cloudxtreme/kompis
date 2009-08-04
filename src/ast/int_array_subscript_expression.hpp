@@ -14,8 +14,8 @@ namespace kompis
     {
       public:
         IntArraySubscriptExpression(Expression *array,
-                                 Expression *index,
-                                 int line_num)
+                                    Expression *index,
+                                    int line_num)
           : Expression(line_num),
             _array(array),
             _index(index) {}

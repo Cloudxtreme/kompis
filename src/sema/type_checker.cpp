@@ -18,7 +18,7 @@ namespace kompis
       if(i->_type != type::T_INT)
         error("", x->_line_num, "type", "array index not int");
 
-      TypeData *v = static_cast<TypeData *>(x->_value->accept(this));
+      TypeData *v = static_cast<TypeData *>(x->_rhs->accept(this));
       if(v->_type != type::T_INT)
         error("", x->_line_num, "type", "rhs of '[]=' not int");
 
@@ -62,8 +62,8 @@ namespace kompis
 
     TypeData *TypeChecker::visit(AssignmentStatement *x)
     {
-      TypeData *l = static_cast<TypeData *>(x->_id->accept(this));
-      TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
+      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
+      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
       if(l->_type != r->_type)
         error("", x->_line_num, "type", "lhs and rhs of '=' of different type");
       return NULL;
@@ -90,7 +90,7 @@ namespace kompis
       return new TypeData(t);
     }
 
-    TypeData *TypeChecker::visit(BinaryIntBooleanExpression *x)
+    TypeData *TypeChecker::visit(ComparisonExpression *x)
     {
       type::Type t = type::T_BOOLEAN;
 
@@ -206,7 +206,7 @@ namespace kompis
 
     TypeData *TypeChecker::visit(IfElseStatement *x)
     {
-      TypeData *p = static_cast<TypeData *>(x->_pred->accept(this));
+      TypeData *p = static_cast<TypeData *>(x->_condition->accept(this));
       if(p->_type != type::T_BOOLEAN)
         error("", x->_line_num, "type", "argument to 'if' not boolean");
 
@@ -357,11 +357,11 @@ namespace kompis
 
     TypeData *TypeChecker::visit(WhileStatement *x)
     {
-      TypeData *p = static_cast<TypeData *>(x->_pred->accept(this));
+      TypeData *p = static_cast<TypeData *>(x->_condition->accept(this));
       if(p->_type != type::T_BOOLEAN)
         error("", x->_line_num, "type", "argument to 'while' not boolean");
 
-      x->_s->accept(this);
+      x->_statement->accept(this);
 
       return NULL;
     }

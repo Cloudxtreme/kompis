@@ -4,12 +4,12 @@ namespace kompis
 {
   namespace ast
   {
-    VisitorData *BinaryIntBooleanExpression::accept(Visitor *visitor)
+    VisitorData *ComparisonExpression::accept(Visitor *visitor)
     {
       return visitor->visit(this);
     }
 
-    const char *BinaryIntBooleanExpression::op_str()
+    const char *ComparisonExpression::op_str()
     {
       switch(_op)
       {

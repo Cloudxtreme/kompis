@@ -15,17 +15,17 @@ namespace kompis
     class AssignmentStatement : public Statement
     {
       public:
-        AssignmentStatement(Identifier *id,
-                            Expression *expr,
+        AssignmentStatement(Identifier *lhs,
+                            Expression *rhs,
                             int line_num = 0)
           : Statement(line_num),
-            _id(id),
-            _expr(expr) {}
+            _lhs(lhs),
+            _rhs(rhs) {}
 
         VisitorData *accept(Visitor *visitor);
 
-        Identifier *_id;
-        Expression *_expr;
+        Identifier *_lhs;
+        Expression *_rhs;
     };
   }
 }

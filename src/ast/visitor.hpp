@@ -7,7 +7,6 @@ namespace kompis
   {
     class AssignmentStatement;
     class BinaryBooleanExpression;
-    class BinaryIntBooleanExpression;
     class BinaryIntExpression;
     class BlockStatement;
     class BooleanLiteral;
@@ -15,6 +14,7 @@ namespace kompis
     class CallExpression;
     class ClassDeclaration;
     class ClassDeclarationList;
+    class ComparisonExpression;
     class ExpressionList;
     class Identifier;
     class IdentifierExpression;
@@ -55,7 +55,6 @@ namespace kompis
 
         virtual VisitorData *visit(AssignmentStatement *) = 0;
         virtual VisitorData *visit(BinaryBooleanExpression *) = 0;
-        virtual VisitorData *visit(BinaryIntBooleanExpression *) = 0;
         virtual VisitorData *visit(BinaryIntExpression *) = 0;
         virtual VisitorData *visit(BlockStatement *) = 0;
         virtual VisitorData *visit(BooleanLiteral *) = 0;
@@ -63,6 +62,7 @@ namespace kompis
         virtual VisitorData *visit(CallExpression *) = 0;
         virtual VisitorData *visit(ClassDeclaration *) = 0;
         virtual VisitorData *visit(ClassDeclarationList *) = 0;
+        virtual VisitorData *visit(ComparisonExpression *) = 0;
         virtual VisitorData *visit(ExpressionList *) = 0;
         virtual VisitorData *visit(Identifier *) = 0;
         virtual VisitorData *visit(IdentifierExpression *) = 0;

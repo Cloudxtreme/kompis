@@ -14,7 +14,7 @@ namespace kompis
     {
       public:
         IntArrayLengthExpression(Expression *array,
-                              int line_num)
+                                 int line_num)
           : Expression(line_num),
             _array(array) {}
 

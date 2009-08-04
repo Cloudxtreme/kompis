@@ -212,7 +212,7 @@ expression
   | expression '*' expression
     { $$ = new BinaryIntExpression(BinaryIntExpression::MUL, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '<' expression
-    { $$ = new BinaryIntBooleanExpression(BinaryIntBooleanExpression::LT, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ComparisonExpression(ComparisonExpression::LT, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression AND expression
     { $$ = new BinaryBooleanExpression(BinaryBooleanExpression::BOOLEAN_AND, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '[' expression ']'

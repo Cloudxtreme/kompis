@@ -18,7 +18,7 @@ namespace kompis
       _out << "[]=\n";
       x->_id->accept(this);
       x->_index->accept(this);
-      x->_value->accept(this);
+      x->_rhs->accept(this);
       --_indentation;
       return NULL;
     }
@@ -49,8 +49,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "=\n";
-      x->_id->accept(this);
-      x->_expr->accept(this);
+      x->_lhs->accept(this);
+      x->_rhs->accept(this);
       --_indentation;
       return NULL;
     }
@@ -66,7 +66,7 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(BinaryIntBooleanExpression *x)
+    VisitorData *PrettyPrinter::visit(ComparisonExpression *x)
     {
       indent();
       ++_indentation;
@@ -194,7 +194,7 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "if\n";
-      x->_pred->accept(this);
+      x->_condition->accept(this);
       x->_then_statement->accept(this);
       x->_else_statement->accept(this);
       --_indentation;
@@ -384,8 +384,8 @@ namespace kompis
       indent();
       ++_indentation;
       _out << "while\n";
-      x->_pred->accept(this);
-      x->_s->accept(this);
+      x->_condition->accept(this);
+      x->_statement->accept(this);
       --_indentation;
       return NULL;
     }

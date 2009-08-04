@@ -16,6 +16,7 @@ namespace kompis
     {
       public:
         virtual ~List() {}
+
         virtual VisitorData *accept(Visitor *) = 0;
 
         std::list<T *> _list;

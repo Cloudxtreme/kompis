@@ -12,11 +12,11 @@ namespace kompis
     {
       public:
         PrettyPrinter(std::ostream &out)
-          : _out(out), _indentation(0) {}
+          : _out(out),
+            _indentation(0) {}
 
         VisitorData *visit(AssignmentStatement *);
         VisitorData *visit(BinaryBooleanExpression *);
-        VisitorData *visit(BinaryIntBooleanExpression *);
         VisitorData *visit(BinaryIntExpression *);
         VisitorData *visit(BlockStatement *);
         VisitorData *visit(BooleanLiteral *);
@@ -24,6 +24,7 @@ namespace kompis
         VisitorData *visit(CallExpression *);
         VisitorData *visit(ClassDeclaration *);
         VisitorData *visit(ClassDeclarationList *);
+        VisitorData *visit(ComparisonExpression *);
         VisitorData *visit(ExpressionList *);
         VisitorData *visit(Identifier *);
         VisitorData *visit(IdentifierExpression *);

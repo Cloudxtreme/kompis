@@ -40,7 +40,6 @@ namespace kompis
 
         TypeData *visit(AssignmentStatement *);
         TypeData *visit(BinaryBooleanExpression *);
-        TypeData *visit(BinaryIntBooleanExpression *);
         TypeData *visit(BinaryIntExpression *);
         TypeData *visit(BlockStatement *);
         TypeData *visit(BooleanLiteral *);
@@ -48,6 +47,7 @@ namespace kompis
         TypeData *visit(CallExpression *);
         TypeData *visit(ClassDeclaration *);
         TypeData *visit(ClassDeclarationList *);
+        TypeData *visit(ComparisonExpression *);
         TypeData *visit(ExpressionList *);
         TypeData *visit(Identifier *);
         TypeData *visit(IdentifierExpression *);
