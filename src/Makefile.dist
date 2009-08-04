@@ -1,0 +1,55 @@
+CC          = gcc
+CXX         = g++
+RM          = rm -f
+RMDIR       = rm -rf
+MKDIR       = mkdir -p
+FLEX        = flex
+BISON       = bison
+MAKEDEPEND  = makedepend
+LD          = $(CXX)
+GPP         = $(CXX)
+
+CPPFLAGS    = -I .
+LDFLAGS     = -I .
+
+SRCS_LEXER  = lexer.cpp
+SRCS_PARSER = parser.cpp
+SRCS_AST    = $(wildcard ast/*.cpp)
+SRCS_SEMA   = $(wildcard sema/*.cpp)
+
+OBJS_LEXER  = $(SRCS_LEXER:.cpp=.o)
+OBJS_PARSER = $(SRCS_PARSER:.cpp=.o)
+OBJS_AST    = $(SRCS_AST:.cpp=.o)
+OBJS_SEMA   = $(SRCS_SEMA:.cpp=.o)
+
+HDRS_PARSER = $(SRCS_PARSER:.cpp=.hpp)
+
+SRCS        = $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_AST) $(SRCS_SEMA)
+OBJS        = $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_AST) $(OBJS_SEMA)
+
+OUTPUT_DIR  = ../bin
+PROG_NAME   = kompis
+TARGET      = $(OUTPUT_DIR)/$(PROG_NAME)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS) $(OUTPUT_DIR)
+	$(LD) $(LDFLAGS) -o $@ $(OBJS)
+
+$(SRCS_LEXER): lexer.l
+	$(FLEX) -o $@ $^
+
+$(SRCS_PARSER): parser.ypp
+	$(BISON) -d -o $@ $^
+
+$(OUTPUT_DIR):
+	$(MKDIR) $(OUTPUT_DIR)
+
+clean:
+	$(RM) $(TARGET) $(SRCS_LEXER) $(SRCS_PARSER) $(HDRS_PARSER) $(OBJS) Makefile.bak
+	$(RMDIR) $(OUTPUTDIR)
+
+depend:
+	$(MAKEDEPEND) -- $(CFLAGS) -- $(SRCS) 2> /dev/null
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
