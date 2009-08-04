@@ -66,12 +66,12 @@ StatementList *statements;
 
 program
   : main_class class_declarations
-    { program_declaration = new ProgramDeclaration((MainClassDeclaration *)$1, $2, line_num); }
+    { program_declaration = new ProgramDeclaration(static_cast<MainClassDeclaration *>($1), $2, line_num); }
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration((Statement *)$15, line_num); }
+    { $$ = new MainClassDeclaration(static_cast<Statement *>($15), line_num); }
   ;
 
 // Of the following two cases, the empty case will be executed first (and only
@@ -82,7 +82,7 @@ class_declarations
   :
     { $$ = new ClassDeclarationList(); }
   | class_declarations class_declaration
-    { $$->_list.push_back((ClassDeclaration *)$2); }
+    { $$->_list.push_back(static_cast<ClassDeclaration *>($2)); }
   ;
 
 class_declaration
@@ -95,12 +95,12 @@ variable_declarations
   :
     { $$ = new VariableDeclarationList(); }
   | variable_declarations variable_declaration
-    { $$->_list.push_back((VariableDeclaration *)$2); }
+    { $$->_list.push_back(static_cast<VariableDeclaration *>($2)); }
   ;
 
 variable_declaration
   : type IDENTIFIER ';'
-    { $$ = new VariableDeclaration((Type *)$1, new Identifier($2, line_num), line_num); }
+    { $$ = new VariableDeclaration(static_cast<Type *>($1), new Identifier($2, line_num), line_num); }
   ;
 
 // See class_declarations for explanation.
@@ -108,12 +108,12 @@ method_declarations
   :
     { $$ = new MethodDeclarationList(); }
   | method_declarations method_declaration
-    { $$->_list.push_back((MethodDeclaration *)$2); }
+    { $$->_list.push_back(static_cast<MethodDeclaration *>($2)); }
   ;
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration((Type *)$2, new Identifier($3, line_num), $5, $8, $9, (Expression *)$11, line_num); }
+    { $$ = new MethodDeclaration(static_cast<Type *>($2), new Identifier($3, line_num), $5, $8, $9, static_cast<Expression *>($11), line_num); }
   ;
 
 // This is a slightly more complicated type of list.
@@ -124,7 +124,7 @@ parameter_list
   | type IDENTIFIER parameter_rests
     // This clause gets executed once, last, for a non-empty parameter list.
     {
-      parameter_declarations->_list.push_front(new ParameterDeclaration((Type *)$1, new Identifier($2, line_num), line_num));
+      parameter_declarations->_list.push_front(new ParameterDeclaration(static_cast<Type *>($1), new Identifier($2, line_num), line_num));
       $$ = parameter_declarations;
     }
   ;
@@ -135,13 +135,13 @@ parameter_rests
     { parameter_declarations = new ParameterDeclarationList(); }
   | parameter_rests parameter_rest
     // This clause gets executed once for each element of a non-empty parameter list, after the parameter_rest clause.
-    { parameter_declarations->_list.push_back((ParameterDeclaration *)$2); }
+    { parameter_declarations->_list.push_back(static_cast<ParameterDeclaration *>($2)); }
   ;
 
 parameter_rest
   : ',' type IDENTIFIER
     // This clause gets executed once for each element of a non-empty parameter list, before the second parameter_rests clause.
-    { $$ = new ParameterDeclaration((Type *)$2, new Identifier($3, line_num), line_num); }
+    { $$ = new ParameterDeclaration(static_cast<Type *>($2), new Identifier($3, line_num), line_num); }
   ;
 
 type
@@ -161,7 +161,7 @@ statements
     { $$ = statements = new StatementList(line_num); }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
     {
-      statements->_list.push_front((Statement *)$1);
+      statements->_list.push_front(static_cast<Statement *>($1));
       $$ = statements;
     }
   ;
@@ -170,15 +170,15 @@ statement
   : '{' statements '}'
     { $$ = $2 }
   | IF '(' expression ')' statement ELSE statement
-    { $$ = new IfThenElseStatement((Expression *)$3, (Statement *)$5, (Statement *)$7, line_num); }
+    { $$ = new IfThenElseStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), static_cast<Statement *>($7), line_num); }
   | WHILE '(' expression ')' statement
-    { $$ = new WhileDoStatement((Expression *)$3, (Statement *)$5, line_num); }
+    { $$ = new WhileDoStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), line_num); }
   | PRINT '(' expression ')' ';'
-    { $$ = new PrintStatement((Expression *)$3, line_num); }
+    { $$ = new PrintStatement(static_cast<Expression *>($3), line_num); }
   | IDENTIFIER '=' expression ';'
-    { $$ = new AssignmentStatement(new Identifier($1, line_num), (Expression *)$3, line_num); }
+    { $$ = new AssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), line_num); }
   | IDENTIFIER '[' expression ']' '=' expression ';'
-    { $$ = new ArrayAssignmentStatement(new Identifier($1, line_num), (Expression *)$3, (Expression *)$6, line_num); }
+    { $$ = new ArrayAssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), static_cast<Expression *>($6), line_num); }
   ;
 
 // See parameter_list for explanation.
@@ -187,7 +187,7 @@ expression_list
     { $$ = expressions = new ExpressionList(); }
   | expression expression_rests
     {
-      expressions->_list.push_front((Expression *)$1);
+      expressions->_list.push_front(static_cast<Expression *>($1));
       $$ = expressions;
     }
   ;
@@ -196,7 +196,7 @@ expression_rests
   :
     { expressions = new ExpressionList(); }
   | expression_rests expression_rest
-    { expressions->_list.push_back((Expression *)$2); }
+    { expressions->_list.push_back(static_cast<Expression *>($2)); }
   ;
 
 expression_rest
@@ -206,21 +206,21 @@ expression_rest
 
 expression
   : expression '+' expression
-    { $$ = new AdditionExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new AdditionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '-' expression
-    { $$ = new SubtractionExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new SubtractionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '*' expression
-    { $$ = new MultiplicationExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new MultiplicationExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '<' expression
-    { $$ = new LessThanExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new LessThanExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression AND expression
-    { $$ = new ConjunctionExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new ConjunctionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '[' expression ']'
-    { $$ = new ArraySubscriptExpression((Expression *)$1, (Expression *)$3, line_num); }
+    { $$ = new ArraySubscriptExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '.' LENGTH
-    { $$ = new ArrayLengthExpression((Expression *)$1, line_num); }
+    { $$ = new ArrayLengthExpression(static_cast<Expression *>($1), line_num); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression((Expression *)$1, new Identifier($3, line_num), $5, line_num); }
+    { $$ = new CallExpression(static_cast<Expression *>($1), new Identifier($3, line_num), $5, line_num); }
   | INTEGER_LITERAL
     { $$ = new IntegerLiteral($1, line_num); }
   | TRUE
@@ -232,11 +232,11 @@ expression
   | THIS
     { $$ = new ThisExpression(line_num); }
   | NEW INT '[' expression ']'
-    { $$ = new NewIntegerArrayExpression((Expression *)$4, line_num); }
+    { $$ = new NewIntegerArrayExpression(static_cast<Expression *>($4), line_num); }
   | NEW IDENTIFIER '(' ')'
     { $$ = new NewObjectExpression(new Identifier($2, line_num), line_num); }
   | '!' expression
-    { $$ = new NegationExpression((Expression *)$2, line_num); }
+    { $$ = new NegationExpression(static_cast<Expression *>($2), line_num); }
   | '(' expression ')'
     { $$ = $2; }
   ;
