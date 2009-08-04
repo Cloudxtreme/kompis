@@ -24,4 +24,7 @@ for INPUT_FILE in $(ls test*.java); do
   [ -f $ERR_FILE ] && diff -q $ERR_FILE $ERROUT_FILE && rm $ERROUT_FILE
 done
 
+# exit with an error code if at least one test failed
+[ $(find . -name '*.*out' | wc -l) -gt 0 ] && exit 1
+
 popd
