@@ -2,11 +2,6 @@
 
 pushd $(dirname $0)
 
-# build compiler
-pushd ../../
-make
-popd
-
 # find all files matching test*.java, run them through compiler, compare output with expected
 for INPUT_FILE in $(ls test*.java); do
   echo testing $INPUT_FILE...
