@@ -46,8 +46,8 @@ $(OUTPUT_DIR):
 	$(MKDIR) $(OUTPUT_DIR)
 
 clean:
-	$(RM) $(TARGET) $(SRCS_LEXER) $(SRCS_PARSER) $(HDRS_PARSER) $(OBJS) Makefile.bak
-	$(RMDIR) $(OUTPUT_DIR)
+	-$(RM) $(TARGET) $(SRCS_LEXER) $(SRCS_PARSER) $(HDRS_PARSER) $(OBJS) Makefile.bak
+	-$(RMDIR) $(OUTPUT_DIR)
 
 depend: $(SRCS_LEXER) $(SRCS_PARSER)
 	$(MAKEDEPEND) -- $(CFLAGS) -- $(SRCS) 2> /dev/null

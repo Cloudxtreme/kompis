@@ -17,7 +17,10 @@ world: depend
 
 clean: src/Makefile
 	$(MAKE) -C $(SOURCE_DIR)/ clean
-	$(RM) $(SOURCE_DIR)/Makefile
+	-$(RM) $(SOURCE_DIR)/Makefile
 
 test: world
 	test/system/_test_all.sh
+
+testclean:
+	-$(RM) test/system/*.*out
