@@ -206,11 +206,11 @@ expression_rest
 
 expression
   : expression '+' expression
-    { $$ = new AdditionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(binop::ADD, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '-' expression
-    { $$ = new SubtractionExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(binop::SUB, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '*' expression
-    { $$ = new MultiplicationExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new BinaryIntExpression(binop::MUL, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression '<' expression
     { $$ = new LessThanExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
   | expression AND expression

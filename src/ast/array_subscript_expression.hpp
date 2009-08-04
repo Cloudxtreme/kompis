@@ -1,13 +1,12 @@
 #ifndef KOMPIS_AST_ARRAY_SUBSCRIPT_EXPRESSION_HPP
 #define KOMPIS_AST_ARRAY_SUBSCRIPT_EXPRESSION_HPP
 
-#include "ast/statement.hpp"
+#include "ast/expression.hpp"
 
 namespace kompis
 {
   namespace ast
   {
-    class Expression;
     class Visitor;
     class VisitorData;
 

@@ -5,11 +5,11 @@ namespace kompis
 {
   namespace ast
   {
-    class AdditionExpression;
     class ArrayAssignmentStatement;
     class ArrayLengthExpression;
     class ArraySubscriptExpression;
     class AssignmentStatement;
+    class BinaryIntExpression;
     class BlockStatement;
     class BooleanLiteral;
     class BooleanType;
@@ -29,7 +29,6 @@ namespace kompis
     class MainClassDeclaration;
     class MethodDeclaration;
     class MethodDeclarationList;
-    class MultiplicationExpression;
     class NegationExpression;
     class NewIntegerArrayExpression;
     class NewObjectExpression;
@@ -38,7 +37,6 @@ namespace kompis
     class PrintStatement;
     class ProgramDeclaration;
     class StatementList;
-    class SubtractionExpression;
     class ThisExpression;
     class VariableDeclaration;
     class VariableDeclarationList;
@@ -55,11 +53,11 @@ namespace kompis
       public:
         virtual ~Visitor() {}
 
-        virtual VisitorData *visit(AdditionExpression *) = 0;
         virtual VisitorData *visit(ArrayAssignmentStatement *) = 0;
         virtual VisitorData *visit(ArrayLengthExpression *) = 0;
         virtual VisitorData *visit(ArraySubscriptExpression *) = 0;
         virtual VisitorData *visit(AssignmentStatement *) = 0;
+        virtual VisitorData *visit(BinaryIntExpression *) = 0;
         virtual VisitorData *visit(BlockStatement *) = 0;
         virtual VisitorData *visit(BooleanLiteral *) = 0;
         virtual VisitorData *visit(BooleanType *) = 0;
@@ -79,7 +77,6 @@ namespace kompis
         virtual VisitorData *visit(MainClassDeclaration *) = 0;
         virtual VisitorData *visit(MethodDeclaration *) = 0;
         virtual VisitorData *visit(MethodDeclarationList *) = 0;
-        virtual VisitorData *visit(MultiplicationExpression *) = 0;
         virtual VisitorData *visit(NegationExpression *) = 0;
         virtual VisitorData *visit(NewIntegerArrayExpression *) = 0;
         virtual VisitorData *visit(NewObjectExpression *) = 0;
@@ -88,7 +85,6 @@ namespace kompis
         virtual VisitorData *visit(PrintStatement *) = 0;
         virtual VisitorData *visit(ProgramDeclaration *) = 0;
         virtual VisitorData *visit(StatementList *) = 0;
-        virtual VisitorData *visit(SubtractionExpression *) = 0;
         virtual VisitorData *visit(ThisExpression *) = 0;
         virtual VisitorData *visit(VariableDeclaration *) = 0;
         virtual VisitorData *visit(VariableDeclarationList *) = 0;

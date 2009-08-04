@@ -1,14 +1,12 @@
 #ifndef KOMPIS_AST_ARRAY_LENGTH_EXPRESSION_HPP
 #define KOMPIS_AST_ARRAY_LENGTH_EXPRESSION_HPP
 
-#include "ast/statement.hpp"
+#include "ast/expression.hpp"
 
 namespace kompis
 {
   namespace ast
   {
-    class Expression;
-    class Identifier;
     class Visitor;
     class VisitorData;
 

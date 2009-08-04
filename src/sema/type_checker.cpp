@@ -8,27 +8,6 @@ namespace kompis
 
   namespace sema
   {
-    TypeData *TypeChecker::visit(AdditionExpression *x)
-    {
-      type::Type t = type::T_INT;
-
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
-      if(l->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "lhs of '+' not int");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
-      if(r->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "rhs of '+' not int");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
     TypeData *TypeChecker::visit(ArrayAssignmentStatement *x)
     {
       TypeData *a = static_cast<TypeData *>(x->_id->accept(this));
@@ -88,6 +67,29 @@ namespace kompis
       if(l->_type != r->_type)
         error("", x->_line_num, "type", "lhs and rhs of '=' of different type");
       return NULL;
+    }
+
+    TypeData *TypeChecker::visit(BinaryIntExpression *x)
+    {
+      // TODO: use binop::str
+
+      type::Type t = type::T_INT;
+
+      TypeData *l = static_cast<TypeData *>(x->_lhs->accept(this));
+      if(l->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "lhs of '+' not int");
+        t = type::T_ERROR;
+      }
+
+      TypeData *r = static_cast<TypeData *>(x->_rhs->accept(this));
+      if(r->_type != type::T_INT)
+      {
+        error("", x->_line_num, "type", "rhs of '+' not int");
+        t = type::T_ERROR;
+      }
+
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(BlockStatement *x)
@@ -253,27 +255,6 @@ namespace kompis
       return NULL;
     }
 
-    TypeData *TypeChecker::visit(MultiplicationExpression *x)
-    {
-      type::Type t = type::T_INT;
-
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
-      if(l->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "lhs of '*' not int");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
-      if(r->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "rhs of '*' not int");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
-    }
-
     TypeData *TypeChecker::visit(NegationExpression *x)
     {
       type::Type t = type::T_BOOLEAN;
@@ -352,27 +333,6 @@ namespace kompis
       for(std::list<Statement *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
-    }
-
-    TypeData *TypeChecker::visit(SubtractionExpression *x)
-    {
-      type::Type t = type::T_INT;
-
-      TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
-      if(l->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "lhs of '-' not int");
-        t = type::T_ERROR;
-      }
-
-      TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
-      if(r->_type != type::T_INT)
-      {
-        error("", x->_line_num, "type", "rhs of '-' not int");
-        t = type::T_ERROR;
-      }
-
-      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(ThisExpression *x)

@@ -11,17 +11,6 @@ namespace kompis
         _out << '\t';
     }
 
-    VisitorData *PrettyPrinter::visit(AdditionExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "+\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
     VisitorData *PrettyPrinter::visit(ArrayAssignmentStatement *x)
     {
       indent();
@@ -62,6 +51,17 @@ namespace kompis
       _out << "=\n";
       x->_id->accept(this);
       x->_expr->accept(this);
+      --_indentation;
+      return NULL;
+    }
+
+    VisitorData *PrettyPrinter::visit(BinaryIntExpression *x)
+    {
+      indent();
+      ++_indentation;
+      _out << binop::str(x->_op) << "\n";
+      x->_lhs->accept(this);
+      x->_rhs->accept(this);
       --_indentation;
       return NULL;
     }
@@ -264,17 +264,6 @@ namespace kompis
       return NULL;
     }
 
-    VisitorData *PrettyPrinter::visit(MultiplicationExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "*\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
     VisitorData *PrettyPrinter::visit(NegationExpression *x)
     {
       indent();
@@ -355,17 +344,6 @@ namespace kompis
       _out << "statement_list\n";
       for(std::list<Statement *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
-      --_indentation;
-      return NULL;
-    }
-
-    VisitorData *PrettyPrinter::visit(SubtractionExpression *x)
-    {
-      indent();
-      ++_indentation;
-      _out << "-\n";
-      x->_left->accept(this);
-      x->_right->accept(this);
       --_indentation;
       return NULL;
     }
