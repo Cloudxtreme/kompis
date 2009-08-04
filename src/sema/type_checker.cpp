@@ -12,17 +12,18 @@ namespace kompis
     {
       TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      type::Type t = type::T_INT;
       if(l->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "lhs of '+' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
       if(r->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "rhs of '+' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_INT);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(AssignmentStatement *x)
@@ -78,17 +79,18 @@ namespace kompis
     {
       TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      type::Type t = type::T_BOOLEAN;
       if(l->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "lhs of '&&' not boolean");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
       if(r->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "rhs of '&&' not boolean");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_BOOLEAN);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(ExpressionList *x)
@@ -136,17 +138,18 @@ namespace kompis
     {
       TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      type::Type t = type::T_BOOLEAN;
       if(l->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "lhs of '<' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
       if(r->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "rhs of '<' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_BOOLEAN);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(MainClassDeclaration *x)
@@ -177,28 +180,30 @@ namespace kompis
     {
       TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      type::Type t = type::T_INT;
       if(l->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "lhs of '*' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
       if(r->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "rhs of '*' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_INT);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(NegationExpression *x)
     {
       TypeData *r = static_cast<TypeData *>(x->_expr->accept(this));
+      type::Type t = type::T_BOOLEAN;
       if(r->_type != type::T_BOOLEAN)
       {
         error("", x->_line_num, "type", "rhs of '!' not boolean");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_BOOLEAN);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(NewObjectExpression *x)
@@ -248,17 +253,18 @@ namespace kompis
     {
       TypeData *l = static_cast<TypeData *>(x->_left->accept(this));
       TypeData *r = static_cast<TypeData *>(x->_right->accept(this));
+      type::Type t = type::T_INT;
       if(l->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "lhs of '-' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
       if(r->_type != type::T_INT)
       {
         error("", x->_line_num, "type", "rhs of '-' not int");
-        return new TypeData(type::T_ERROR);
+        t = type::T_ERROR;
       }
-      return new TypeData(type::T_INT);
+      return new TypeData(t);
     }
 
     TypeData *TypeChecker::visit(ThisExpression *x)
