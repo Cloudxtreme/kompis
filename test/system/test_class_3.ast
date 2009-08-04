@@ -8,7 +8,7 @@ program
 			variable_declaration_list
 			method_declaration_list
 				method
-					Integer
+					int
 					a
 					parameter_declaration_list
 					variable_declaration_list

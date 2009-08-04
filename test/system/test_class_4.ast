@@ -7,11 +7,11 @@ program
 			A
 			variable_declaration_list
 				variable
-					Integer
+					int
 					i
 			method_declaration_list
 				method
-					Integer
+					int
 					a
 					parameter_declaration_list
 					variable_declaration_list

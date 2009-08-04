@@ -8,18 +8,18 @@ program
 			variable_declaration_list
 			method_declaration_list
 				method
-					Integer
+					int
 					f
 					parameter_declaration_list
 						parameter
-							Integer
+							int
 							x
 					variable_declaration_list
 						variable
-							Integer
+							int
 							y
 						variable
-							Integer
+							int
 							z
 					statement_list
 					0

@@ -8,14 +8,14 @@ program
 			variable_declaration_list
 			method_declaration_list
 				method
-					Integer
+					int
 					f
 					parameter_declaration_list
 						parameter
-							Integer
+							int
 							x
 						parameter
-							Integer
+							int
 							y
 					variable_declaration_list
 					statement_list

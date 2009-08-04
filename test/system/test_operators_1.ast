@@ -7,24 +7,24 @@ program
 			A
 			variable_declaration_list
 				variable
-					Integer
+					int
 					z
 			method_declaration_list
 				method
-					Integer
+					int
 					f
 					parameter_declaration_list
 						parameter
-							Integer
+							int
 							x
 						parameter
-							Integer
+							int
 							y
 						parameter
-							Boolean
+							boolean
 							b1
 						parameter
-							Boolean
+							boolean
 							b2
 					variable_declaration_list
 					statement_list

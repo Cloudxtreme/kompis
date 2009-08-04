@@ -12,17 +12,17 @@ program
 			variable_declaration_list
 			method_declaration_list
 				method
-					Integer
+					int
 					foo
 					parameter_declaration_list
 					variable_declaration_list
 						variable
-							Integer[]
+							int[]
 							a
 					statement_list
 						=
 							a
-							new Integer[]
+							new int[]
 								+
 									17
 									4711
@@ -47,17 +47,17 @@ program
 									100
 					3
 				method
-					Integer[]
+					int[]
 					bar
 					parameter_declaration_list
 					variable_declaration_list
 						variable
-							Integer[]
+							int[]
 							b
 					statement_list
 						=
 							b
-							new Integer[]
+							new int[]
 								10
 						[]=
 							b
