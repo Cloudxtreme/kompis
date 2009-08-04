@@ -1,1 +1,173 @@
-todo
+:44: type error: lhs of '+' not int
+:44: type error: rhs of '+' not int
+:44: type error: lhs and rhs of '=' of different type
+:45: type error: lhs of '+' not int
+:45: type error: rhs of '+' not int
+:45: type error: lhs and rhs of '=' of different type
+:46: type error: lhs of '+' not int
+:46: type error: rhs of '+' not int
+:46: type error: lhs and rhs of '=' of different type
+:47: type error: lhs of '+' not int
+:47: type error: rhs of '+' not int
+:47: type error: lhs and rhs of '=' of different type
+:51: type error: lhs of '+' not int
+:51: type error: rhs of '+' not int
+:51: type error: lhs and rhs of '=' of different type
+:55: type error: lhs of '+' not int
+:55: type error: rhs of '+' not int
+:55: type error: lhs and rhs of '=' of different type
+:56: type error: lhs of '+' not int
+:56: type error: rhs of '+' not int
+:56: type error: lhs and rhs of '=' of different type
+:57: type error: lhs of '+' not int
+:57: type error: rhs of '+' not int
+:57: type error: lhs and rhs of '=' of different type
+:58: type error: lhs of '+' not int
+:58: type error: rhs of '+' not int
+:58: type error: lhs and rhs of '=' of different type
+:62: type error: rhs of '+' not int
+:62: type error: lhs and rhs of '=' of different type
+:63: type error: rhs of '+' not int
+:63: type error: lhs and rhs of '=' of different type
+:64: type error: lhs of '+' not int
+:64: type error: lhs and rhs of '=' of different type
+:65: type error: lhs of '+' not int
+:65: type error: lhs and rhs of '=' of different type
+:69: type error: rhs of '+' not int
+:69: type error: lhs and rhs of '=' of different type
+:70: type error: rhs of '+' not int
+:70: type error: lhs and rhs of '=' of different type
+:71: type error: lhs of '+' not int
+:71: type error: lhs and rhs of '=' of different type
+:72: type error: lhs of '+' not int
+:72: type error: lhs and rhs of '=' of different type
+:76: type error: rhs of '+' not int
+:76: type error: lhs and rhs of '=' of different type
+:77: type error: lhs of '+' not int
+:77: type error: lhs and rhs of '=' of different type
+:96: type error: lhs of '-' not int
+:96: type error: rhs of '-' not int
+:96: type error: lhs and rhs of '=' of different type
+:97: type error: lhs of '-' not int
+:97: type error: rhs of '-' not int
+:97: type error: lhs and rhs of '=' of different type
+:98: type error: lhs of '-' not int
+:98: type error: rhs of '-' not int
+:98: type error: lhs and rhs of '=' of different type
+:99: type error: lhs of '-' not int
+:99: type error: rhs of '-' not int
+:99: type error: lhs and rhs of '=' of different type
+:103: type error: lhs of '-' not int
+:103: type error: rhs of '-' not int
+:103: type error: lhs and rhs of '=' of different type
+:107: type error: lhs of '-' not int
+:107: type error: rhs of '-' not int
+:107: type error: lhs and rhs of '=' of different type
+:108: type error: lhs of '-' not int
+:108: type error: rhs of '-' not int
+:108: type error: lhs and rhs of '=' of different type
+:109: type error: lhs of '-' not int
+:109: type error: rhs of '-' not int
+:109: type error: lhs and rhs of '=' of different type
+:110: type error: lhs of '-' not int
+:110: type error: rhs of '-' not int
+:110: type error: lhs and rhs of '=' of different type
+:114: type error: rhs of '-' not int
+:114: type error: lhs and rhs of '=' of different type
+:115: type error: rhs of '-' not int
+:115: type error: lhs and rhs of '=' of different type
+:116: type error: lhs of '-' not int
+:116: type error: lhs and rhs of '=' of different type
+:117: type error: lhs of '-' not int
+:117: type error: lhs and rhs of '=' of different type
+:121: type error: rhs of '-' not int
+:121: type error: lhs and rhs of '=' of different type
+:122: type error: rhs of '-' not int
+:122: type error: lhs and rhs of '=' of different type
+:123: type error: lhs of '-' not int
+:123: type error: lhs and rhs of '=' of different type
+:124: type error: lhs of '-' not int
+:124: type error: lhs and rhs of '=' of different type
+:128: type error: rhs of '-' not int
+:128: type error: lhs and rhs of '=' of different type
+:129: type error: lhs of '-' not int
+:129: type error: lhs and rhs of '=' of different type
+:148: type error: lhs of '*' not int
+:148: type error: rhs of '*' not int
+:148: type error: lhs and rhs of '=' of different type
+:149: type error: lhs of '*' not int
+:149: type error: rhs of '*' not int
+:149: type error: lhs and rhs of '=' of different type
+:150: type error: lhs of '*' not int
+:150: type error: rhs of '*' not int
+:150: type error: lhs and rhs of '=' of different type
+:151: type error: lhs of '*' not int
+:151: type error: rhs of '*' not int
+:151: type error: lhs and rhs of '=' of different type
+:155: type error: lhs of '*' not int
+:155: type error: rhs of '*' not int
+:155: type error: lhs and rhs of '=' of different type
+:159: type error: lhs of '*' not int
+:159: type error: rhs of '*' not int
+:159: type error: lhs and rhs of '=' of different type
+:160: type error: lhs of '*' not int
+:160: type error: rhs of '*' not int
+:160: type error: lhs and rhs of '=' of different type
+:161: type error: lhs of '*' not int
+:161: type error: rhs of '*' not int
+:161: type error: lhs and rhs of '=' of different type
+:162: type error: lhs of '*' not int
+:162: type error: rhs of '*' not int
+:162: type error: lhs and rhs of '=' of different type
+:166: type error: rhs of '*' not int
+:166: type error: lhs and rhs of '=' of different type
+:167: type error: rhs of '*' not int
+:167: type error: lhs and rhs of '=' of different type
+:168: type error: lhs of '*' not int
+:168: type error: lhs and rhs of '=' of different type
+:169: type error: lhs of '*' not int
+:169: type error: lhs and rhs of '=' of different type
+:173: type error: rhs of '*' not int
+:173: type error: lhs and rhs of '=' of different type
+:174: type error: rhs of '*' not int
+:174: type error: lhs and rhs of '=' of different type
+:175: type error: lhs of '*' not int
+:175: type error: lhs and rhs of '=' of different type
+:176: type error: lhs of '*' not int
+:176: type error: lhs and rhs of '=' of different type
+:180: type error: rhs of '*' not int
+:180: type error: lhs and rhs of '=' of different type
+:181: type error: lhs of '*' not int
+:181: type error: lhs and rhs of '=' of different type
+:187: type error: lhs of '&&' not boolean
+:187: type error: rhs of '&&' not boolean
+:187: type error: lhs and rhs of '=' of different type
+:191: type error: lhs of '&&' not boolean
+:191: type error: rhs of '&&' not boolean
+:191: type error: lhs and rhs of '=' of different type
+:195: type error: lhs of '&&' not boolean
+:195: type error: rhs of '&&' not boolean
+:195: type error: lhs and rhs of '=' of different type
+:196: type error: lhs of '&&' not boolean
+:196: type error: rhs of '&&' not boolean
+:196: type error: lhs and rhs of '=' of different type
+:218: type error: lhs of '&&' not boolean
+:218: type error: lhs and rhs of '=' of different type
+:219: type error: lhs of '&&' not boolean
+:219: type error: lhs and rhs of '=' of different type
+:220: type error: rhs of '&&' not boolean
+:220: type error: lhs and rhs of '=' of different type
+:221: type error: rhs of '&&' not boolean
+:221: type error: lhs and rhs of '=' of different type
+:225: type error: lhs of '&&' not boolean
+:225: type error: lhs and rhs of '=' of different type
+:226: type error: lhs of '&&' not boolean
+:226: type error: lhs and rhs of '=' of different type
+:227: type error: rhs of '&&' not boolean
+:227: type error: lhs and rhs of '=' of different type
+:228: type error: rhs of '&&' not boolean
+:228: type error: lhs and rhs of '=' of different type
+:232: type error: lhs of '&&' not boolean
+:232: type error: lhs and rhs of '=' of different type
+:233: type error: rhs of '&&' not boolean
+:233: type error: lhs and rhs of '=' of different type
