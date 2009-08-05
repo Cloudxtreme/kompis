@@ -1,5 +1,5 @@
-#ifndef KOMPIS_AST_TYPE_CHECKER_HPP
-#define KOMPIS_AST_TYPE_CHECKER_HPP
+#ifndef KOMPIS_SEMA_TYPE_CHECKER_HPP
+#define KOMPIS_SEMA_TYPE_CHECKER_HPP
 
 #include <ostream>
 #include "ast/visitor.hpp"

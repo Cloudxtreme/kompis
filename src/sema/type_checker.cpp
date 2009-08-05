@@ -1,5 +1,5 @@
-#include "sema/type_checker.hpp"
 #include "ast/ast.hpp"
+#include "sema/sema.hpp"
 #include "util/error.hpp"
 
 namespace kompis

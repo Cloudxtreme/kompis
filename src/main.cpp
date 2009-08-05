@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include "ast/ast.hpp"
-#include "sema/type_checker.hpp"
+#include "sema/sema.hpp"
 using namespace kompis;
 
 #include "parser.hpp"
@@ -57,6 +57,9 @@ int main(int argc, char *argv[])
     ast::PrettyPrinter pp(*ast_stream);
     pp.visit(program_declaration);
   }
+
+  sema::SymbolTableBuilder stb;
+  stb.visit(program_declaration);
 
   sema::TypeChecker tc;
   tc.visit(program_declaration);
