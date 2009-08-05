@@ -9,8 +9,8 @@ MAKEDEPEND  = makedepend
 LD          = $(CXX)
 GPP         = $(CXX)
 
-CPPFLAGS    = -I .
-LDFLAGS     = -I .
+CPPFLAGS    = -I . -Wall
+LDFLAGS     = -I . -Wall
 
 SRCS_MAIN   = main.cpp
 SRCS_LEXER  = lexer.cpp
@@ -52,6 +52,6 @@ clean:
 	-$(RMDIR) $(OUTPUT_DIR)
 
 depend: $(SRCS_LEXER) $(SRCS_PARSER)
-	$(MAKEDEPEND) -- $(CFLAGS) -- $(SRCS) 2> /dev/null
+	$(MAKEDEPEND) -- $(CPPFLAGS) -- $(SRCS) 2> /dev/null
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
