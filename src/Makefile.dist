@@ -17,17 +17,19 @@ SRCS_LEXER  = lexer.cpp
 SRCS_PARSER = parser.cpp
 SRCS_AST    = $(wildcard ast/*.cpp)
 SRCS_SEMA   = $(wildcard sema/*.cpp)
+SRCS_UTIL   = $(wildcard util/*.cpp)
 
 OBJS_MAIN   = $(SRCS_MAIN:.cpp=.o)
 OBJS_LEXER  = $(SRCS_LEXER:.cpp=.o)
 OBJS_PARSER = $(SRCS_PARSER:.cpp=.o)
 OBJS_AST    = $(SRCS_AST:.cpp=.o)
 OBJS_SEMA   = $(SRCS_SEMA:.cpp=.o)
+OBJS_UTIL   = $(SRCS_UTIL:.cpp=.o)
 
 HDRS_PARSER = _$(SRCS_PARSER:.cpp=.hpp)
 
-SRCS        = $(SRCS_MAIN) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_AST) $(SRCS_SEMA)
-OBJS        = $(OBJS_MAIN) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_AST) $(OBJS_SEMA)
+SRCS        = $(SRCS_MAIN) $(SRCS_LEXER) $(SRCS_PARSER) $(SRCS_AST) $(SRCS_SEMA) $(SRCS_UTIL)
+OBJS        = $(OBJS_MAIN) $(OBJS_LEXER) $(OBJS_PARSER) $(OBJS_AST) $(OBJS_SEMA) $(OBJS_UTIL)
 
 OUTPUT_DIR  = ../bin
 PROG_NAME   = kompis
