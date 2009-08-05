@@ -1,14 +1,8 @@
 // vim: set filetype=yacc :
 
 %{
-#include <iostream>
-
 #include "ast/ast.hpp"
-#include "ast/pretty_printer.hpp"
-#include "sema/type_checker.hpp"
 using namespace kompis;
-using namespace ast;
-using namespace sema;
 
 extern "C"
 {
@@ -21,10 +15,10 @@ int yylex();
 extern int line_num;
 
 // These are used to subvert Bison's type system, or lack thereof.
-ExpressionList *expressions;
-ParameterDeclarationList *parameter_declarations;
-ProgramDeclaration *program_declaration;
-StatementList *statements;
+ast::ExpressionList *expressions;
+ast::ParameterDeclarationList *parameter_declarations;
+ast::ProgramDeclaration *program_declaration;
+ast::StatementList *statements;
 %}
 
 %token BOOLEAN CLASS ELSE FALSE IDENTIFIER IF INT INT_LITERAL MAIN NEW PRINT PUBLIC RETURN STATIC STRING THIS TRUE VOID WHILE LENGTH
@@ -43,13 +37,13 @@ StatementList *statements;
 {
   int value;
   char *text;
-  Node *node;
-  ClassDeclarationList *class_declarations;
-  ExpressionList *expressions;
-  MethodDeclarationList *method_declarations;
-  ParameterDeclarationList *parameter_declarations;
-  StatementList *statements;
-  VariableDeclarationList *variable_declarations;
+  ast::Node *node;
+  ast::ClassDeclarationList *class_declarations;
+  ast::ExpressionList *expressions;
+  ast::MethodDeclarationList *method_declarations;
+  ast::ParameterDeclarationList *parameter_declarations;
+  ast::StatementList *statements;
+  ast::VariableDeclarationList *variable_declarations;
 }
 
 %type <value> INT_LITERAL
@@ -66,12 +60,12 @@ StatementList *statements;
 
 program
   : main_class class_declarations
-    { program_declaration = new ProgramDeclaration(static_cast<MainClassDeclaration *>($1), $2, line_num); }
+    { program_declaration = new ast::ProgramDeclaration(static_cast<ast::MainClassDeclaration *>($1), $2, line_num); }
   ;
 
 main_class
   : CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' '{' statement '}' '}'
-    { $$ = new MainClassDeclaration(static_cast<Statement *>($15), line_num); }
+    { $$ = new ast::MainClassDeclaration(static_cast<ast::Statement *>($15), line_num); }
   ;
 
 // Of the following two cases, the empty case will be executed first (and only
@@ -80,51 +74,51 @@ main_class
 // types.)
 class_declarations
   :
-    { $$ = new ClassDeclarationList(); }
+    { $$ = new ast::ClassDeclarationList(); }
   | class_declarations class_declaration
-    { $$->_list.push_back(static_cast<ClassDeclaration *>($2)); }
+    { $$->_list.push_back(static_cast<ast::ClassDeclaration *>($2)); }
   ;
 
 class_declaration
   : CLASS IDENTIFIER '{' variable_declarations method_declarations '}'
-    { $$ = new ClassDeclaration(new Identifier($2, line_num), $4, $5, line_num); }
+    { $$ = new ast::ClassDeclaration(new ast::Identifier($2, line_num), $4, $5, line_num); }
   ;
 
 // See class_declarations for explanation.
 variable_declarations
   :
-    { $$ = new VariableDeclarationList(); }
+    { $$ = new ast::VariableDeclarationList(); }
   | variable_declarations variable_declaration
-    { $$->_list.push_back(static_cast<VariableDeclaration *>($2)); }
+    { $$->_list.push_back(static_cast<ast::VariableDeclaration *>($2)); }
   ;
 
 variable_declaration
   : type IDENTIFIER ';'
-    { $$ = new VariableDeclaration(static_cast<Type *>($1), new Identifier($2, line_num), line_num); }
+    { $$ = new ast::VariableDeclaration(static_cast<ast::Type *>($1), new ast::Identifier($2, line_num), line_num); }
   ;
 
 // See class_declarations for explanation.
 method_declarations
   :
-    { $$ = new MethodDeclarationList(); }
+    { $$ = new ast::MethodDeclarationList(); }
   | method_declarations method_declaration
-    { $$->_list.push_back(static_cast<MethodDeclaration *>($2)); }
+    { $$->_list.push_back(static_cast<ast::MethodDeclaration *>($2)); }
   ;
 
 method_declaration
   : PUBLIC type IDENTIFIER '(' parameter_list ')' '{' variable_declarations statements RETURN expression ';' '}'
-    { $$ = new MethodDeclaration(static_cast<Type *>($2), new Identifier($3, line_num), $5, $8, $9, static_cast<Expression *>($11), line_num); }
+    { $$ = new ast::MethodDeclaration(static_cast<ast::Type *>($2), new ast::Identifier($3, line_num), $5, $8, $9, static_cast<ast::Expression *>($11), line_num); }
   ;
 
 // This is a slightly more complicated type of list.
 parameter_list
   :
     // This clause ONLY gets executed for an empty parameter list.
-    { $$ = parameter_declarations = new ParameterDeclarationList(); }
+    { $$ = parameter_declarations = new ast::ParameterDeclarationList(); }
   | type IDENTIFIER parameter_rests
     // This clause gets executed once, last, for a non-empty parameter list.
     {
-      parameter_declarations->_list.push_front(new ParameterDeclaration(static_cast<Type *>($1), new Identifier($2, line_num), line_num));
+      parameter_declarations->_list.push_front(new ast::ParameterDeclaration(static_cast<ast::Type *>($1), new ast::Identifier($2, line_num), line_num));
       $$ = parameter_declarations;
     }
   ;
@@ -132,36 +126,36 @@ parameter_list
 parameter_rests
   :
     // This clause gets executed once, first, for a non-empty parameter list.
-    { parameter_declarations = new ParameterDeclarationList(); }
+    { parameter_declarations = new ast::ParameterDeclarationList(); }
   | parameter_rests parameter_rest
     // This clause gets executed once for each element of a non-empty parameter list, after the parameter_rest clause.
-    { parameter_declarations->_list.push_back(static_cast<ParameterDeclaration *>($2)); }
+    { parameter_declarations->_list.push_back(static_cast<ast::ParameterDeclaration *>($2)); }
   ;
 
 parameter_rest
   : ',' type IDENTIFIER
     // This clause gets executed once for each element of a non-empty parameter list, before the second parameter_rests clause.
-    { $$ = new ParameterDeclaration(static_cast<Type *>($2), new Identifier($3, line_num), line_num); }
+    { $$ = new ast::ParameterDeclaration(static_cast<ast::Type *>($2), new ast::Identifier($3, line_num), line_num); }
   ;
 
 type
   : INT '[' ']'
-    { $$ = new IntArrayType(line_num); }
+    { $$ = new ast::IntArrayType(line_num); }
   | BOOLEAN
-    { $$ = new BooleanType(line_num); }
+    { $$ = new ast::BooleanType(line_num); }
   | INT
-    { $$ = new IntType(line_num); }
+    { $$ = new ast::IntType(line_num); }
   | IDENTIFIER
-    { $$ = new IdentifierType($1, line_num); }
+    { $$ = new ast::IdentifierType($1, line_num); }
   ;
 
 // See class_declarations for explanation.
 statements
   :
-    { $$ = statements = new StatementList(line_num); }
+    { $$ = statements = new ast::StatementList(line_num); }
   | statement statements // right recursive, to fix a shift/reduce conflict in method bodies
     {
-      statements->_list.push_front(static_cast<Statement *>($1));
+      statements->_list.push_front(static_cast<ast::Statement *>($1));
       $$ = statements;
     }
   ;
@@ -170,33 +164,33 @@ statement
   : '{' statements '}'
     { $$ = $2 }
   | IF '(' expression ')' statement ELSE statement
-    { $$ = new IfElseStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), static_cast<Statement *>($7), line_num); }
+    { $$ = new ast::IfElseStatement(static_cast<ast::Expression *>($3), static_cast<ast::Statement *>($5), static_cast<ast::Statement *>($7), line_num); }
   | WHILE '(' expression ')' statement
-    { $$ = new WhileStatement(static_cast<Expression *>($3), static_cast<Statement *>($5), line_num); }
+    { $$ = new ast::WhileStatement(static_cast<ast::Expression *>($3), static_cast<ast::Statement *>($5), line_num); }
   | PRINT '(' expression ')' ';'
-    { $$ = new PrintStatement(static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::PrintStatement(static_cast<ast::Expression *>($3), line_num); }
   | IDENTIFIER '=' expression ';'
-    { $$ = new AssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::AssignmentStatement(new ast::Identifier($1, line_num), static_cast<ast::Expression *>($3), line_num); }
   | IDENTIFIER '[' expression ']' '=' expression ';'
-    { $$ = new IntArrayAssignmentStatement(new Identifier($1, line_num), static_cast<Expression *>($3), static_cast<Expression *>($6), line_num); }
+    { $$ = new ast::IntArrayAssignmentStatement(new ast::Identifier($1, line_num), static_cast<ast::Expression *>($3), static_cast<ast::Expression *>($6), line_num); }
   ;
 
 // See parameter_list for explanation.
 expression_list
   :
-    { $$ = expressions = new ExpressionList(); }
+    { $$ = expressions = new ast::ExpressionList(); }
   | expression expression_rests
     {
-      expressions->_list.push_front(static_cast<Expression *>($1));
+      expressions->_list.push_front(static_cast<ast::Expression *>($1));
       $$ = expressions;
     }
   ;
 
 expression_rests
   :
-    { expressions = new ExpressionList(); }
+    { expressions = new ast::ExpressionList(); }
   | expression_rests expression_rest
-    { expressions->_list.push_back(static_cast<Expression *>($2)); }
+    { expressions->_list.push_back(static_cast<ast::Expression *>($2)); }
   ;
 
 expression_rest
@@ -206,37 +200,37 @@ expression_rest
 
 expression
   : expression '+' expression
-    { $$ = new BinaryIntExpression(BinaryIntExpression::ADD, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::BinaryIntExpression(ast::BinaryIntExpression::ADD, static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression '-' expression
-    { $$ = new BinaryIntExpression(BinaryIntExpression::SUB, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::BinaryIntExpression(ast::BinaryIntExpression::SUB, static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression '*' expression
-    { $$ = new BinaryIntExpression(BinaryIntExpression::MUL, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::BinaryIntExpression(ast::BinaryIntExpression::MUL, static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression '<' expression
-    { $$ = new ComparisonExpression(ComparisonExpression::LT, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::ComparisonExpression(ast::ComparisonExpression::LT, static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression AND expression
-    { $$ = new BinaryBooleanExpression(BinaryBooleanExpression::BOOLEAN_AND, static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::BinaryBooleanExpression(ast::BinaryBooleanExpression::BOOLEAN_AND, static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression '[' expression ']'
-    { $$ = new IntArraySubscriptExpression(static_cast<Expression *>($1), static_cast<Expression *>($3), line_num); }
+    { $$ = new ast::IntArraySubscriptExpression(static_cast<ast::Expression *>($1), static_cast<ast::Expression *>($3), line_num); }
   | expression '.' LENGTH
-    { $$ = new IntArrayLengthExpression(static_cast<Expression *>($1), line_num); }
+    { $$ = new ast::IntArrayLengthExpression(static_cast<ast::Expression *>($1), line_num); }
   | expression '.' IDENTIFIER '(' expression_list ')'
-    { $$ = new CallExpression(static_cast<Expression *>($1), new Identifier($3, line_num), $5, line_num); }
+    { $$ = new ast::CallExpression(static_cast<ast::Expression *>($1), new ast::Identifier($3, line_num), $5, line_num); }
   | INT_LITERAL
-    { $$ = new IntLiteral($1, line_num); }
+    { $$ = new ast::IntLiteral($1, line_num); }
   | TRUE
-    { $$ = new BooleanLiteral(true, line_num); }
+    { $$ = new ast::BooleanLiteral(true, line_num); }
   | FALSE
-    { $$ = new BooleanLiteral(false, line_num); }
+    { $$ = new ast::BooleanLiteral(false, line_num); }
   | IDENTIFIER
-    { $$ = new IdentifierExpression($1, line_num); }
+    { $$ = new ast::IdentifierExpression($1, line_num); }
   | THIS
-    { $$ = new ThisExpression(line_num); }
+    { $$ = new ast::ThisExpression(line_num); }
   | NEW INT '[' expression ']'
-    { $$ = new NewIntArrayExpression(static_cast<Expression *>($4), line_num); }
+    { $$ = new ast::NewIntArrayExpression(static_cast<ast::Expression *>($4), line_num); }
   | NEW IDENTIFIER '(' ')'
-    { $$ = new NewObjectExpression(new Identifier($2, line_num), line_num); }
+    { $$ = new ast::NewObjectExpression(new ast::Identifier($2, line_num), line_num); }
   | '!' expression
-    { $$ = new UnaryBooleanExpression(UnaryBooleanExpression::BOOLEAN_NEG, static_cast<Expression *>($2), line_num); }
+    { $$ = new ast::UnaryBooleanExpression(ast::UnaryBooleanExpression::BOOLEAN_NEG, static_cast<ast::Expression *>($2), line_num); }
   | '(' expression ')'
     { $$ = $2; }
   ;
@@ -244,7 +238,6 @@ expression
 %%
 
 extern int line_num;
-//extern int yydebug;
 
 void yyerror(const char *str)
 {
@@ -254,20 +247,4 @@ void yyerror(const char *str)
 int yywrap()
 {
   return 1; // ?
-}
-
-int main(int argc, char *argv[])
-{
-  //yydebug = 1;
-  yyparse();
-
-  if (program_declaration == NULL) {
-    exit(1);
-  }
-
-  PrettyPrinter pp(std::cout);
-  pp.visit(program_declaration);
-  TypeChecker tc;
-  tc.visit(program_declaration);
-  return 0;
 }

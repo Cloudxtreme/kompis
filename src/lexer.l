@@ -1,10 +1,4 @@
 %{
-// we need to include this before the parser header...
-// yup, it's ugly
-#include "ast/ast.hpp"
-using namespace kompis;
-using namespace ast;
-
 #include "parser.hpp"
 
 int line_num = 1;

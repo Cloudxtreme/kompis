@@ -13,7 +13,7 @@ for INPUT_FILE in $(ls test*.java); do
   [ -f $ERR_FILE ] && ERROUT_FILE=${INPUT_FILE/.java/.errout} || ERROUT_FILE="/dev/null"
 
   # run kompis
-  ../../bin/kompis <$INPUT_FILE >$ASTOUT_FILE 2>$ERROUT_FILE
+  ../../bin/kompis -A <$INPUT_FILE >$ASTOUT_FILE 2>$ERROUT_FILE
 
   # if a *.ast file with expected stdout output exists, diff it with *.astout
   # remove output file only if there was no diff
