@@ -16,6 +16,8 @@ namespace kompis
         case BOOLEAN_NEG:
           return "!";
       }
+
+      return NULL; // Will not happen.
     }
   }
 }

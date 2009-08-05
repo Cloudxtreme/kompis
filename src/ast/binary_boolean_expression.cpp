@@ -18,6 +18,8 @@ namespace kompis
         case BOOLEAN_OR:
           return "||";
       }
+
+      return NULL; // Will not happen.
     }
   }
 }

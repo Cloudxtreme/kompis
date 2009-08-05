@@ -22,6 +22,8 @@ namespace kompis
         case DIV:
           return "/";
       }
+
+      return NULL; // Will not happen.
     }
   }
 }

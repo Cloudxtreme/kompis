@@ -26,6 +26,8 @@ namespace kompis
         case GE:
           return ">=";
       }
+
+      return NULL; // Will not happen.
     }
   }
 }
