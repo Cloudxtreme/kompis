@@ -424,4 +424,24 @@ class Test
 
     return 0;
   }
+
+  public int[] a()
+  {
+    return new int[1];
+  }
+
+  public boolean b()
+  {
+    return true;
+  }
+
+  public int i()
+  {
+    return 1;
+  }
+
+  public Test o()
+  {
+    return new Test();
+  }
 }
