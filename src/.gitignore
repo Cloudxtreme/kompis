@@ -1,5 +1,5 @@
-Makefile
-Makefile.bak
-lexer.cpp
-parser.cpp
-_parser.hpp
+/Makefile
+/Makefile.bak
+/lexer.cpp
+/parser.cpp
+/_parser.hpp
