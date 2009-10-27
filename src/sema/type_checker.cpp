@@ -139,12 +139,16 @@ namespace kompis
 
     TypeData *TypeChecker::visit(Identifier *x)
     {
-      return new TypeData(type::T_INT); // TODO
+      // TODO: what? this is used in class, method and variable declarations, assignments, calls, etc?
+      // perhaps the best thing is to lookup and return type or T_ERROR, and let parent deal?
+      // maybe we need T_UNBOUND?
+      return new TypeData(type::T_INT);
     }
 
     TypeData *TypeChecker::visit(IdentifierExpression *x)
     {
-      return new TypeData(type::T_INT); // TODO
+      // TODO: lookup x, return type of x or T_ERROR if not bound
+      return new TypeData(type::T_INT);
     }
 
     TypeData *TypeChecker::visit(IdentifierType *x)

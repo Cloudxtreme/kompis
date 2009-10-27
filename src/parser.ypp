@@ -228,6 +228,7 @@ expression
   | NEW INT '[' expression ']'
     { $$ = new ast::NewIntArrayExpression(static_cast<ast::Expression *>($4), line_num); }
   | NEW IDENTIFIER '(' ')'
+  // TODO: use IdentifierType here?
     { $$ = new ast::NewObjectExpression(new ast::Identifier($2, line_num), line_num); }
   | '!' expression
     { $$ = new ast::UnaryBooleanExpression(ast::UnaryBooleanExpression::BOOLEAN_NEG, static_cast<ast::Expression *>($2), line_num); }
