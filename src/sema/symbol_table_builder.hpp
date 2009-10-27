@@ -1,6 +1,7 @@
 #ifndef KOMPIS_SEMA_SYMBOL_TABLE_BUILDER_HPP
 #define KOMPIS_SEMA_SYMBOL_TABLE_BUILDER_HPP
 
+#include <map>
 #include <ostream>
 #include "ast/visitor.hpp"
 
@@ -14,6 +15,15 @@ namespace kompis
     {
       public:
         SymbolData() {}
+
+        // union (or something) of:
+        // - classes []
+        // - class {}
+        // - methods []
+        // - method {}
+        // - variables []
+        // - variable {}
+        // - type: boolean, int, int array, class {}
     };
 
     class SymbolTableBuilder : public Visitor
@@ -57,6 +67,10 @@ namespace kompis
         SymbolData *visit(VariableDeclaration *);
         SymbolData *visit(VariableDeclarationList *);
         SymbolData *visit(WhileStatement *);
+
+      private:
+        // TODO: should be returned by methods
+        std::map<std::string, void *> _classes;
     };
   }
 }

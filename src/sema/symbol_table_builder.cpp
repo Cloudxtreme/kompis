@@ -11,31 +11,24 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(AssignmentStatement *x)
     {
       // nothing
-      x->_lhs->accept(this);
-      x->_rhs->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(BinaryBooleanExpression *x)
     {
       // nothing
-      x->_lhs->accept(this);
-      x->_rhs->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(BinaryIntExpression *x)
     {
       // nothing
-      x->_lhs->accept(this);
-      x->_rhs->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(BlockStatement *x)
     {
       // nothing
-      x->_statements->accept(this);
       return NULL;
     }
 
@@ -47,31 +40,36 @@ namespace kompis
 
     SymbolData *SymbolTableBuilder::visit(BooleanType *x)
     {
-      // ?
+      // TODO: return boolean type
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(CallExpression *x)
     {
       // nothing
-      x->_self->accept(this);
-      x->_method_name->accept(this);
-      x->_args->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(ClassDeclaration *x)
     {
-      // check unique, create class
+      // TODO: report error if class name in use
+      // TODO: return class data
+
       x->_name->accept(this);
       x->_vars->accept(this);
       x->_methods->accept(this);
+
+      if(_classes.find(x->_name->_name) != _classes.end())
+        error("", x->_line_num, "symbol", "class name already in use");
+      else
+        _classes.insert(std::make_pair(x->_name->_name, static_cast<void *>(NULL))); // TODO: create class data
+
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(ClassDeclarationList *x)
     {
-      // create classes
+      // TODO: return classes
       for(std::list<ClassDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
@@ -80,73 +78,60 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(ComparisonExpression *x)
     {
       // nothing
-      x->_lhs->accept(this);
-      x->_rhs->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(ExpressionList *x)
     {
       // nothing
-      for(std::list<Expression *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
-        (*i)->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(Identifier *x)
     {
-      // ?
+      // TODO: return something?
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IdentifierExpression *x)
     {
-      // ?
+      // TODO: return something?
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IdentifierType *x)
     {
-      // ?
+      // TODO: return something?
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IfElseStatement *x)
     {
       // nothing
-      x->_condition->accept(this);
-      x->_then_statement->accept(this);
-      x->_else_statement->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IntArrayAssignmentStatement *x)
     {
       // nothing
-      x->_id->accept(this);
-      x->_index->accept(this);
-      x->_rhs->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IntArrayLengthExpression *x)
     {
       // nothing
-      x->_array->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IntArraySubscriptExpression *x)
     {
       // nothing
-      x->_array->accept(this);
-      x->_index->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(IntArrayType *x)
     {
-      // ?
+      // TODO: return int array type?
       return NULL;
     }
 
@@ -158,20 +143,20 @@ namespace kompis
 
     SymbolData *SymbolTableBuilder::visit(IntType *x)
     {
-      // ?
+      // TODO: return int type?
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(MainClassDeclaration *x)
     {
-      // nothing?
-      x->_statement->accept(this);
+      // TODO: nothing? means that another class may have same name as main class, because main class is not a real class
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(MethodDeclaration *x)
     {
-      // check unique, create method
+      // TODO: report error if method name in use in scope
+      // TODO: return method data
       x->_return_type->accept(this);
       x->_name->accept(this);
       x->_params->accept(this);
@@ -183,7 +168,7 @@ namespace kompis
 
     SymbolData *SymbolTableBuilder::visit(MethodDeclarationList *x)
     {
-      // create methods
+      // TODO: return methods
       for(std::list<MethodDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
@@ -192,20 +177,19 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(NewIntArrayExpression *x)
     {
       // nothing
-      x->_count->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(NewObjectExpression *x)
     {
       // nothing
-      x->_class_name->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(ParameterDeclaration *x)
     {
-      // check unique, return param
+      // TODO: report error if param name in use in scope
+      // TODO: return param data (same as variable data, right?)
       x->_type->accept(this);
       x->_name->accept(this);
       return NULL;
@@ -213,7 +197,7 @@ namespace kompis
 
     SymbolData *SymbolTableBuilder::visit(ParameterDeclarationList *x)
     {
-      // return params
+      // TODO: return params
       for(std::list<ParameterDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
@@ -222,13 +206,12 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(PrintStatement *x)
     {
       // nothing
-      x->_expr->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(ProgramDeclaration *x)
     {
-      // create classes
+      // TODO: store class data somewhere
       x->_main->accept(this);
       x->_classes->accept(this);
       return NULL;
@@ -237,8 +220,6 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(StatementList *x)
     {
       // nothing
-      for(std::list<Statement *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
-        (*i)->accept(this);
       return NULL;
     }
 
@@ -251,13 +232,13 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(UnaryBooleanExpression *x)
     {
       // nothing
-      x->_expr->accept(this);
       return NULL;
     }
 
     SymbolData *SymbolTableBuilder::visit(VariableDeclaration *x)
     {
-      // check unique, create var
+      // TODO: report error if variable name in use in scope
+      // TODO: return variable data
       x->_type->accept(this);
       x->_name->accept(this);
       return NULL;
@@ -265,7 +246,7 @@ namespace kompis
 
     SymbolData *SymbolTableBuilder::visit(VariableDeclarationList *x)
     {
-      // create vars
+      // TODO: return variables
       for(std::list<VariableDeclaration *>::iterator i = x->_list.begin(), e = x->_list.end(); i != e; ++i)
         (*i)->accept(this);
       return NULL;
@@ -274,8 +255,6 @@ namespace kompis
     SymbolData *SymbolTableBuilder::visit(WhileStatement *x)
     {
       // nothing
-      x->_condition->accept(this);
-      x->_statement->accept(this);
       return NULL;
     }
   }
